@@ -1,3 +1,23 @@
+# Datavisu
+
+⏱ A 3month-project for @ecolehetic, with the aim of creating a data visualisation website, using @reactjs.
+
+## Temporary/Test sources
+
+[`timeline.json`](https://gist.githubusercontent.com/blyndusk/d789375e1a6309f82745bcfa3477f64f/raw/e05be961740078e85a8a7baaeb5a63c6cc5dcee1/timeline.json)
+
+## Team
+
+- [Yasmine Adrad](https://github.com/YasmineAD)
+- [Maxime Charpentier](https://github.com/maximecharpentier)
+- [Amaury Faveriel](https://github.com/AmauryFaveriel)
+- [Alexandre Delaloy](https://github.com/blyndusk)
+
+## License
+
+Under [MIT](https://github.com/blyndusk/datavisu/blob/master/LICENSE) license.
+
+----
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
