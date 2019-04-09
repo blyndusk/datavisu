@@ -1,0 +1,35 @@
+.Timeline {
+    svg {
+        margin: 10px;
+        .year {
+            line {
+                stroke: #888;
+                stroke-width: 4;
+                @extend %mainTransition;
+                cursor: pointer;
+                &:hover {
+                    stroke: #777;
+                    stroke-width: 12;
+                    circle {
+                        fill: red;
+                    }
+                }
+            };
+            circle {
+                fill: #666;
+            };
+            circle[data-label="0"] {
+                fill: hsl(0, 100%, 80%);
+            }
+            circle[data-label="1"] {
+                fill: hsl(50, 100%, 80%);
+            }
+            circle[data-label="2"] {
+                fill: hsl(100, 100%, 80%);
+            }
+            circle[data-label="3"] {
+                fill: hsl(150, 100%, 80%);
+            }
+        }
+    }
+}
