@@ -1,5 +1,18 @@
 body {
   font-family: "Avenir", sans-serif;
   scroll-behavior: smooth;
-  background: red;
+  background: #999;
+}
+svg {
+    margin: 10px;
+    line {
+        stroke: #888;
+        stroke-width: 4;
+        @extend %mainTransition;
+        cursor: pointer;
+        &:hover {
+            stroke: #777;
+            stroke-width: 12;
+        }
+    }
 }
