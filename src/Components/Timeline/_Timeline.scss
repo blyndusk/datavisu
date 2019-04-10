@@ -17,6 +17,7 @@
             };
             circle {
                 fill: #666;
+                @extend %mainTransition;
             };
             circle[data-label="0"] {
                 fill: hsl(0, 100%, 80%);
@@ -30,6 +31,15 @@
             circle[data-label="3"] {
                 fill: hsl(150, 100%, 80%);
             }
+            circle  {
+                fill: red;
+                 
+            }
         }
     }
+}
+
+.peoples {
+    position: absolute;
+    left: -10px;
 }

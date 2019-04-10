@@ -57,7 +57,37 @@ class Timeline extends Component {
                         key={`${i}${j}${k}`}
                         data-id={`${i}${j}${k}`}
                         data-label={j}
-                        r="5" 
+                        r="5"
+                        onMouseOver={(e) => {
+                            const year = e.target.parentNode.parentNode.parentNode;
+                            const circles = year.querySelectorAll('circle');
+                            e.target.setAttribute('r', '10')
+                            for (let i = 0; i < circles.length; i++) {
+                                const circle = circles[i];
+                                const targetId = e.target.dataset.id;
+                                const currentId = circle.dataset.id;
+                                let cy = parseInt(circle.getAttribute('cy'))
+                                if ( targetId > currentId) cy += 10;
+                                else if (targetId < currentId) cy -= 10;
+                                circle.setAttribute('cy', `${cy}`)
+                                
+                            }
+                        }}
+                        onMouseOut={(e) => {
+                            const year = e.target.parentNode.parentNode.parentNode;
+                            const circles = year.querySelectorAll('circle');
+                            e.target.setAttribute('r', '5')
+                            for (let i = 0; i < circles.length; i++) {
+                                const circle = circles[i];
+                                const targetId = e.target.dataset.id;
+                                const currentId = circle.dataset.id;
+                                let cy = parseInt(circle.getAttribute('cy'))
+                                if ( targetId < currentId) cy += 10;
+                                else if (targetId > currentId) cy -= 10;
+                                circle.setAttribute('cy', `${cy}`)
+                                
+                            }
+                        }}
                         cx={circlePos.x}
                         cy={200 - circlePos.y}
                     >{person}</circle>));
