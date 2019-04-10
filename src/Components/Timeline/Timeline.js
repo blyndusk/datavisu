@@ -58,36 +58,8 @@ class Timeline extends Component {
                         data-id={`${i}${j}${k}`}
                         data-label={j}
                         r="5"
-                        onMouseOver={(e) => {
-                            const year = e.target.parentNode.parentNode.parentNode;
-                            const circles = year.querySelectorAll('circle');
-                            e.target.setAttribute('r', '10')
-                            for (let i = 0; i < circles.length; i++) {
-                                const circle = circles[i];
-                                const targetId = e.target.dataset.id;
-                                const currentId = circle.dataset.id;
-                                let cy = parseInt(circle.getAttribute('cy'))
-                                if ( targetId > currentId) cy += 10;
-                                else if (targetId < currentId) cy -= 10;
-                                circle.setAttribute('cy', `${cy}`)
-                                
-                            }
-                        }}
-                        onMouseOut={(e) => {
-                            const year = e.target.parentNode.parentNode.parentNode;
-                            const circles = year.querySelectorAll('circle');
-                            e.target.setAttribute('r', '5')
-                            for (let i = 0; i < circles.length; i++) {
-                                const circle = circles[i];
-                                const targetId = e.target.dataset.id;
-                                const currentId = circle.dataset.id;
-                                let cy = parseInt(circle.getAttribute('cy'))
-                                if ( targetId < currentId) cy += 10;
-                                else if (targetId > currentId) cy -= 10;
-                                circle.setAttribute('cy', `${cy}`)
-                                
-                            }
-                        }}
+                        onMouseOver={(e) => this.circleMouseOver(e)}
+                        onMouseOut={(e) => this.circleMouseOut(e)}
                         cx={circlePos.x}
                         cy={200 - circlePos.y}
                     >{person}</circle>));
@@ -119,6 +91,32 @@ class Timeline extends Component {
                 </g>
             )
         })
+    circleMouseOver = (e) => {
+        const elt = e.target
+        const circles = elt.parentNode.parentNode.parentNode.querySelectorAll('circle');
+        elt.setAttribute('r', '10')
+        Array.from(circles).map((x) => {
+            const targetId = elt.dataset.id;
+            const currentId = x.dataset.id;
+            let cy = parseInt(x.getAttribute('cy'))
+            if ( targetId > currentId) cy += 10;
+            else if (targetId < currentId) cy -= 10;
+            return x.setAttribute('cy', `${cy}`)
+        })
+    }
+    circleMouseOut = (e) => {
+        const elt = e.target
+        const circles = elt.parentNode.parentNode.parentNode.querySelectorAll('circle');
+        elt.setAttribute('r', '5')
+        Array.from(circles).map((x) => {
+            const targetId = elt.dataset.id;
+            const currentId = x.dataset.id;
+            let cy = parseInt(x.getAttribute('cy'))
+            if ( targetId < currentId) cy += 10;
+            else if (targetId > currentId) cy -= 10;
+            return x.setAttribute('cy', `${cy}`)
+        })
+    }
     mouseup = (year) => {
         console.log('yeyey')
         return <p>{year}</p>
@@ -133,5 +131,6 @@ class Timeline extends Component {
         );
     }
 }
+
 
 export default Timeline;

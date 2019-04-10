@@ -5,8 +5,8 @@
             line {
                 stroke: #888;
                 stroke-width: 4;
-                @extend %mainTransition;
                 cursor: pointer;
+                @extend %mainTransition;
                 &:hover {
                     stroke: #777;
                     stroke-width: 12;
@@ -17,6 +17,7 @@
             };
             circle {
                 fill: #666;
+                cursor: pointer;
                 @extend %mainTransition;
             };
             circle[data-label="0"] {
