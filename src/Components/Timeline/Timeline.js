@@ -55,6 +55,7 @@ class Timeline extends Component {
                     // push a circle for each person
                     SVGPeopleSubGroup.push((<circle 
                         key={`${i}${j}${k}`}
+                        data-id={`${i}${j}${k}`}
                         data-label={j}
                         r="5" 
                         cx={circlePos.x}
@@ -62,16 +63,28 @@ class Timeline extends Component {
                     >{person}</circle>));
                 }
                 // group all person in people
-                SVGPeopleGroup.push(<g key={`${i}${j}`} className="peoples">{SVGPeopleSubGroup}</g>)
+                SVGPeopleGroup.push(<g 
+                    key={`${i}${j}`}
+                    data-id={`${i}${j}`}
+                    className="peoples"
+                >{SVGPeopleSubGroup}</g>)
             }
             // group all people in a category
             SVGcategoryGroup.push(<g key={i} className="category">{SVGPeopleGroup}</g>)
             return (
                 // group all categories in a year
-                <g key={i} className="year">
-                    {/* the line */}
-                    <line  x1={this.yearPosY }  y1={200 - totalPeopleLength * 20} x2={this.yearPosY }  y2={200} onMouseEnter={() => this.mouseup(x.year)}/>
-                    {/* circles */}
+                <g 
+                    key={i}
+                    data-id={i}
+                    className="year">
+                    <line 
+                        data-id={i}
+                        x1={this.yearPosY} 
+                        y1={200 - totalPeopleLength * 20}
+                        x2={this.yearPosY} 
+                        y2={200} 
+                        onMouseEnter={() => this.mouseup(x.year)}
+                    />
                     {SVGcategoryGroup}
                 </g>
             )
