@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 
-import Timeline from './Tl/Tl';
+import Tl from './Tl/Tl';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        app
-        <Timeline/>
+        <Tl/>
+        <Tl/>
+        <Tl/>
       </div>
     );
   }
