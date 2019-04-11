@@ -28,6 +28,7 @@ class Category extends Component {
     }
 }
 
+
 class Timeline extends Component {
     constructor(props) {
         super(props);
