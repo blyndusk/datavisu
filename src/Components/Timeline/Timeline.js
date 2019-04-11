@@ -55,14 +55,15 @@ class Timeline extends Component {
                         key={`${i}${j}${k}`} 
                         content={
                         <circle 
-                        className="dot" 
-                        data-id={`${i}${j}${k}`}
-                        data-label={j}
-                        r="5"
-                        onMouseOver={(e) => this.circleMouseOver(e)}
-                        onMouseOut={(e) => this.circleMouseOut(e)}
-                        cx={circlePos.x}
-                        cy={200 - circlePos.y}/>
+                            className="dot" 
+                            data-id={`${i}${j}${k}`}
+                            data-label={j}
+                            cx={circlePos.x}
+                            r="5"
+                            cy={200 - circlePos.y}
+                            onMouseOver={(e) => this.circleMouseOver(e)}
+                            onMouseOut={(e) => this.circleMouseOut(e)}
+                        />
                     }/>);
                 }
                 // group all person in people
@@ -84,8 +85,7 @@ class Timeline extends Component {
                     key={i}
                     data-id={i}
                     content={
-                        <Fragment
-                        >
+                        <Fragment>
                             <line 
                                 data-id={i}
                                 x1={this.yearPosY} 
@@ -95,7 +95,6 @@ class Timeline extends Component {
                             />
                             {SVGcategoryGroup}
                         </Fragment>
-                        
                     }
                 />
             )
