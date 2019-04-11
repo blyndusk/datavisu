@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import './scss/master.scss';
 
-import Timeline from './Components/Tl/Tl';
+import Timeline from './Tl/Tl';
 
 class App extends Component {
   render() {
