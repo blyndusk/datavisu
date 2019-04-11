@@ -1,4 +1,32 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+
+class Year extends Component {
+    render() {
+        return (
+            <g className="year" data-id={this.props.id}>
+                {this.props.content}
+            </g>
+        );
+    }
+}
+class PrizesList extends Component {
+    render() {
+        return (
+            <g className="prizesList" data-id={this.props.id}>
+                {this.props.content}
+            </g>
+        );
+    }
+}
+class Category extends Component {
+    render() {
+        return (
+            <g className="category" data-id={this.props.id}>
+                {this.props.content}
+            </g>
+        );
+    }
+}
 
 class Timeline extends Component {
     constructor(props) {
@@ -9,12 +37,11 @@ class Timeline extends Component {
         // total length of the timelinex
         this.yearPosY = 0;
     }
-
     componentDidMount = () => {
         this.fetchData()
     }
     fetchData = () => {
-        fetch('https://gist.githubusercontent.com/blyndusk/d789375e1a6309f82745bcfa3477f64f/raw/2bfea3519938d430b8f922b064c2b54567ea87db/timeline.json')
+        fetch('https://gist.githubusercontent.com/blyndusk/d789375e1a6309f82745bcfa3477f64f/raw/208d26ee8a552ecf2dea727f8ecefa41b47582f8/timeline.json')
         .then((fetched) => {
             return fetched.json();
         })
@@ -53,7 +80,8 @@ class Timeline extends Component {
                     // update the circle y postion by one unit
                     circlePos.y += 10;
                     // push a circle for each person
-                    SVGPeopleSubGroup.push((<circle 
+                    SVGPeopleSubGroup.push(<circle 
+                        className="people"
                         key={`${i}${j}${k}`}
                         data-id={`${i}${j}${k}`}
                         data-label={j}
@@ -61,34 +89,40 @@ class Timeline extends Component {
                         onMouseOver={(e) => this.circleMouseOver(e)}
                         onMouseOut={(e) => this.circleMouseOut(e)}
                         cx={circlePos.x}
-                        cy={200 - circlePos.y}
-                    >{person}</circle>));
+                        cy={200 - circlePos.y}/>);
                 }
                 // group all person in people
-                SVGPeopleGroup.push(<g 
+                SVGPeopleGroup.push(<Category
                     key={`${i}${j}`}
-                    data-id={`${i}${j}`}
-                    className="peoples"
-                >{SVGPeopleSubGroup}</g>)
+                    id={`${i}${j}`}
+                    content={SVGPeopleSubGroup}
+                />)
             }
             // group all people in a category
-            SVGcategoryGroup.push(<g key={i} className="category">{SVGPeopleGroup}</g>)
+            SVGcategoryGroup.push(<PrizesList 
+                key={i} 
+                id={i}
+                content={SVGPeopleGroup}
+            />)
             return (
                 // group all categories in a year
-                <g 
+                <Year 
                     key={i}
-                    data-id={i}
-                    className="year">
-                    <line 
-                        data-id={i}
-                        x1={this.yearPosY} 
-                        y1={200 - totalPeopleLength * 20}
-                        x2={this.yearPosY} 
-                        y2={200} 
-                        onMouseEnter={() => this.mouseup(x.year)}
-                    />
-                    {SVGcategoryGroup}
-                </g>
+                    content={
+                        <g 
+                            data-id={i}
+                            className="lineNPeople">
+                            <line 
+                                data-id={i}
+                                x1={this.yearPosY} 
+                                y1={200 - totalPeopleLength * 20}
+                                x2={this.yearPosY} 
+                                y2={200} 
+                            />
+                            {SVGcategoryGroup}
+                        </g>
+                    }
+                />
             )
         })
     circleMouseOver = (e) => {
@@ -117,17 +151,15 @@ class Timeline extends Component {
             return x.setAttribute('cy', `${cy}`)
         })
     }
-    mouseup = (year) => {
-        console.log('yeyey')
-        return <p>{year}</p>
-    } 
     render() {
         return (
-        <div className="Timeline">
-            <svg  height="200" width="500">
-                {this.getPrizesLength()}
-            </svg>
-        </div>
+            <Fragment>
+                <div className="Timeline">
+                    <svg  height="200" width="500">
+                        {this.getPrizesLength()}
+                    </svg>
+                </div>
+            </Fragment>
         );
     }
 }
