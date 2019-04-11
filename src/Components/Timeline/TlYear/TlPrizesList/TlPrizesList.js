@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class TlYear extends Component {
+class TlPrizesList extends Component {
     render() {
         return (
-            <g className="year">
+            <g className="prizesList" data-id={this.props.id}>
                 {this.props.content}
             </g>
         );
     }
 }
 
-export default TlYear;
+export default TlPrizesList;

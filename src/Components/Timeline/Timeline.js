@@ -1,41 +1,9 @@
-import React, { Component, Fragment } from 'react';
+import TlYear from './TlYear/TlYear';
+import TlPrizesList from './TlYear/TlPrizesList/TlPrizesList';
+import TlCategory from './TlYear/TlPrizesList/TlCategory/TlCategory';
+import TlDot from './TlYear/TlPrizesList/TlCategory/TlDot/TlDot';
 
-class Year extends Component {
-    render() {
-        return (
-            <g className="year" data-id={this.props.id}>
-                {this.props.content}
-            </g>
-        );
-    }
-}
-class PrizesList extends Component {
-    render() {
-        return (
-            <g className="prizesList" data-id={this.props.id}>
-                {this.props.content}
-            </g>
-        );
-    }
-}
-class Category extends Component {
-    render() {
-        return (
-            <g className="category" data-id={this.props.id}>
-                {this.props.content}
-            </g>
-        );
-    }
-}
-class Dot extends Component {
-    render() {
-        return (
-            <g className="Ddot" data-id={this.props.id}>
-                {this.props.content}
-            </g>
-        );
-    }
-}
+import React, { Component, Fragment } from 'react';
 
 class Timeline extends Component {
     constructor(props) {
@@ -46,17 +14,11 @@ class Timeline extends Component {
         // total length of the timelinex
         this.yearPosY = 0;
     }
-    componentDidMount = () => {
-        this.fetchData()
-    }
+    componentDidMount = () => this.fetchData();
     fetchData = () => {
         fetch('https://gist.githubusercontent.com/blyndusk/d789375e1a6309f82745bcfa3477f64f/raw/208d26ee8a552ecf2dea727f8ecefa41b47582f8/timeline.json')
-        .then((fetched) => {
-            return fetched.json();
-        })
-        .then((json) => {
-            this.setState({timeline: json})
-        }); 
+        .then(fetched => fetched.json())
+        .then(json => this.setState({timeline: json})); 
     }
     getPrizesLength = () => this.state.timeline.map((x, i) => {
             // every year, yearPosY is incremented by 20
@@ -89,10 +51,11 @@ class Timeline extends Component {
                     // update the circle y postion by one unit
                     circlePos.y += 10;
                     // push a circle for each person
-                    SVGPeopleSubGroup.push(<Dot 
-                        key={`${i}${j}${k}`} content={
+                    SVGPeopleSubGroup.push(<TlDot 
+                        key={`${i}${j}${k}`} 
+                        content={
                         <circle 
-                        className="people"
+                        className="dot" 
                         data-id={`${i}${j}${k}`}
                         data-label={j}
                         r="5"
@@ -103,26 +66,25 @@ class Timeline extends Component {
                     }/>);
                 }
                 // group all person in people
-                SVGPeopleGroup.push(<Category
+                SVGPeopleGroup.push(<TlCategory
                     key={`${i}${j}`}
                     id={`${i}${j}`}
                     content={SVGPeopleSubGroup}
                 />)
             }
             // group all people in a category
-            SVGcategoryGroup.push(<PrizesList 
+            SVGcategoryGroup.push(<TlPrizesList 
                 key={i} 
                 id={i}
                 content={SVGPeopleGroup}
             />)
             return (
                 // group all categories in a year
-                <Year 
+                <TlYear 
                     key={i}
                     content={
-                        <g 
-                            data-id={i}
-                            className="lineNPeople">
+                        <Fragment
+                        >
                             <line 
                                 data-id={i}
                                 x1={this.yearPosY} 
@@ -131,7 +93,8 @@ class Timeline extends Component {
                                 y2={200} 
                             />
                             {SVGcategoryGroup}
-                        </g>
+                        </Fragment>
+                        
                     }
                 />
             )
