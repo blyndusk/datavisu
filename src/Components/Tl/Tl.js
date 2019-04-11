@@ -1,14 +1,15 @@
-import TlYear from './TlYear/TlYear';
-import TlPrizesList from './TlYear/TlPrizesList/TlPrizesList';
-import TlCategory from './TlYear/TlPrizesList/TlCategory/TlCategory';
-import TlDot from './TlYear/TlPrizesList/TlCategory/TlDot/TlDot';
-
 import React, { Component, Fragment } from 'react';
+
+import TlYear from './TlYear/TlYear';
+import TlPrizes from './TlYear/TlPrizes/TlPrizes';
+import TlCategory from './TlYear/TlPrizes/TlCategory/TlCategory';
+import TlPriceWinner from './TlYear/TlPrizes/TlCategory/TlPriceWinner/TlPriceWinner'
 
 class Timeline extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            json: 'https://gist.githubusercontent.com/blyndusk/d789375e1a6309f82745bcfa3477f64f/raw/3ad3349db277470055d5f0a6c1dacef3f0a18c4e/timeline.json',
             timeline: []
         }
         // total length of the timelinex
@@ -16,11 +17,12 @@ class Timeline extends Component {
     }
     componentDidMount = () => this.fetchData();
     fetchData = () => {
-        fetch('https://gist.githubusercontent.com/blyndusk/d789375e1a6309f82745bcfa3477f64f/raw/208d26ee8a552ecf2dea727f8ecefa41b47582f8/timeline.json')
+        fetch(this.state.json)
         .then(fetched => fetched.json())
-        .then(json => this.setState({timeline: json})); 
+        .then(json => this.setState({timeline: json}))
+        .catch(error => console.log(error))
     }
-    getPrizesLength = () => this.state.timeline.map((x, i) => {
+    generate = () => this.state.timeline.map((year, i) => {
             // every year, yearPosY is incremented by 20
             this.yearPosY += 20;
             // total length of poeple in a specific year
@@ -35,9 +37,7 @@ class Timeline extends Component {
                 y: -10
             };
             // for all categories in a year
-            for (let j = 0; j < x.categories.length; j++) {
-                // a category
-                const category = x.categories[j];
+            year.prizesList.map((category, j) => {
                 // increment the total length with each length
                 totalPeopleLength += category.length;
                 // update the circle y postion by one unit
@@ -49,7 +49,7 @@ class Timeline extends Component {
                     // update the circle y postion by one unit
                     circlePos.y += 10;
                     // push a circle for each person
-                    SVGPeopleSubGroup.push(<TlDot 
+                    SVGPeopleSubGroup.push(<TlPriceWinner 
                         key={`${i}${j}${k}`} 
                         content={
                         <circle 
@@ -65,14 +65,14 @@ class Timeline extends Component {
                     }/>);
                 }
                 // group all person in people
-                SVGPeopleGroup.push(<TlCategory
+                return SVGPeopleGroup.push(<TlCategory
                     key={`${i}${j}`}
                     id={`${i}${j}`}
                     content={SVGPeopleSubGroup}
                 />)
-            }
+            })
             // group all people in a category
-            SVGcategoryGroup.push(<TlPrizesList 
+            SVGcategoryGroup.push(<TlPrizes 
                 key={i} 
                 id={i}
                 content={SVGPeopleGroup}
@@ -124,7 +124,7 @@ class Timeline extends Component {
             height="200"
             width="500"
         >
-            {this.getPrizesLength()}
+            {this.generate()}
         </svg>;
     }
 }

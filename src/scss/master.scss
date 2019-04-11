@@ -14,8 +14,8 @@
 // IMPORT COMPONENT FILES
 // ==============================================
 
-@import "../Components/Timeline/Timeline";
-@import "../Components/Timeline/TlYear/TlYear";
-// @import "../Components/Timeline/TlYear/TlPrizesList/TlPrizesList";
-@import "../Components/Timeline/TlYear/TlPrizesList/TlCategory/TlCategory";
-@import "../Components/Timeline/TlYear/TlPrizesList/TlCategory/TlDot/TlDot";
+@import "../Components/Tl/Tl";
+@import "../Components/Tl/TlYear/TlYear";
+@import "../Components/Tl/TlYear/TlPrizes/TlPrizes";
+@import "../Components/Tl/TlYear/TlPrizes/TlCategory/TlCategory";
+@import "../Components/Tl/TlYear/TlPrizes/TlCategory/TlPriceWinner/TlPrizeWinner";
