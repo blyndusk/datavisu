@@ -8,7 +8,6 @@ class App extends Component {
       <div className="App">
         <Tl/>
         <Tl/>
-        <Tl/>
       </div>
     );
   }

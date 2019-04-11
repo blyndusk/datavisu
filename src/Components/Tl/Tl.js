@@ -9,7 +9,7 @@ class Timeline extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            json: 'https://gist.githubusercontent.com/blyndusk/d789375e1a6309f82745bcfa3477f64f/raw/e1b9fdd086530e370775d95351019e4c1c6a2db8/timeline.json',
+            json: 'https://gist.githubusercontent.com/blyndusk/d789375e1a6309f82745bcfa3477f64f/raw/c142eb72d344edbb1a9994a8a14e49c823784cfc/timeline.json',
             timeline: [],
             svg: {
                 w: 500,
@@ -72,7 +72,7 @@ class Timeline extends Component {
                         <circle 
                             className="dot" 
                             data-id={`${i}${j}${k}`}
-                            data-label={pricewinner.category}
+                            data-category={pricewinner.category}
                             cx={circlePos.x}
                             r="5"
                             cy={this.state.svg.h - circlePos.y}

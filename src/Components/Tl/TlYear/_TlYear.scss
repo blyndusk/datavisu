@@ -1,0 +1,12 @@
+#Timeline .year {
+    line {
+        stroke: #888;
+        stroke-width: 4;
+        cursor: pointer;
+        @extend %mainTransition;
+        &:hover {
+            stroke: #777;
+            stroke-width: 12;
+        }
+    };
+}

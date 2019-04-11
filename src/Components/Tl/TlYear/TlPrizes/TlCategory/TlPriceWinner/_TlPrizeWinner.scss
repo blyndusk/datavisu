@@ -1,0 +1,19 @@
+#Timeline  {
+    circle {
+        fill: #666;
+        cursor: pointer;
+        @extend %mainTransition;
+    }
+    circle[data-category="0"] {
+        fill: hsl(0, 100%, 80%);
+    }
+    circle[data-category="1"] {
+        fill: hsl(75, 100%, 80%);
+    }
+    circle[data-category="2"] {
+        fill: hsl(150, 100%, 80%);
+    }
+    circle[data-category="3"] {
+        fill: hsl(225, 100%, 80%);
+    }
+};
