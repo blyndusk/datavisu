@@ -15,10 +15,8 @@ class Timeline extends Component {
                 w: 500,
                 h: 200
             },
-            year: {
-                inc: 20
-            },
             line: {
+                inc: 20,
                 multiplier: 20
             },
             dot: {
@@ -33,7 +31,7 @@ class Timeline extends Component {
         // array which'll contain the prize list 
         this.prizesArr = []
         // array which'll contain all categories
-        this.CategoryArr = []
+        this.CategoriesArr = []
         // array which'll contain all prize winners of a category
         this.prizeWinnersArr = [];
         // line position
@@ -55,117 +53,148 @@ class Timeline extends Component {
         .then(json => this.setState({timeline: json}))
         .catch(error => console.log(error))
     }
+    // generation of price winners (dots)
     generatePriceWinners = (parent, i, j) => parent.map((pricewinner, k) => {
-        // update the circle y postion by one unit
+        // update the cdot y position by one dot incrementation
         this.dot.y += this.state.dot.inc;
-        // push a circle for each person
+        // push a <TlPriceWinner/> for each price winner
         return this.prizeWinnersArr.push(<TlPriceWinner 
+            // unique key
             key={`${i}${j}${k}`} 
-            content={
-            <circle 
+            // the content is a SVG circle
+            content={<circle 
                 className="dot" 
+                // unique id
                 data-id={`${i}${j}${k}`}
+                // category
                 data-category={pricewinner.category}
+                // position
                 cx={this.dot.x}
-                r="5"
                 cy={this.state.svg.h - this.dot.y}
-                onMouseOver={(e) => this.circleMouseOver(e)}
-                onMouseOut={(e) => this.circleMouseOut(e)}
-            />
-        }/>);
+                // rayon
+                r={this.state.dot.scaleOut}
+                // mouse events
+                onMouseOver={(e) => this.dotMouseOver(e)}
+                onMouseOut={(e) => this.dotMouseOut(e)}
+            />}
+        />);
     })
+    // generation of categories (<g><TlPrizeWinner/></g>)
     generateCategories = (parent, i) => parent.prizesList.map((category, j) => {
-        // increment the total length with each length
+        // increment the total length with each prize winners in a category length
         this.totalLength += category.length;
-        // update the circle y postion by one unit
+        // update the dot y position by one dot incrementation, again
         this.dot.y += this.state.dot.inc;
-        // init a subgroup array to staock all people
+        // reset the prize winners array
         this.prizeWinnersArr = [];
-        // for every people in a category
-        this.generatePriceWinners(category, i, j)
-        // group all person in people
-        return this.CategoryArr.push(<TlCategory
+        // call the above method
+        this.generatePriceWinners(category, i, j);
+        // push a <TlCategory/> for each category
+        return this.CategoriesArr.push(<TlCategory
+            // unique key & id
             key={`${i}${j}`}
             id={`${i}${j}`}
+            // the content is all the <TlPriceWinner/>
             content={this.prizeWinnersArr}
         />)
     })
+    // generation of all the prizes (<g><TlCategory/></g>)
     generatePrizes = (parent, i) => {
-        // every year, yearPosY is incremented by 20
-        this.line.x += this.state.year.inc;
-        // total length of poeple in a specific year
-        // rendered array, which'll contain people in a category
-        this.prizesArr = [];
-        // rendered array, which'll contain a person for a nobel prize
-        this.CategoryArr = [];
+        // reset the total length
+        this.totalLength = 0;
+        // every line, the line y position is incremented by a line incrementation
+        this.line.x += this.state.line.inc;
+        // reset the dots position
         this.dot.x = this.line.x;
         this.dot.y = 0;
-        this.totalLength = 0;
-        
-        // for all categories in a year
+        // reset the categories array
+        this.CategoriesArr = [];
+        // call the above method
         this.generateCategories(parent, i)
-
+        // reset the line y position
         this.line.y = this.state.svg.h - this.totalLength * this.state.line.multiplier;
-        // group all people in a category
+        // push a <TlPrize/> for each prize
         this.prizesArr.push(<TlPrizes 
+            // unique key & id
             key={i} 
             id={i}
-            content={this.CategoryArr}
+            // the content is all the <TlCategory/>
+            content={this.CategoriesArr}
         />)
     }
-    generateYears = () => this.state.timeline.map((year, i) => {
-            this.generatePrizes(year, i)
-            return (
-                // group all categories in a year
-                <TlYear 
-                    key={i}
-                    data-id={i}
-                    content={
-                        <Fragment>
-                            <line 
-                                data-id={i}
-                                x1={this.line.x} 
-                                y1={this.line.y}
-                                x2={this.line.x} 
-                                y2={this.state.svg.h} 
-                            />
-                            {this.prizesArr}
-                        </Fragment>
-                    }
-                />
-            )
-        })
-    circleMouse = (e, r, mouse) => {
+    // generation of all the timeline
+    generateTimeline = () => this.state.timeline.map((year, i) => {
+        // reset the prizes array
+        this.prizesArr = [];
+        this.generatePrizes(year, i)
+        return (
+            // group all categories in a year
+            <TlYear 
+                // unique key & id
+                key={i}
+                data-id={i}
+                // the content is the line & all the <TlPrizes/>
+                content={<Fragment>
+                    <line 
+                        // unique od
+                        data-id={i}
+                        // position
+                        x1={this.line.x} 
+                        y1={this.line.y}
+                        x2={this.line.x} 
+                        y2={this.state.svg.h} 
+                    />
+                    {this.prizesArr}
+                </Fragment>}
+            />
+        )
+    })
+    // dot mouse events
+    dotMouse = (e, r, mouse) => {
+        // get the current element
         const elt = e.target
-        const circles = elt.parentNode.parentNode.parentNode.querySelectorAll('circle');
+        // get all the dots
+        const dots = elt.parentNode.parentNode.parentNode.querySelectorAll('circle');
+        // set the scale
         elt.setAttribute('r', r)
-        Array.from(circles).map((x) => {
-            const targetId = elt.dataset.id;
-            const currentId = x.dataset.id;
+        // for all the dots
+        Array.from(dots).map((x) => {
+            // get the target id
+            const targettedId = elt.dataset.id;
+            // get the mapped id
+            const mappedId = x.dataset.id;
+            // get the y position of the mapped dot
             let cy = parseInt(x.getAttribute('cy'))
+            // 1 = over; 0 = out
             if (mouse === 1) {
-                if ( targetId > currentId) cy += this.state.dot.othersDotsPosition;
-                else if (targetId < currentId) cy -= this.state.dot.othersDotsPosition;
+                // if the targeted is bigger than the mapped id, increment by the dot pos
+                if ( targettedId > mappedId) cy += this.state.dot.othersDotsPosition;
+                // else if the targeted is bigger than the mapped id, decrement by the dot pos
+                else if (targettedId < mappedId) cy -= this.state.dot.othersDotsPosition;
             }
+            // if the mouse is out, reverse logic
             else if (mouse === 0) {
-                if ( targetId < currentId) cy += this.state.dot.othersDotsPosition;
-                else if (targetId > currentId) cy -= this.state.dot.othersDotsPosition;
+                if ( targettedId < mappedId) cy += this.state.dot.othersDotsPosition;
+                else if (targettedId > mappedId) cy -= this.state.dot.othersDotsPosition;
             }
+            // set new y dot position
             return x.setAttribute('cy', cy)
         })
     }
-    circleMouseOver = (e) => this.circleMouse(e, this.state.dot.scaleIn, 1);
-    circleMouseOut = (e) => this.circleMouse(e, this.state.dot.scaleOut, 0);
+    // when the mouse is on a dot
+    dotMouseOver = (e) => this.dotMouse(e, this.state.dot.scaleIn, 1);
+    // when the mouse is over of a dot
+    dotMouseOut = (e) => this.dotMouse(e, this.state.dot.scaleOut, 0);
     render() {
+        // render a svg with all child Components
         return <svg 
             id="Timeline"
             width={this.state.svg.w}
             height={this.state.svg.h}
         >
-            {this.generateYears()}
+            {this.generateTimeline()}
         </svg>;
     }
 }
-
 
 export default Timeline;
