@@ -82,6 +82,7 @@ class Timeline extends Component {
                 // group all categories in a year
                 <TlYear 
                     key={i}
+                    data-id={i}
                     content={
                         <Fragment
                         >
