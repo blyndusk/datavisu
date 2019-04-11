@@ -27,7 +27,15 @@ class Category extends Component {
         );
     }
 }
-
+class Dot extends Component {
+    render() {
+        return (
+            <g className="Ddot" data-id={this.props.id}>
+                {this.props.content}
+            </g>
+        );
+    }
+}
 
 class Timeline extends Component {
     constructor(props) {
@@ -81,16 +89,18 @@ class Timeline extends Component {
                     // update the circle y postion by one unit
                     circlePos.y += 10;
                     // push a circle for each person
-                    SVGPeopleSubGroup.push(<circle 
+                    SVGPeopleSubGroup.push(<Dot 
+                        key={`${i}${j}${k}`} content={
+                        <circle 
                         className="people"
-                        key={`${i}${j}${k}`}
                         data-id={`${i}${j}${k}`}
                         data-label={j}
                         r="5"
                         onMouseOver={(e) => this.circleMouseOver(e)}
                         onMouseOut={(e) => this.circleMouseOut(e)}
                         cx={circlePos.x}
-                        cy={200 - circlePos.y}/>);
+                        cy={200 - circlePos.y}/>
+                    }/>);
                 }
                 // group all person in people
                 SVGPeopleGroup.push(<Category
