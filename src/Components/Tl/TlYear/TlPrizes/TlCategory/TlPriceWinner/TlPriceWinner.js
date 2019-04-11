@@ -1,9 +1,9 @@
 import { Component } from 'react';
 
-class TlDot extends Component {
+class TlPriceWinner extends Component {
     render() {
         return this.props.content;
     }
 }
 
-export default TlDot;
+export default TlPriceWinner;
