@@ -46,8 +46,6 @@ class Timeline extends Component {
                 const SVGPeopleSubGroup = [];
                 // for every people in a category
                 for (let k = 0; k < category.length; k++) {
-                    // a person
-                    const person = category[k].name;
                     // update the circle y postion by one unit
                     circlePos.y += 10;
                     // push a circle for each person
@@ -99,42 +97,35 @@ class Timeline extends Component {
                 />
             )
         })
-    circleMouseOver = (e) => {
+    circleMouse = (e, r, mouse) => {
         const elt = e.target
         const circles = elt.parentNode.parentNode.parentNode.querySelectorAll('circle');
-        elt.setAttribute('r', '10')
+        elt.setAttribute('r', r)
         Array.from(circles).map((x) => {
             const targetId = elt.dataset.id;
             const currentId = x.dataset.id;
             let cy = parseInt(x.getAttribute('cy'))
-            if ( targetId > currentId) cy += 10;
-            else if (targetId < currentId) cy -= 10;
-            return x.setAttribute('cy', `${cy}`)
+            if (mouse === 1) {
+                if ( targetId > currentId) cy += 10;
+                else if (targetId < currentId) cy -= 10;
+            }
+            else if (mouse === 0) {
+                if ( targetId < currentId) cy += 10;
+                else if (targetId > currentId) cy -= 10;
+            }
+            return x.setAttribute('cy', cy)
         })
     }
-    circleMouseOut = (e) => {
-        const elt = e.target
-        const circles = elt.parentNode.parentNode.parentNode.querySelectorAll('circle');
-        elt.setAttribute('r', '5')
-        Array.from(circles).map((x) => {
-            const targetId = elt.dataset.id;
-            const currentId = x.dataset.id;
-            let cy = parseInt(x.getAttribute('cy'))
-            if ( targetId < currentId) cy += 10;
-            else if (targetId > currentId) cy -= 10;
-            return x.setAttribute('cy', `${cy}`)
-        })
-    }
+    circleMouseOver = (e) => this.circleMouse(e, 10, 1);
+    circleMouseOut = (e) => this.circleMouse(e, 5, 0);
     render() {
-        return (
-            <Fragment>
-                <div className="Timeline">
-                    <svg  height="200" width="500">
-                        {this.getPrizesLength()}
-                    </svg>
-                </div>
-            </Fragment>
-        );
+        return <svg 
+            id="Timeline"
+            height="200"
+            width="500"
+        >
+            {this.getPrizesLength()}
+        </svg>;
     }
 }
 
