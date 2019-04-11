@@ -21,15 +21,30 @@ class Timeline extends Component {
             line: {
                 multiplier: 20
             },
-            circle: {
+            dot: {
                 inc: 10,
                 hover: 10,
-                scale0: 5,
-                scale1: 10
+                scaleIn: 10,
+                scaleOut: 5
             }
         }
         // total length of the timelinex
-        this.yearPosY = 0;
+        this.prizesArr = []
+        this.prizesArr = []
+        this.prizesArr = [];
+        this.totalLength = 0;
+        this.year = {
+            pos: {
+                x: 0,
+                y: 0
+            }
+        }
+        this.dot = {
+            pos: {
+                x: this.year.pos.x,
+                y: 0
+            }
+        }
     }
     componentDidMount = () => this.fetchData();
     fetchData = () => {
@@ -38,33 +53,33 @@ class Timeline extends Component {
         .then(json => this.setState({timeline: json}))
         .catch(error => console.log(error))
     }
+    generatePriceWinners = () => {
+        
+    }
     generate = () => this.state.timeline.map((year, i) => {
             // every year, yearPosY is incremented by 20
-            this.yearPosY += this.state.year.inc;
+            this.year.pos.x += this.state.year.inc;
             // total length of poeple in a specific year
-            let totalPeopleLength = 0;
             // rendered array, which'll contain people in a category
             const SVGcategoryGroup = [];
             // rendered array, which'll contain a person for a nobel prize
             const SVGPeopleGroup = [];
-            // SVG circles position
-            let circlePos= {
-                x: this.yearPosY,
-                y: 0
-            };
+            this.dot.pos.x = this.year.pos.x;
+            this.dot.pos.y = 0;
+            this.totalLength = 0;
+            
             // for all categories in a year
             year.prizesList.map((category, j) => {
                 // increment the total length with each length
-                totalPeopleLength += category.length;
+                this.totalLength += category.length;
                 // update the circle y postion by one unit
-                circlePos.y += this.state.circle.inc;
+                this.dot.pos.y += this.state.dot.inc;
                 // init a subgroup array to staock all people
                 const SVGPeopleSubGroup = [];
                 // for every people in a category
                 category.map((pricewinner, k) => {
-                    console.log(pricewinner)
                     // update the circle y postion by one unit
-                    circlePos.y += this.state.circle.inc;
+                    this.dot.pos.y += this.state.dot.inc;
                     // push a circle for each person
                     return SVGPeopleSubGroup.push(<TlPriceWinner 
                         key={`${i}${j}${k}`} 
@@ -73,9 +88,9 @@ class Timeline extends Component {
                             className="dot" 
                             data-id={`${i}${j}${k}`}
                             data-category={pricewinner.category}
-                            cx={circlePos.x}
+                            cx={this.dot.pos.x}
                             r="5"
-                            cy={this.state.svg.h - circlePos.y}
+                            cy={this.state.svg.h - this.dot.pos.y}
                             onMouseOver={(e) => this.circleMouseOver(e)}
                             onMouseOut={(e) => this.circleMouseOut(e)}
                         />
@@ -88,6 +103,8 @@ class Timeline extends Component {
                     content={SVGPeopleSubGroup}
                 />)
             })
+
+            this.year.pos.y = this.state.svg.h - this.totalLength * this.state.line.multiplier;
             // group all people in a category
             SVGcategoryGroup.push(<TlPrizes 
                 key={i} 
@@ -103,9 +120,9 @@ class Timeline extends Component {
                         <Fragment>
                             <line 
                                 data-id={i}
-                                x1={this.yearPosY} 
-                                y1={this.state.svg.h - totalPeopleLength * this.state.line.multiplier}
-                                x2={this.yearPosY} 
+                                x1={this.year.pos.x} 
+                                y1={this.year.pos.y}
+                                x2={this.year.pos.x} 
                                 y2={this.state.svg.h} 
                             />
                             {SVGcategoryGroup}
@@ -123,18 +140,18 @@ class Timeline extends Component {
             const currentId = x.dataset.id;
             let cy = parseInt(x.getAttribute('cy'))
             if (mouse === 1) {
-                if ( targetId > currentId) cy += this.state.circle.hover;
-                else if (targetId < currentId) cy -= this.state.circle.hover;
+                if ( targetId > currentId) cy += this.state.dot.hover;
+                else if (targetId < currentId) cy -= this.state.dot.hover;
             }
             else if (mouse === 0) {
-                if ( targetId < currentId) cy += this.state.circle.hover;
-                else if (targetId > currentId) cy -= this.state.circle.hover;
+                if ( targetId < currentId) cy += this.state.dot.hover;
+                else if (targetId > currentId) cy -= this.state.dot.hover;
             }
             return x.setAttribute('cy', cy)
         })
     }
-    circleMouseOver = (e) => this.circleMouse(e, this.state.circle.scale1, 1);
-    circleMouseOut = (e) => this.circleMouse(e, this.state.circle.scale0, 0);
+    circleMouseOver = (e) => this.circleMouse(e, this.state.dot.scaleIn, 1);
+    circleMouseOut = (e) => this.circleMouse(e, this.state.dot.scaleOut, 0);
     render() {
         return <svg 
             id="Timeline"
