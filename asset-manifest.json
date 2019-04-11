@@ -1,13 +1,13 @@
 {
-  "main.css": "/datavisu/static/css/main.ab6751af.chunk.css",
-  "main.js": "/datavisu/static/js/main.7eac283d.chunk.js",
-  "main.js.map": "/datavisu/static/js/main.7eac283d.chunk.js.map",
+  "main.css": "/datavisu/static/css/main.cd27a108.chunk.css",
+  "main.js": "/datavisu/static/js/main.bb814a67.chunk.js",
+  "main.js.map": "/datavisu/static/js/main.bb814a67.chunk.js.map",
   "runtime~main.js": "/datavisu/static/js/runtime~main.9f98ce46.js",
   "runtime~main.js.map": "/datavisu/static/js/runtime~main.9f98ce46.js.map",
   "static/js/2.d6a534e5.chunk.js": "/datavisu/static/js/2.d6a534e5.chunk.js",
   "static/js/2.d6a534e5.chunk.js.map": "/datavisu/static/js/2.d6a534e5.chunk.js.map",
   "index.html": "/datavisu/index.html",
-  "precache-manifest.e98219e888f5b0de6726751f13bc2cfe.js": "/datavisu/precache-manifest.e98219e888f5b0de6726751f13bc2cfe.js",
+  "precache-manifest.7ace4ff71a783a0cea0bfa1c8069e90c.js": "/datavisu/precache-manifest.7ace4ff71a783a0cea0bfa1c8069e90c.js",
   "service-worker.js": "/datavisu/service-worker.js",
-  "static/css/main.ab6751af.chunk.css.map": "/datavisu/static/css/main.ab6751af.chunk.css.map"
+  "static/css/main.cd27a108.chunk.css.map": "/datavisu/static/css/main.cd27a108.chunk.css.map"
 }
