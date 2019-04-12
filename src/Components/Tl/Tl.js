@@ -9,7 +9,7 @@ class Timeline extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            json: 'https://gist.githubusercontent.com/blyndusk/d789375e1a6309f82745bcfa3477f64f/raw/c142eb72d344edbb1a9994a8a14e49c823784cfc/timeline.json',
+            json: 'http://trash.a-dll.com/tl.json',
             timeline: [],
             svg: {
                 w: 500,
@@ -55,6 +55,7 @@ class Timeline extends Component {
     }
     // generation of price winners (dots)
     generatePriceWinners = (parent, i, j) => parent.map((pricewinner, k) => {
+        console.log(pricewinner)
         // update the cdot y position by one dot incrementation
         this.dot.y += this.state.dot.inc;
         // push a <TlPriceWinner/> for each price winner
@@ -67,7 +68,7 @@ class Timeline extends Component {
                 // unique id
                 data-id={`${i}${j}${k}`}
                 // category
-                data-category={pricewinner.category}
+                data-category={pricewinner.data.field}
                 // position
                 cx={this.dot.x}
                 cy={this.state.svg.h - this.dot.y}
@@ -80,7 +81,7 @@ class Timeline extends Component {
         />);
     })
     // generation of categories (<g><TlPrizeWinner/></g>)
-    generateCategories = (parent, i) => parent.prizesList.map((category, j) => {
+    generateCategories = (parent, i) => parent.prizeList.map((category, j) => {
         // increment the total length with each prize winners in a category length
         this.totalLength += category.length;
         // update the dot y position by one dot incrementation, again
