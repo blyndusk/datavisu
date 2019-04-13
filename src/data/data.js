@@ -36,5 +36,5 @@ export const generateData = () => {
             }
         }
     }
-    return JSON.stringify(data)
+    return data
 }
