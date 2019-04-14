@@ -1,28 +1,28 @@
 #Timeline  {
-    circle {
+    .dot {
         fill: #666;
         cursor: pointer;
         @extend %mainTransition;
     }
-    circle[data-category="0"] {
+    .dot[data-category="0"] {
         fill: hsl(0, 100%, 80%);
     }
-    circle[data-category="1"] {
+    .dot[data-category="1"] {
         fill: hsl(55, 100%, 80%);
     }
-    circle[data-category="2"] {
+    .dot[data-category="2"] {
         fill: hsl(110, 100%, 80%);
     }
-    circle[data-category="3"] {
+    .dot[data-category="3"] {
         fill: hsl(165, 100%, 80%);
     }
-    circle[data-category="4"] {
+    .dot[data-category="4"] {
         fill: hsl(220, 100%, 80%);
     }
-    circle[data-category="5"] {
+    .dot[data-category="5"] {
         fill: hsl(275, 100%, 80%);
     }
-    circle[data-category="6"] {
+    .dot[data-category="6"] {
         fill: hsl(330, 100%, 80%);
     }
 };

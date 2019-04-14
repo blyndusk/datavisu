@@ -61,11 +61,13 @@ class Timeline extends Component {
         // update the cdot y position by one dot incrementation
         this.dot.y += this.state.dot.inc;
         // push a <TlPriceWinner/> for each price winner
+        let rectPosX = this.dot.x - 4;
+        let rectPosY = (this.state.svg.h - this.dot.y) - 4;
         return this.prizeWinnersArr.push(<TlPriceWinner 
             // unique key
             key={`${i}${j}${k}`} 
             // the content is a SVG circle
-            content={<circle 
+            content={pricewinner.data.gender ? <circle 
                 className="dot" 
                 // unique id
                 data-id={`${i}${j}${k}`}
@@ -79,6 +81,17 @@ class Timeline extends Component {
                 // mouse events
                 onMouseOver={(e) => this.dotMouseOver(e)}
                 onMouseOut={(e) => this.dotMouseOut(e)}
+            /> : <rect 
+                width="8"
+                height="8"
+                x={rectPosX}
+                y={rectPosY}
+
+                className="dot" 
+                // unique id
+                data-id={`${i}${j}${k}`}
+                // category
+                data-category={pricewinner.data.field}
             />}
         />);
     })
