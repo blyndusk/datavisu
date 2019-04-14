@@ -4,12 +4,9 @@ import Tl from './Tl/Tl';
 
 class App extends Component {
   render() {
-    return (
-      <div className="App">
+    return <div className="App">
         <Tl/>
-        <Tl/>
-      </div>
-    );
+    </div>;
   }
 }
 

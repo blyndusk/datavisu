@@ -58,7 +58,6 @@ class Timeline extends Component {
     }
     // generation of price winners (dots)
     generatePriceWinners = (parent, i, j) => parent.map((pricewinner, k) => {
-        console.log(pricewinner)
         // update the cdot y position by one dot incrementation
         this.dot.y += this.state.dot.inc;
         // push a <TlPriceWinner/> for each price winner
@@ -85,22 +84,24 @@ class Timeline extends Component {
     })
     // generation of categories (<g><TlPrizeWinner/></g>)
     generateCategories = (parent, i) => parent.prizeList.map((category, j) => {
-        // increment the total length with each prize winners in a category length
-        this.totalLength += category.length;
-        // update the dot y position by one dot incrementation, again
-        this.dot.y += this.state.dot.inc;
-        // reset the prize winners array
-        this.prizeWinnersArr = [];
-        // call the above method
-        this.generatePriceWinners(category, i, j);
+        if (category.length !== 0) {
+            // increment the total length with each prize winners in a category length
+            this.totalLength += category.length;
+            // update the dot y position by one dot incrementation, again
+            this.dot.y += this.state.dot.inc;
+            // reset the prize winners array
+            this.prizeWinnersArr = [];
+            // call the above method
+            this.generatePriceWinners(category, i, j);
+        }
         // push a <TlCategory/> for each category
-        return this.CategoriesArr.push(<TlCategory
+        return this.CategoriesArr.push(category.length !== 0 ? <TlCategory
             // unique key & id
             key={`${i}${j}`}
             id={`${i}${j}`}
             // the content is all the <TlPriceWinner/>
             content={this.prizeWinnersArr}
-        />)
+        /> : null)
     })
     // generation of all the prizes (<g><TlCategory/></g>)
     generatePrizes = (parent, i) => {
@@ -137,6 +138,7 @@ class Timeline extends Component {
                 // unique key & id
                 key={i}
                 data-id={i}
+                year={year.year}
                 // the content is the line & all the <TlPrizes/>
                 content={<Fragment>
                     <line 
