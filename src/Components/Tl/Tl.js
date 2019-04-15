@@ -23,7 +23,7 @@ class Timeline extends Component {
             },
             dot: {
                 inc: 10,
-                othersDotsPosition: 10,
+                hover: 10,
                 scaleIn: 10,
                 scaleOut: 5
             },
@@ -184,99 +184,58 @@ class Timeline extends Component {
     dotMouse = (e, r, wh, mouse) => {
         // get the current element
         const elt = e.target
-        const type = elt.tagName
+        // get the NodeList of all <circles> and <rect>
         const nodeDots = elt.parentNode.parentNode.parentNode.querySelectorAll('.category');
+        // init the final array
         const dots = [];
         // get all the dots
         Array.from(nodeDots).map(x => Array.from(x.childNodes).map(y => dots.push(y)));
-        if (type === 'circle') elt.setAttribute('r', r)
+        // if the element is a circle, set 'r' atribute
+        if (elt.tagName === 'circle') elt.setAttribute('r', r);
+        // else, set x, y, width & height attribute
         else {
+            // update coords in terms of mouse in or out
+            const getCoords = (e) => mouse ? (parseInt(elt.getAttribute(e)) - 4) : (parseInt(elt.getAttribute(e)) + 4);
             const rect = {
-                x: mouse ? (parseInt(elt.getAttribute('x')) - 4) : (parseInt(elt.getAttribute('x')) + 4),
-                y: mouse ? (parseInt(elt.getAttribute('y')) - 4) : (parseInt(elt.getAttribute('y')) + 4),
+                x: getCoords('x'),
+                y: getCoords('y'),
                 width: wh,
                 height: wh
             }
+            // set all attributes
             for (const key in rect) elt.setAttribute(key, rect[key]);
         }
-        
         // for all the dots
         Array.from(dots).map((x) => {
             // get the target id
             const targettedId = elt.dataset.id;
             // get the mapped id
             const mappedId = x.dataset.id;
-            // get the y position of the mapped dot
+            // get the y position of the mapped circle
             let circleY = parseInt(x.getAttribute('cy'))
+            // get the y position of the mapped rect
             let rectY = parseInt(x.getAttribute('y'))
-            // 1 = over; 0 = out
-            if (mouse === 1) {
-                // if the targeted is bigger than the mapped id, increment by the dot pos
-                if ( targettedId > mappedId) {
-                    circleY += this.state.dot.othersDotsPosition;
-                    rectY += this.state.dot.othersDotsPosition;
-                }
-                // else if the targeted is bigger than the mapped id, decrement by the dot pos
-                else if (targettedId < mappedId) {
-                    circleY -= this.state.dot.othersDotsPosition;
-                    rectY -= this.state.dot.othersDotsPosition;
-                }
+            // if the targetted dot is under the mapped dot
+            if (targettedId > mappedId) {
+                // if mouse is over, increment; if out, decrement
+                mouse ? circleY += this.state.dot.hover : circleY -= this.state.dot.hover
+                mouse ? rectY += this.state.dot.hover : rectY -= this.state.dot.hover;
             }
-            // if the mouse is out, reverse logic
-            else if (mouse === 0) {
-                if ( targettedId < mappedId) {
-                    circleY += this.state.dot.othersDotsPosition;
-                    rectY += this.state.dot.othersDotsPosition;
-                }
-                else if (targettedId > mappedId) {
-                    circleY -= this.state.dot.othersDotsPosition;
-                    rectY -= this.state.dot.othersDotsPosition;
-                }
+            // reverse logic
+            else if (targettedId < mappedId) { 
+                mouse ? circleY -= this.state.dot.hover : circleY += this.state.dot.hover
+                mouse ? rectY -= this.state.dot.hover : rectY += this.state.dot.hover;
             }
-            // set new y dot position
+            // set new y dot position, for circle & rect
             x.setAttribute('cy', circleY)
-            x.setAttribute('y', rectY)      
+            x.setAttribute('y', rectY)   
+            return null;   
         })
     }
     // when the mouse is on a dot
     dotMouseOver = (e) => this.dotMouse(e, this.state.dot.scaleIn, this.state.rect.scaleIn, 1);
     // when the mouse is over of a dot
     dotMouseOut = (e) => this.dotMouse(e, this.state.dot.scaleOut, this.state.rect.scaleOut, 0);
-    rectMouse = (e, r, mouse) => {
-        // get the current element
-        const elt = e.target
-        // get all the dots
-        const dots = elt.parentNode.parentNode.parentNode.querySelectorAll('circle');
-        // set the scale
-        elt.setAttribute('r', r)
-        // for all the dots
-        Array.from(dots).map((x) => {
-            // get the target id
-            const targettedId = elt.dataset.id;
-            // get the mapped id
-            const mappedId = x.dataset.id;
-            // get the y position of the mapped dot
-            let cy = parseInt(x.getAttribute('cy'))
-            // 1 = over; 0 = out
-            if (mouse === 1) {
-                // if the targeted is bigger than the mapped id, increment by the dot pos
-                if ( targettedId > mappedId) cy += this.state.dot.othersDotsPosition;
-                // else if the targeted is bigger than the mapped id, decrement by the dot pos
-                else if (targettedId < mappedId) cy -= this.state.dot.othersDotsPosition;
-            }
-            // if the mouse is out, reverse logic
-            else if (mouse === 0) {
-                if ( targettedId < mappedId) cy += this.state.dot.othersDotsPosition;
-                else if (targettedId > mappedId) cy -= this.state.dot.othersDotsPosition;
-            }
-            // set new y dot position
-            return x.setAttribute('cy', cy)
-        })
-    }
-    // when the mouse is on a dot
-    rectMouseOver = (e) => this.rectMouse(e, this.state.rect.scaleIn, 1);
-    // when the mouse is over of a dot
-    rectMouseOut = (e) => this.rectMouse(e, this.state.rect.scaleOut, 0);
     render() {
         // render a svg with all child Components
         return <svg 
