@@ -184,56 +184,58 @@ class Timeline extends Component {
     dotMouse = (e, r, wh, mouse) => {
         // get the current element
         const elt = e.target
-        const all = elt.parentNode.parentNode.parentNode.querySelectorAll('.category');
-        const dotsAndRects = [];
+        const type = elt.tagName
+        const nodeDots = elt.parentNode.parentNode.parentNode.querySelectorAll('.category');
+        const dots = [];
         // get all the dots
-        Array.from(all).map(x => Array.from(x.childNodes).map(y => dotsAndRects.push(y)))
-        // set the scale
-        elt.setAttribute('r', r)
-        elt.setAttribute('width', wh)
-        elt.setAttribute('height', wh)
-        let rectX = parseInt(elt.getAttribute('x'));
-        let rectY = parseInt(elt.getAttribute('y'));
-        mouse ? elt.setAttribute('x', (rectX - 4)) : elt.setAttribute('x', (rectX + 4)) ;
-        mouse ? elt.setAttribute('y', (rectY - 4)) : elt.setAttribute('y', (rectY + 4)) ;
+        Array.from(nodeDots).map(x => Array.from(x.childNodes).map(y => dots.push(y)));
+        if (type === 'circle') elt.setAttribute('r', r)
+        else {
+            const rect = {
+                x: mouse ? (parseInt(elt.getAttribute('x')) - 4) : (parseInt(elt.getAttribute('x')) + 4),
+                y: mouse ? (parseInt(elt.getAttribute('y')) - 4) : (parseInt(elt.getAttribute('y')) + 4),
+                width: wh,
+                height: wh
+            }
+            for (const key in rect) elt.setAttribute(key, rect[key]);
+        }
+        
         // for all the dots
-        Array.from(dotsAndRects).map((x) => {
+        Array.from(dots).map((x) => {
             // get the target id
             const targettedId = elt.dataset.id;
             // get the mapped id
             const mappedId = x.dataset.id;
-            console.log(mappedId)
             // get the y position of the mapped dot
-            let cy = parseInt(x.getAttribute('cy'))
-            let posY = parseInt(x.getAttribute('y'))
+            let circleY = parseInt(x.getAttribute('cy'))
+            let rectY = parseInt(x.getAttribute('y'))
             // 1 = over; 0 = out
             if (mouse === 1) {
                 // if the targeted is bigger than the mapped id, increment by the dot pos
                 if ( targettedId > mappedId) {
-                    cy += this.state.dot.othersDotsPosition;
-                    posY += this.state.dot.othersDotsPosition;
+                    circleY += this.state.dot.othersDotsPosition;
+                    rectY += this.state.dot.othersDotsPosition;
                 }
                 // else if the targeted is bigger than the mapped id, decrement by the dot pos
                 else if (targettedId < mappedId) {
-                    cy -= this.state.dot.othersDotsPosition;
-                    posY -= this.state.dot.othersDotsPosition;
-                    
+                    circleY -= this.state.dot.othersDotsPosition;
+                    rectY -= this.state.dot.othersDotsPosition;
                 }
             }
             // if the mouse is out, reverse logic
             else if (mouse === 0) {
                 if ( targettedId < mappedId) {
-                    cy += this.state.dot.othersDotsPosition;
-                    posY += this.state.dot.othersDotsPosition;
+                    circleY += this.state.dot.othersDotsPosition;
+                    rectY += this.state.dot.othersDotsPosition;
                 }
                 else if (targettedId > mappedId) {
-                    cy -= this.state.dot.othersDotsPosition;
-                    posY -= this.state.dot.othersDotsPosition;
+                    circleY -= this.state.dot.othersDotsPosition;
+                    rectY -= this.state.dot.othersDotsPosition;
                 }
             }
             // set new y dot position
-            x.setAttribute('cy', cy)
-            x.setAttribute('y', posY)      
+            x.setAttribute('cy', circleY)
+            x.setAttribute('y', rectY)      
         })
     }
     // when the mouse is on a dot
