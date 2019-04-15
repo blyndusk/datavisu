@@ -26,6 +26,10 @@ class Timeline extends Component {
                 othersDotsPosition: 10,
                 scaleIn: 10,
                 scaleOut: 5
+            },
+            rect: {
+                scaleIn: 16,
+                scaleOut: 8
             }
         }
         // total length of the timeline
@@ -46,6 +50,10 @@ class Timeline extends Component {
             x: this.line.x,
             y: 0
         }
+        this.rect = {
+            x: this.dot.x - 4,
+            y: (this.state.svg.h - this.dot.y) - 4
+        }
     }
     // fetch the data when the component mounting
     UNSAFE_componentWillMount = () => this.fetchData();
@@ -61,8 +69,8 @@ class Timeline extends Component {
         // update the cdot y position by one dot incrementation
         this.dot.y += this.state.dot.inc;
         // push a <TlPriceWinner/> for each price winner
-        let rectPosX = this.dot.x - 4;
-        let rectPosY = (this.state.svg.h - this.dot.y) - 4;
+        this.rect.x = this.dot.x - 4;
+        this.rect.y = (this.state.svg.h - this.dot.y) - 4;
         return this.prizeWinnersArr.push(<TlPriceWinner 
             // unique key
             key={`${i}${j}${k}`} 
@@ -82,16 +90,20 @@ class Timeline extends Component {
                 onMouseOver={(e) => this.dotMouseOver(e)}
                 onMouseOut={(e) => this.dotMouseOut(e)}
             /> : <rect 
-                width="8"
-                height="8"
-                x={rectPosX}
-                y={rectPosY}
-
                 className="dot" 
                 // unique id
                 data-id={`${i}${j}${k}`}
                 // category
                 data-category={pricewinner.data.field}
+                width="8"
+                height="8"
+                x={this.rect.x}
+                y={this.rect.y}
+                onMouseOver={(e) => this.dotMouseOver(e)}
+                onMouseOut={(e) => this.dotMouseOut(e)}
+
+                // onMouseOver={(e) => this.rectMouseOver(e)}
+                // onMouseOut={(e) => this.rectMouseOut(e)}
             />}
         />);
     })
@@ -169,7 +181,66 @@ class Timeline extends Component {
         )
     })
     // dot mouse events
-    dotMouse = (e, r, mouse) => {
+    dotMouse = (e, r, wh, mouse) => {
+        // get the current element
+        const elt = e.target
+        const all = elt.parentNode.parentNode.parentNode.querySelectorAll('.category');
+        const dotsAndRects = [];
+        // get all the dots
+        Array.from(all).map(x => Array.from(x.childNodes).map(y => dotsAndRects.push(y)))
+        // set the scale
+        elt.setAttribute('r', r)
+        elt.setAttribute('width', wh)
+        elt.setAttribute('height', wh)
+        let rectX = parseInt(elt.getAttribute('x'));
+        let rectY = parseInt(elt.getAttribute('y'));
+        mouse ? elt.setAttribute('x', (rectX - 4)) : elt.setAttribute('x', (rectX + 4)) ;
+        mouse ? elt.setAttribute('y', (rectY - 4)) : elt.setAttribute('y', (rectY + 4)) ;
+        // for all the dots
+        Array.from(dotsAndRects).map((x) => {
+            // get the target id
+            const targettedId = elt.dataset.id;
+            // get the mapped id
+            const mappedId = x.dataset.id;
+            console.log(mappedId)
+            // get the y position of the mapped dot
+            let cy = parseInt(x.getAttribute('cy'))
+            let posY = parseInt(x.getAttribute('y'))
+            // 1 = over; 0 = out
+            if (mouse === 1) {
+                // if the targeted is bigger than the mapped id, increment by the dot pos
+                if ( targettedId > mappedId) {
+                    cy += this.state.dot.othersDotsPosition;
+                    posY += this.state.dot.othersDotsPosition;
+                }
+                // else if the targeted is bigger than the mapped id, decrement by the dot pos
+                else if (targettedId < mappedId) {
+                    cy -= this.state.dot.othersDotsPosition;
+                    posY -= this.state.dot.othersDotsPosition;
+                    
+                }
+            }
+            // if the mouse is out, reverse logic
+            else if (mouse === 0) {
+                if ( targettedId < mappedId) {
+                    cy += this.state.dot.othersDotsPosition;
+                    posY += this.state.dot.othersDotsPosition;
+                }
+                else if (targettedId > mappedId) {
+                    cy -= this.state.dot.othersDotsPosition;
+                    posY -= this.state.dot.othersDotsPosition;
+                }
+            }
+            // set new y dot position
+            x.setAttribute('cy', cy)
+            x.setAttribute('y', posY)      
+        })
+    }
+    // when the mouse is on a dot
+    dotMouseOver = (e) => this.dotMouse(e, this.state.dot.scaleIn, this.state.rect.scaleIn, 1);
+    // when the mouse is over of a dot
+    dotMouseOut = (e) => this.dotMouse(e, this.state.dot.scaleOut, this.state.rect.scaleOut, 0);
+    rectMouse = (e, r, mouse) => {
         // get the current element
         const elt = e.target
         // get all the dots
@@ -201,9 +272,9 @@ class Timeline extends Component {
         })
     }
     // when the mouse is on a dot
-    dotMouseOver = (e) => this.dotMouse(e, this.state.dot.scaleIn, 1);
+    rectMouseOver = (e) => this.rectMouse(e, this.state.rect.scaleIn, 1);
     // when the mouse is over of a dot
-    dotMouseOut = (e) => this.dotMouse(e, this.state.dot.scaleOut, 0);
+    rectMouseOut = (e) => this.rectMouse(e, this.state.rect.scaleOut, 0);
     render() {
         // render a svg with all child Components
         return <svg 
