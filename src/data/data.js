@@ -1,7 +1,6 @@
 const data = [];
 const rdmInt = (min, max) => Math.floor(Math.random() * (max - min) + min)
-
-export const generateData = () => {
+const generateData = () => {
     const years = rdmInt(5, 10);
     let year = 1934
     // years generation
@@ -28,5 +27,6 @@ export const generateData = () => {
         });
         return console.clear();
     }));
-    return data
+    return console.log(JSON.stringify(data))
 }
+generateData()

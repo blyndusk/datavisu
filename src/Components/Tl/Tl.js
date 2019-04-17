@@ -4,15 +4,13 @@ import TlYear from './TlYear/TlYear';
 import TlPrizes from './TlYear/TlPrizes/TlPrizes';
 import TlCategory from './TlYear/TlPrizes/TlCategory/TlCategory';
 import TlPriceWinner from './TlYear/TlPrizes/TlCategory/TlPriceWinner/TlPriceWinner'
-import { generateData } from '../../data/data';
+import Axios from 'axios';
 
 class Timeline extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            json: 'https://trash.a-dll.com/tl.json',
             timeline: [],
-            timeline2: generateData(),
             svg: {
                 w: 500,
                 h: 400
@@ -58,6 +56,24 @@ class Timeline extends Component {
     // fetch the data when the component mounting
     UNSAFE_componentWillMount = () => this.fetchData();
     fetchData = () => {
+        Axios.get('https://trash.a-dll.com/tl.json', {
+            params: {
+                year: 1934
+            },
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+            },
+            proxy: {
+                host: ' http://172.19.120.186',
+                port: 3000
+            }
+        })
+        .then(res => {
+            console.log(res.data)
+            this.setState({ timeline: res.data})
+        })
+        .catch(err => console.log(err))
+
         // fetch(this.state.json2, {mode: 'no-cors'})
         // .then(fetched => fetched.json())
         // .then(json => this.setState({timeline: json}))
@@ -153,7 +169,7 @@ class Timeline extends Component {
         />)
     }
     // generation of all the timeline
-    generateTimeline = () => this.state.timeline2.map((year, i) => {
+    generateTimeline = () => this.state.timeline.map((year, i) => {
         // reset the prizes array
         this.prizesArr = [];
         this.generatePrizes(year, i)
