@@ -4,13 +4,12 @@ import TlYear from './TlYear/TlYear';
 import TlPrizes from './TlYear/TlPrizes/TlPrizes';
 import TlCategory from './TlYear/TlPrizes/TlCategory/TlCategory';
 import TlPriceWinner from './TlYear/TlPrizes/TlCategory/TlPriceWinner/TlPriceWinner'
-import Axios from 'axios';
+import Pop from './Pop/Pop'
 
 class Timeline extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            timeline: [],
             svg: {
                 w: 500,
                 h: 400
@@ -28,7 +27,8 @@ class Timeline extends Component {
             rect: {
                 scaleIn: 16,
                 scaleOut: 8
-            }
+            },
+            
         }
         // total length of the timeline
         this.totalLength = 0;
@@ -52,34 +52,10 @@ class Timeline extends Component {
             x: this.dot.x - 4,
             y: (this.state.svg.h - this.dot.y) - 4
         }
-    }
-    // fetch the data when the component mounting
-    UNSAFE_componentWillMount = () => this.fetchData();
-    fetchData = () => {
-        Axios.get('https://trash.a-dll.com/tl.json', {
-            params: {
-                year: 1934
-            },
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-            },
-            proxy: {
-                host: ' http://172.19.120.186',
-                port: 3000
-            }
-        })
-        .then(res => {
-            console.log(res.data)
-            this.setState({ timeline: res.data})
-        })
-        .catch(err => console.log(err))
 
-        // fetch(this.state.json2, {mode: 'no-cors'})
-        // .then(fetched => fetched.json())
-        // .then(json => this.setState({timeline: json}))
-        // .catch(error => console.log(error))
-        console.log(this.state.timeline2)
+        this.infos = {}
     }
+    
     // generation of price winners (dots)
     generatePriceWinners = (parent, i, j) => parent.map((pricewinner, k) => {
         // update the cdot y position by one dot incrementation
@@ -96,7 +72,10 @@ class Timeline extends Component {
                 // unique id
                 data-id={`${i}${j}${k}`}
                 // category
-                data-category={pricewinner.data.field}
+                data-age={pricewinner.data.age}
+                data-coutry={pricewinner.data.coutry}
+                data-field={pricewinner.data.field}
+                data-gender={pricewinner.data.gender}
                 // position
                 cx={this.dot.x}
                 cy={this.state.svg.h - this.dot.y}
@@ -110,7 +89,10 @@ class Timeline extends Component {
                 // unique id
                 data-id={`${i}${j}${k}`}
                 // category
-                data-category={pricewinner.data.field}
+                data-age={pricewinner.data.age}
+                data-coutry={pricewinner.data.coutry}
+                data-field={pricewinner.data.field}
+                data-gender={pricewinner.data.gender}
                 width="8"
                 height="8"
                 x={this.rect.x}
@@ -150,6 +132,7 @@ class Timeline extends Component {
         this.totalLength = 0;
         // every line, the line y position is incremented by a line incrementation
         this.line.x += this.state.line.inc;
+        console.log("eee")
         // reset the dots position
         this.dot.x = this.line.x;
         this.dot.y = 0;
@@ -169,7 +152,7 @@ class Timeline extends Component {
         />)
     }
     // generation of all the timeline
-    generateTimeline = () => this.state.timeline.map((year, i) => {
+    generateTimeline = () => this.props.data.map((year, i) => {
         // reset the prizes array
         this.prizesArr = [];
         this.generatePrizes(year, i)
@@ -200,6 +183,14 @@ class Timeline extends Component {
     dotMouse = (e, r, wh, mouse) => {
         // get the current element
         const elt = e.target
+
+        this.infos = {
+            age: elt.dataset.age,
+            country: elt.dataset.country,
+            field: elt.dataset.field,
+            gender: elt.dataset.gender,
+        }
+
         // get the NodeList of all <circles> and <rect>
         const nodeDots = elt.parentNode.parentNode.parentNode.querySelectorAll('.category');
         // init the final array
@@ -254,13 +245,16 @@ class Timeline extends Component {
     dotMouseOut = (e) => this.dotMouse(e, this.state.dot.scaleOut, this.state.rect.scaleOut, 0);
     render() {
         // render a svg with all child Components
-        return <svg 
-            id="Timeline"
-            width={this.state.svg.w}
-            height={this.state.svg.h}
-        >
-            {this.generateTimeline()}
-        </svg>;
+        return <Fragment>
+            <svg 
+                id="Timeline"
+                width={this.state.svg.w}
+                height={this.state.svg.h}
+            >
+                {this.generateTimeline()}
+            </svg>
+            {/* <Pop data={this.infos}/> */}
+        </Fragment>
     }
 }
 
