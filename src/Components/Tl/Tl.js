@@ -183,7 +183,7 @@ class Timeline extends Component {
     dotMouse = (e, r, wh, mouse) => {
         // get the current element
         const elt = e.target
-
+        console.log(elt)
         this.infos = {
             age: elt.dataset.age,
             country: elt.dataset.country,
