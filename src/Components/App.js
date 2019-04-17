@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Axios from 'axios';
 
 import Tl from './Tl/Tl';
+import Filters from './Filters/Filters'
 
 class App extends Component {
     constructor(props) {
@@ -31,6 +32,7 @@ class App extends Component {
     render() {
         return <div className="App">
             <Tl data={this.state.timeline}/>
+            <Filters/>
         </div>;
     }
 }
