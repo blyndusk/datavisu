@@ -8,10 +8,14 @@ class FilterGender extends Component {
         }
     }
     renderField = (bool) => bool ? <div>
-        <label>
-            <input type="checkbox" name="gd1" value="gd1"/>Man
-            <input type="checkbox" name="gd2" value="gd2"/>Woman
-        </label>
+        <div>
+            <input onChange={(e) => this.props.setGender(e)} type="radio" name="gd1" value="0"/>
+            <label>Man</label>
+        </div>
+        <div>
+            <input onChange={(e) => this.props.setGender(e)} type="radio" name="gd2" value="1"/>
+            <label>Woman</label>
+        </div>
     </div> : null
     render() {
         return <div className="FilterGender">

@@ -13,7 +13,9 @@ class Filters extends Component {
             <FilterFields
                 setFields={this.props.setFields}
             />
-            <FilterGender/>
+            <FilterGender
+                setGender={this.props.setGender}
+                />
         </div>;
     }
 }

@@ -49,7 +49,9 @@ class App extends Component {
         this.setState({params});
     }
     setGender = (e) => {
-
+        let params = {...this.state.params};
+        params.gender = e.target.value
+        this.setState({params});
     }
     render() {
         return <div className="App">
@@ -57,7 +59,7 @@ class App extends Component {
             <Filters
                 setAge={this.setAge}
                 setFields={this.setFields}
-                setGender={(e) => this.setGender(e)}
+                setGender={this.setGender}
             />
         </div>;
     }
