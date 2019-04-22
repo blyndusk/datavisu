@@ -34,10 +34,10 @@ class App extends Component {
     }
     // fetch the data when the component mounting
     UNSAFE_componentWillMount = () => this.fetchData();
-    setAge = (e) => {
+    setAge = (e, reset) => {
         let params = {...this.state.params};
-        params.age = e.target.value;                        //updating value
-        this.setState({params}, () => console.log("ddd"));
+        params.age = reset ? null : e.target.value;  
+        this.setState({params});
     }
     setFields = (e) => {
 
@@ -49,7 +49,7 @@ class App extends Component {
         return <div className="App">
             <Tl data={this.state.timeline}/>
             <Filters
-                setAge={(e) => this.setAge(e)}
+                setAge={this.setAge}
                 setFields={(e) => this.setFields(e)}
                 setGender={(e) => this.setGender(e)}
             />
