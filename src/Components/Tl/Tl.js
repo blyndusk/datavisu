@@ -99,9 +99,6 @@ class Timeline extends Component {
                 y={this.rect.y}
                 onMouseOver={(e) => this.dotMouseOver(e)}
                 onMouseOut={(e) => this.dotMouseOut(e)}
-
-                // onMouseOver={(e) => this.rectMouseOver(e)}
-                // onMouseOut={(e) => this.rectMouseOut(e)}
             />}
         />);
     })
@@ -132,7 +129,7 @@ class Timeline extends Component {
         this.totalLength = 0;
         // every line, the line y position is incremented by a line incrementation
         this.line.x += this.state.line.inc;
-        console.log("eee")
+        console.log(this.line.x)
         // reset the dots position
         this.dot.x = this.line.x;
         this.dot.y = 0;
@@ -155,6 +152,7 @@ class Timeline extends Component {
     generateTimeline = () => this.props.data.map((year, i) => {
         // reset the prizes array
         this.prizesArr = [];
+        console.log('aaa')
         this.generatePrizes(year, i)
         return (
             // group all categories in a year
@@ -179,6 +177,13 @@ class Timeline extends Component {
             />
         )
     })
+    resetTlParams = () => {
+        // line position
+        this.line = {
+            x: 0,
+            y: 0
+        }
+    }
     // dot mouse events
     dotMouse = (e, r, wh, mouse) => {
         // get the current element
@@ -251,9 +256,11 @@ class Timeline extends Component {
                 width={this.state.svg.w}
                 height={this.state.svg.h}
             >
+                {this.resetTlParams()}
                 {this.generateTimeline()}
+                {console.log('bb')}
             </svg>
-            {/* <Pop data={this.infos}/> */}
+            <Pop data={this.infos}/>
         </Fragment>
     }
 }

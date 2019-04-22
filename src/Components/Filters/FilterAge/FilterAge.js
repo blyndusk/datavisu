@@ -4,7 +4,8 @@ class FilterAge extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            display: false
+            display: false,
+            value: null
         }
     }
     renderAge = (bool) => bool ? <input 
@@ -12,14 +13,20 @@ class FilterAge extends Component {
         min="20"
         max="72"
         placeholder="30"
-        onChange={(e) => console.log(e.target.value)}
+        onChange={(e) => this.props.setAge(e)}
     /> : null 
+    onChangeDisplay = (e) => {
+        this.setState({
+            display : e.target.checked,
+            value: null
+        })
+    }
     render() {
         return <div className="FilterAge">
             <h2>FilterAge</h2>
             <input 
                 type="checkbox"
-                onChange={(e) => this.setState({display : e.target.checked})}    
+                onChange={(e) => this.onChangeDisplay(e)}    
             />
             {this.renderAge(this.state.display)}
         </div>

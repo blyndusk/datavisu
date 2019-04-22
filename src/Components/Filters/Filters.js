@@ -17,7 +17,9 @@ class Filters extends Component {
     render() {
         return <div className="Filters" >
             <h2>filters</h2>
-            <FilterAge/>
+            <FilterAge
+                setAge={(e) => this.props.setAge(e)}
+            />
             <FilterFields/>
             <FilterGender/>
         </div>;

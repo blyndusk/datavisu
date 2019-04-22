@@ -8,7 +8,12 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            timeline: []
+            timeline: [],
+            params: {
+                age: null,
+                field: null,
+                gender: null
+            }
         }
     }
     fetchData = () => {
@@ -29,10 +34,26 @@ class App extends Component {
     }
     // fetch the data when the component mounting
     UNSAFE_componentWillMount = () => this.fetchData();
+    setAge = (e) => {
+        console.log(e.target.value)
+        let params = {...this.state.params};
+        params.age = e.target.value;                        //updating value
+        this.setState({params}, () => console.log("ddd"));
+    }
+    setFields = (e) => {
+
+    }
+    setGender = (e) => {
+
+    }
     render() {
         return <div className="App">
             <Tl data={this.state.timeline}/>
-            <Filters/>
+            <Filters
+                setAge={(e) => this.setAge(e)}
+                setFields={(e) => this.setFields(e)}
+                setGender={(e) => this.setGender(e)}
+            />
         </div>;
     }
 }
