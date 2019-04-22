@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Axios from 'axios';
+import axios from 'axios';
 
 import Tl from './Tl/Tl';
 import Filters from './Filters/Filters'
@@ -13,13 +13,14 @@ class App extends Component {
                 age: null,
                 fields: [],
                 gender: null
-            }
+            },
+            test: "imatest"
         }
     }
-    fetchData = () => {
-        Axios.get('./timeline.json', {
+    fetchData = (params) => {
+        axios.get('./timeline.json', {
             params: {
-                year: 1934
+                ...params
             },
             headers: {
                 'Access-Control-Allow-Origin': '*',
@@ -29,11 +30,22 @@ class App extends Component {
                 port: 3000
             }
         })
-        .then(res => this.setState({ timeline: res.data}))
+        .then(res => {
+            console.log(`new Axios call:`)
+            console.log(res.config.params)
+            this.setState({ timeline: res.data})
+        })
         .catch(err => console.log(err))
+
+    }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        // Typical usage (don't forget to compare props):
+        if (this.state.params !== prevState.params) {
+            this.fetchData(this.state.params);
+        }
     }
     // fetch the data when the component mounting
-    UNSAFE_componentWillMount = () => this.fetchData();
+    UNSAFE_componentWillMount = () => this.fetchData(this.state.params);
     setAge = (e, reset) => {
         let params = {...this.state.params};
         params.age = reset ? null : e.target.value;  
