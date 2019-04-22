@@ -11,7 +11,7 @@ class App extends Component {
             timeline: [],
             params: {
                 age: null,
-                field: null,
+                fields: [],
                 gender: null
             }
         }
@@ -40,7 +40,13 @@ class App extends Component {
         this.setState({params});
     }
     setFields = (e) => {
-
+        let params = {...this.state.params};
+        if (e.target.checked) params.fields.push(e.target.value)
+        else params.fields.map((x, i) => {
+            if ( x === e.target.value) params.fields.splice(i, 1);
+            return x
+        })
+        this.setState({params});
     }
     setGender = (e) => {
 
@@ -50,7 +56,7 @@ class App extends Component {
             <Tl data={this.state.timeline}/>
             <Filters
                 setAge={this.setAge}
-                setFields={(e) => this.setFields(e)}
+                setFields={this.setFields}
                 setGender={(e) => this.setGender(e)}
             />
         </div>;
