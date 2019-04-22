@@ -11,8 +11,8 @@ class Timeline extends Component {
         super(props);
         this.state = {
             svg: {
-                w: 500,
-                h: 400
+                w: 200,
+                h: 200
             },
             line: {
                 inc: 20,
@@ -57,6 +57,10 @@ class Timeline extends Component {
         }
 
     }
+    componentDidMount = () => {
+        console.log(this.props)
+        this.setState({svg : { w: this.props.data.length * 10, h: 200}})
+    } 
     
     // generation of price winners (dots)
     generatePriceWinners = (parent, i, j) => parent.map((pricewinner, k) => {
@@ -254,7 +258,7 @@ class Timeline extends Component {
         return <Fragment>
             <svg 
                 id="Timeline"
-                width={this.state.svg.w}
+                width={this.props.data.length * 20}
                 height={this.state.svg.h}
             >
                 {this.resetTlParams()}

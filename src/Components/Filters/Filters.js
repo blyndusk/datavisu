@@ -6,7 +6,7 @@ import FilterGender from './FilterGender/FilterGender'
 class Filters extends Component {
     render() {
         return <div className="Filters" >
-            <h2>filters</h2>
+            <h2>Filters</h2>
             <FilterAge
                 setAge={this.props.setAge}
             />
