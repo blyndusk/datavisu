@@ -4,7 +4,7 @@ class FilterAge extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            display: false,
+            display: false
         }
     }
     renderAge = (bool) => bool ? <input 
@@ -15,7 +15,7 @@ class FilterAge extends Component {
         onChange={(e) => this.props.setAge(e, 0)}
     /> : null 
     resetAge = (e) => {
-        this.setState({ display : e.target.checked })
+        this.setState({display : e.target.checked})
         this.props.setAge(e, 1)
     }
     render() {

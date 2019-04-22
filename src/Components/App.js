@@ -51,18 +51,22 @@ class App extends Component {
         params.age = reset ? null : e.target.value;  
         this.setState({params});
     }
-    setFields = (e) => {
+    setFields = (e, reset) => {
         let params = {...this.state.params};
-        if (e.target.checked) params.fields.push(e.target.value)
-        else params.fields.map((x, i) => {
-            if ( x === e.target.value) params.fields.splice(i, 1);
-            return x
-        })
+        if (reset) {
+            params.fields = []
+        } else {
+            if (e.target.checked) params.fields.push(e.target.value)
+            else params.fields.map((x, i) => {
+                if ( x === e.target.value) params.fields.splice(i, 1);
+                return x
+            })
+        }
         this.setState({params});
     }
-    setGender = (e) => {
+    setGender = (e, reset) => {
         let params = {...this.state.params};
-        params.gender = e.target.value
+        params.gender = reset ? null : e.target.value
         this.setState({params});
     }
     render() {
