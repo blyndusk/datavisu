@@ -1,3 +1,6 @@
 #Timeline {
     margin: 10px;
+    &:hover ~ .Pop {
+        opacity: 1;
+    }
 }

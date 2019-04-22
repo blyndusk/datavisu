@@ -35,7 +35,6 @@ class App extends Component {
     // fetch the data when the component mounting
     UNSAFE_componentWillMount = () => this.fetchData();
     setAge = (e) => {
-        console.log(e.target.value)
         let params = {...this.state.params};
         params.age = e.target.value;                        //updating value
         this.setState({params}, () => console.log("ddd"));

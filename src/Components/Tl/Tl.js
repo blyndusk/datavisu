@@ -28,6 +28,9 @@ class Timeline extends Component {
                 scaleIn: 16,
                 scaleOut: 8
             },
+            infos: {
+
+            }
             
         }
         // total length of the timeline
@@ -53,7 +56,6 @@ class Timeline extends Component {
             y: (this.state.svg.h - this.dot.y) - 4
         }
 
-        this.infos = {}
     }
     
     // generation of price winners (dots)
@@ -129,7 +131,6 @@ class Timeline extends Component {
         this.totalLength = 0;
         // every line, the line y position is incremented by a line incrementation
         this.line.x += this.state.line.inc;
-        console.log(this.line.x)
         // reset the dots position
         this.dot.x = this.line.x;
         this.dot.y = 0;
@@ -152,7 +153,6 @@ class Timeline extends Component {
     generateTimeline = () => this.props.data.map((year, i) => {
         // reset the prizes array
         this.prizesArr = [];
-        console.log('aaa')
         this.generatePrizes(year, i)
         return (
             // group all categories in a year
@@ -188,13 +188,13 @@ class Timeline extends Component {
     dotMouse = (e, r, wh, mouse) => {
         // get the current element
         const elt = e.target
-        console.log(elt)
-        this.infos = {
+
+        this.setState({infos: {
             age: elt.dataset.age,
             country: elt.dataset.country,
             field: elt.dataset.field,
             gender: elt.dataset.gender,
-        }
+        }});
 
         // get the NodeList of all <circles> and <rect>
         const nodeDots = elt.parentNode.parentNode.parentNode.querySelectorAll('.category');
@@ -241,6 +241,7 @@ class Timeline extends Component {
             // set new y dot position, for circle & rect
             x.setAttribute('cy', circleY)
             x.setAttribute('y', rectY)   
+            // document.querySelector('.Pop').style.opacity = mouse ? 1 : 0
             return null;   
         })
     }
@@ -258,9 +259,8 @@ class Timeline extends Component {
             >
                 {this.resetTlParams()}
                 {this.generateTimeline()}
-                {console.log('bb')}
             </svg>
-            <Pop data={this.infos}/>
+            <Pop data={this.state.infos}/>
         </Fragment>
     }
 }
