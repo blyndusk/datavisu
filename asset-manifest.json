@@ -1,13 +1,13 @@
 {
-  "main.css": "/datavisu/static/css/main.f2aeb1cc.chunk.css",
-  "main.js": "/datavisu/static/js/main.bef4a6b5.chunk.js",
-  "main.js.map": "/datavisu/static/js/main.bef4a6b5.chunk.js.map",
-  "runtime~main.js": "/datavisu/static/js/runtime~main.cf015f01.js",
-  "runtime~main.js.map": "/datavisu/static/js/runtime~main.cf015f01.js.map",
-  "static/js/2.f275399c.chunk.js": "/datavisu/static/js/2.f275399c.chunk.js",
-  "static/js/2.f275399c.chunk.js.map": "/datavisu/static/js/2.f275399c.chunk.js.map",
-  "index.html": "/datavisu/index.html",
-  "precache-manifest.8d3d394c842fc31fe52565a5204a9624.js": "/datavisu/precache-manifest.8d3d394c842fc31fe52565a5204a9624.js",
-  "service-worker.js": "/datavisu/service-worker.js",
-  "static/css/main.f2aeb1cc.chunk.css.map": "/datavisu/static/css/main.f2aeb1cc.chunk.css.map"
+  "main.css": "/unknown-genius/static/css/main.f2aeb1cc.chunk.css",
+  "main.js": "/unknown-genius/static/js/main.39d3040c.chunk.js",
+  "main.js.map": "/unknown-genius/static/js/main.39d3040c.chunk.js.map",
+  "runtime~main.js": "/unknown-genius/static/js/runtime~main.ae075ded.js",
+  "runtime~main.js.map": "/unknown-genius/static/js/runtime~main.ae075ded.js.map",
+  "static/js/2.f275399c.chunk.js": "/unknown-genius/static/js/2.f275399c.chunk.js",
+  "static/js/2.f275399c.chunk.js.map": "/unknown-genius/static/js/2.f275399c.chunk.js.map",
+  "index.html": "/unknown-genius/index.html",
+  "precache-manifest.f4d091fee9019dccbe2b21fd57bafd30.js": "/unknown-genius/precache-manifest.f4d091fee9019dccbe2b21fd57bafd30.js",
+  "service-worker.js": "/unknown-genius/service-worker.js",
+  "static/css/main.f2aeb1cc.chunk.css.map": "/unknown-genius/static/css/main.f2aeb1cc.chunk.css.map"
 }
