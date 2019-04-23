@@ -1,4 +1,4 @@
-# Datavisu
+# Unknown genuis
 
 ⏱ A 3month-project for @ecolehetic, with the aim of creating a data visualisation website, using @reactjs.
 
@@ -15,7 +15,7 @@
 
 ## License
 
-Under [MIT](https://github.com/blyndusk/datavisu/blob/master/LICENSE) license.
+Under [MIT](https://github.com/blyndusk/unknown-genius/blob/master/LICENSE) license.
 
 ----
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
