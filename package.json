@@ -1,5 +1,5 @@
 {
-  "name": "dtvs",
+  "name": "backendunknowngenius",
   "version": "0.1.0",
   "private": true,
   "homepage": "https://blyndusk.github.io/unknown-genius",
@@ -28,5 +28,17 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "description": "⏱ A 3month-project for @ecolehetic, with the aim of creating a data visualisation website, using @reactjs.",
+  "main": "index.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AmauryFaveriel/backend-unknowngenius.git"
+  },
+  "author": "AmauryFaveriel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AmauryFaveriel/backend-unknowngenius/issues"
+  }
 }
