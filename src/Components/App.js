@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import Tl from './Tl/Tl';
 import Filters from './Filters/Filters'
+import Map from './Map/Map'
 
 class App extends Component {
     constructor(props) {
@@ -71,6 +72,7 @@ class App extends Component {
     }
     render() {
         return <div className="App">
+            <Map/>
             <Tl data={this.state.timeline}/>
             <Filters
                 setAge={this.setAge}
