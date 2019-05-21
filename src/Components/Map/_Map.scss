@@ -1,0 +1,126 @@
+.Map {
+    
+    padding: 100px;
+    svg {
+        position: relative;
+        /*
+        * Below are Cascading Style Sheet (CSS) definitions in use in this file,
+        * which allow easily changing how countries are displayed.
+        *
+        */
+
+        /*
+        * Circles around small countries
+        *
+        * Change opacity to 1 to display all circles.
+        *
+        */
+        .circle {
+            opacity:0;
+            fill:#b9b9b9;
+            fill-opacity:1;
+            stroke:black;
+            stroke-width:0.99986893;
+            stroke-miterlimit:3.97446823;
+            stroke-dasharray:none;
+            stroke-opacity:1;
+        }
+
+        /*
+        * Land
+        */
+        .land {
+            fill: #b9b9b9;
+            fill-opacity: 1;
+            // stroke: #ffffff;
+            // stroke-opacity: 1;
+            stroke-width: 0.99986997;
+            stroke-miterlimit: 3.97446823;
+            stroke-dasharray: none;
+            &:hover {
+                stroke: #eee;
+                stroke-width: 5;
+                position: fixed;
+                z-index: 1000000000;
+
+            }
+        }
+
+        /*
+        * Additional style rules
+        *
+        * The following are examples of colouring countries.  You can substitute these with your own styles to colour the countries on the map.
+        *
+        * Color a few countries:
+        *
+        * .gb, .au, .nc
+        * {
+        *    fill:       #ff0000;
+        * }
+        *
+        * Color a few small country circles (and the countries):
+        *
+        * .ms, .ky
+        * {
+        *    opacity:    1;
+        *    fill:       #ff0000;
+        * }
+        *
+        */
+
+        /*
+        * Antarctica
+        */
+
+        .aq
+        {
+        fill:#e6e6e6;
+        }
+
+        /*
+        * Sea
+        */
+
+        .ocean
+        {
+        opacity: 1;
+        color: #000000;
+        fill:#999 !important;
+        fill-opacity:1;
+        fill-rule:nonzero;
+        stroke:#000000;
+        stroke-width:0.5;
+        stroke-linecap:butt;
+        stroke-linejoin:miter;
+        marker:none;
+        marker-start:none;
+        marker-mid:none;
+        marker-end:none;
+        stroke-miterlimit:1;
+        stroke-dasharray:none;
+        stroke-dashoffset:0;
+        stroke-opacity:1;
+        visibility:visible;
+        display:inline;
+        overflow:visible;
+        }
+
+        .lake
+        {
+        fill:#ffffff;
+        fill-opacity:1;
+        stroke:#ffffff;
+        stroke-opacity:1;
+        stroke-width:0.99986997;
+        stroke-miterlimit:3.97446823;
+        stroke-dasharray:none;
+        }
+        path {
+            &:hover {
+                fill: red;
+            }
+        }
+        
+    }
+
+}
