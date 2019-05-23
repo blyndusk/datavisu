@@ -15,16 +15,27 @@
 // ==============================================
 
 @import "../Components/App";
+
+// ===== filters =======
+@import "../Components/Filters/Filters";
+
+// ===== pop =======
+@import "../Components/Tl/Pop/Pop";
+
+// ===== intro =======
+@import "../Components/Intro/Intro";
+
+// ===== loader =======
+@import "../Components/Loader/Loader";
+
+// ===== map =======
+@import "../Components/Map/Map";
+@import "../Components/Map/MapFilters/MapFilters";
+@import "../Components/Map/MapLegend/MapLegend";
+
+// ===== timeline =======
 @import "../Components/Tl/Tl";
 @import "../Components/Tl/TlYear/TlYear";
 @import "../Components/Tl/TlYear/TlPrizes/TlPrizes";
 @import "../Components/Tl/TlYear/TlPrizes/TlCategory/TlCategory";
 @import "../Components/Tl/TlYear/TlPrizes/TlCategory/TlPriceWinner/TlPrizeWinner";
-
-@import "../Components/Filters/Filters";
-
-@import "../Components/Tl/Pop/Pop";
-
-@import "../Components/Map/Map";
-@import "../Components/Map/MapFilters/MapFilters";
-@import "../Components/Map/MapLegend/MapLegend";

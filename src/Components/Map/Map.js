@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import MapSVG from './SVG/MapSVG'
+import MapSVG from './MapSVG/MapSVG'
 import MapFilters from './MapFilters/MapFilters'
 import MapLegend from './MapLegend/MapLegend';
 
