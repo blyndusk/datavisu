@@ -5,6 +5,7 @@ import MapLegend from './MapLegend/MapLegend';
 import MapPop from './MapPop/MapPop';
 import MapSVG from './MapSVG/MapSVG';
 import axios from 'axios';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class Map extends Component {
     constructor(props) {
@@ -74,6 +75,7 @@ class Map extends Component {
                 country={this.state.country}    
             />
             <MapSVG/>
+            
         </section>
     }
 }

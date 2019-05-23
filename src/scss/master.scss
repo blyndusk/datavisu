@@ -16,11 +16,14 @@
 
 @import "../Components/App";
 
+// ===== comparator =======
+@import "../Components/Comparator/Comparator";
+
 // ===== filters =======
 @import "../Components/Filters/Filters";
 
-// ===== pop =======
-@import "../Components/Tl/Pop/Pop";
+// ===== comparator =======
+@import "../Components/Home/Home";
 
 // ===== intro =======
 @import "../Components/Intro/Intro";
@@ -36,6 +39,9 @@
 
 // ===== timeline =======
 @import "../Components/Tl/Tl";
+
+// ===== pop =======
+@import "../Components/Tl/Pop/Pop";
 @import "../Components/Tl/TlYear/TlYear";
 @import "../Components/Tl/TlYear/TlPrizes/TlPrizes";
 @import "../Components/Tl/TlYear/TlPrizes/TlCategory/TlCategory";

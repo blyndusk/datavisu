@@ -3,3 +3,44 @@ body {
   scroll-behavior: smooth;
   background: $bg;
 }
+#nav {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    display: flex;
+    z-index: 3;
+    a {
+        color: #fff;
+        background: #ffffff1a;
+        width: 60px;
+        height: 60px;
+        margin: 30px;
+        border: 2px #fff solid;
+        border-radius: 100%;
+        @include fs(20px);
+        text-decoration: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &:hover {
+            background: #fff;
+            color: $gold;
+            border-color: $gold;
+        }
+    }
+}
+#comparator {
+    background: $gold;
+    border-radius: 25px;
+    margin: 30px;
+    padding: 15px;
+    @include fs(20px);
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    a {
+        color: #fff;
+        text-decoration: none;
+    }
+}

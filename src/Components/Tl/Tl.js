@@ -5,6 +5,7 @@ import TlPrizes from './TlYear/TlPrizes/TlPrizes';
 import TlCategory from './TlYear/TlPrizes/TlCategory/TlCategory';
 import TlPriceWinner from './TlYear/TlPrizes/TlCategory/TlPriceWinner/TlPriceWinner'
 import Pop from './Pop/Pop'
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class Timeline extends Component {
     constructor(props) {

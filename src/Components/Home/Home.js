@@ -7,17 +7,11 @@ class Home extends Component {
     render() {
         return <section className="Home">   
             <h2>Home</h2>
-            <ul>
-                    <li>
-                        <Link to="/map">Map</Link>
-                    </li>
-                    <li>
-                        <Link to="/timeline">Timeline</Link>
-                    </li>
-                    <li>
-                        <Link to="/Home">Home</Link>
-                    </li>
-                </ul>
+            <nav id="nav">
+                <Link to="/map">MAP</Link>
+                <Link to="/timeline">TL</Link>
+            </nav>
+            <button id="comparator"><Link to="/comparator">COMPARE COUNTRIES</Link></button>
         </section>
     }
 }

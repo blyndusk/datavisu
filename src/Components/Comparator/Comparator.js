@@ -7,17 +7,6 @@ class Comparator extends Component {
     render() {
         return <section className="Comparator">   
             <h2>Comparator</h2>
-            <ul>
-                    <li>
-                        <Link to="/map">Map</Link>
-                    </li>
-                    <li>
-                        <Link to="/timeline">Timeline</Link>
-                    </li>
-                    <li>
-                        <Link to="/comparator">Comparator</Link>
-                    </li>
-                </ul>
         </section>
     }
 }
