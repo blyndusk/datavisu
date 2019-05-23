@@ -1,6 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import axios from 'axios';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
+import Comparator from './Comparator/Comparator'
+import Home from './Home/Home'
 import Tl from './Tl/Tl';
 import Filters from './Filters/Filters'
 import Map from './Map/Map'
@@ -72,13 +75,20 @@ class App extends Component {
     }
     render() {
         return <div className="App">
-            <Map/>
-            {/* <Tl data={this.state.timeline}/>
-            <Filters
-                setAge={this.setAge}
-                setFields={this.setFields}
-                setGender={this.setGender}
-            /> */}
+            
+            <Router>
+            <Route path="/" component={Home} />
+                <Route path="/timeline/" component={() => (<Fragment>
+                    <Tl data={this.state.timeline}/>
+                    <Filters
+                        setAge={this.setAge}
+                        setFields={this.setFields}
+                        setGender={this.setGender}
+                    />
+                </Fragment>)}/>
+                <Route path="/map/" component={Map} />
+                <Route path="/comparator/" component={Comparator} />
+            </Router>
         </div>;
     }
 }
