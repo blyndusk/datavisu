@@ -12,7 +12,8 @@ class Map extends Component {
         const paths = document.querySelectorAll('.Map path');
         for (let i = 0; i < paths.length; i++) {
             const path = paths[i];
-            path.style.fill = `hsl(248, 100%, ${Math.floor(Math.random() * (90 - 10) ) + 10}%)`
+            const color = Math.floor(Math.random() * (66 - 24) ) + 24
+            path.style.fill = `hsl(213, ${color}%, ${color}%)`
             
             
         }

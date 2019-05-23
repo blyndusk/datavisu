@@ -4,7 +4,6 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        border: red 5px solid;
         // Below are Cascading Style Sheet (CSS) definitions in use in this file,
         // which allow easily changing how countries are displayed.
     
@@ -24,11 +23,14 @@
         .land {
             fill: #b9b9b9;
             fill-opacity: 1;
-            stroke: #ffffff;
+            stroke: transparent;
             stroke-opacity: 1;
-            stroke-width: 0.99986997;
+            stroke-width: 5;
             stroke-miterlimit: 3.97446823;
             stroke-dasharray: none;
+            &:hover {
+                stroke: #fff;
+            }
         }
 
 /*
@@ -64,7 +66,7 @@
         .ocean {
             opacity: 1;
             color: #000000;
-            fill:white;
+            fill: $bg !important;
             fill-opacity:1;
             fill-rule:nonzero;
             stroke:#000000;
