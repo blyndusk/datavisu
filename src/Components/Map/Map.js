@@ -14,6 +14,13 @@ class Map extends Component {
             const path = paths[i];
             path.style.fill = `hsl(248, 100%, ${Math.floor(Math.random() * (90 - 10) ) + 10}%)`
             
+            
+        }
+        const gs = document.querySelectorAll('.Map g');
+        for (let j = 0; j < gs.length; j++) {
+            const g = gs[j];
+            g.addEventListener('click', () => console.log(g.id))
+            
         }
     }
     render() {

@@ -73,12 +73,12 @@ class App extends Component {
     render() {
         return <div className="App">
             <Map/>
-            <Tl data={this.state.timeline}/>
+            {/* <Tl data={this.state.timeline}/>
             <Filters
                 setAge={this.setAge}
                 setFields={this.setFields}
                 setGender={this.setGender}
-            />
+            /> */}
         </div>;
     }
 }
