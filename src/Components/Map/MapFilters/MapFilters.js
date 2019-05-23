@@ -46,6 +46,8 @@ class MapFilters extends Component {
     render() {
         return <ul className="MapFilters">    
             {this.state.fields.map(field => <MapFilter
+                getField={this.props.getField}
+                key={field.name}
                 name={field.name}
                 label={field.label}
             />)}

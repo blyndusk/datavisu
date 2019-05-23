@@ -1,9 +1,24 @@
 .Map {
+    .infos {
+        position: fixed;
+        top: 25px;
+        left: 25px;
+        color: #fff;
+        @include fs(20px);
+        span {
+            color: $gold;
+            text-transform: uppercase;
+        }
+        a {
+            color: brown;
+        }
+    }
     svg {
         position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        z-index: 2;
         // Below are Cascading Style Sheet (CSS) definitions in use in this file,
         // which allow easily changing how countries are displayed.
     

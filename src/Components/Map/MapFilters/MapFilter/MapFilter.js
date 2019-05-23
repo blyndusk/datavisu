@@ -6,12 +6,12 @@ class MapFilter extends Component {
     componentDidMount = () => {
         
     }
-    addFilter = (e) => console.log(e.target.dataset.label);
+    addFilter = (e) => e.target.dataset.label;
     
     
     render() {
         return <li 
-            onClick={this.addFilter}
+            onClick={(e) => this.props.getField(e)}
             data-label={this.props.label}
         >{this.props.name}</li>
     }
