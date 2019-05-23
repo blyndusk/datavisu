@@ -1,0 +1,15 @@
+.MapFilters {
+    color: #fff;
+    @include fs(20px);
+    position: fixed;
+    bottom: 25px;
+    left: 25px;
+    li {
+        text-transform: uppercase;
+        padding: 10px 0;
+        cursor: pointer;
+        &:active {
+            color: $gold;
+        }
+    }
+}

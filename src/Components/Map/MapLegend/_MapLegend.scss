@@ -1,0 +1,26 @@
+.MapLegend {
+    color: #fff;
+    position: fixed;
+    top: 50px;
+    right: 50px;
+    .legend {
+        width: 25px;
+        height: 150px;
+        background: linear-gradient(#8fb7e8, #354456);
+        border-radius: 25px;
+    }
+    span {
+        width: 50px;
+        text-transform: uppercase;
+        @include fs(9px);
+        position: absolute;
+        left: -60px;
+        &:nth-of-type(1) {
+            top: 10px;
+            
+        }
+        &:nth-of-type(2) {
+            bottom: 10px;
+        }
+    }
+}
