@@ -2,6 +2,18 @@
 
 ⏱ A 3month-project for @ecolehetic, with the aim of creating a data visualisation website, using @reactjs.
 
+## Install DB
+
+- start mysql
+- change .env with logins
+- `composer update`
+- (`bin/console cache:clear`)
+- `bin/console doctrine:database:create`
+- `bin/console make:migration`
+- `bin/console doctrine:migration:migrate`
+- `bin/console server:run`
+
+
 ## Temporary/Test sources
 
 [`timeline.json`](https://gist.githubusercontent.com/blyndusk/d789375e1a6309f82745bcfa3477f64f/raw/e05be961740078e85a8a7baaeb5a63c6cc5dcee1/timeline.json)
