@@ -1,5 +1,5 @@
 {
-  "name": "backendunknowngenius",
+  "name": "unknown-genius",
   "version": "0.1.0",
   "private": true,
   "homepage": "https://blyndusk.github.io/unknown-genius",
@@ -35,11 +35,11 @@
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AmauryFaveriel/backend-unknowngenius.git"
+    "url": "git+https://github.com/blyndusk/unknown-genius.git"
   },
-  "author": "AmauryFaveriel",
+  "author": "blyndusk",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/AmauryFaveriel/backend-unknowngenius/issues"
+    "url": "https://github.com/blyndusk/unknown-genius/issues"
   }
 }
