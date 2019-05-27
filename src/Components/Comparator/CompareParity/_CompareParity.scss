@@ -1,0 +1,14 @@
+.CompareParity {
+    svg {
+        stroke-width: 30;
+        stroke-opacity: 1;
+        fill: none;
+        .men {
+            stroke: #152b65;
+        }
+        
+        .women { 
+            stroke: #21d386;
+        }
+    } 
+}
