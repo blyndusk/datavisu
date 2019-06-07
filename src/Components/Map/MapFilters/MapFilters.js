@@ -9,7 +9,7 @@ class MapFilters extends Component {
             fields: [
                 {
                     name: 'all',
-                    label: 'all'
+                    label: ''
                 },
                 {
                     name: 'physics',

@@ -11,8 +11,16 @@ class Map extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            baseUrl: 'http://localhost:8000/api/',
+            type: [
+                'people',
+                'prices'
+            ],
+            fieldParam: 'idprice.idcategory.category',
+            countryParam: 'idcountry.code',
+            peopleCountryParam: 'idpeople.idcountry.code',
             country: '',
-            field: 'all',
+            field: '',
             apiFieldCall: '',
             apiCountryCall: '',
             calls: 0,
@@ -21,24 +29,53 @@ class Map extends Component {
     }
     componentDidMount = () => {
         this.getCountry()
-        this.parseCountries('people')
+        this.setCountriesField()
     }
-    parseCountries = (url) => {
-        console.log(url)
-        axios.get(`http://localhost:8000/api/${url}`)
+    getField = (e) => {
+        this.setState({field: e.target.dataset.label}, () =>  this.setCountriesField())        
+    }
+    setCountriesField = () => {
+        let params = {}
+        if (!this.state.field.length) params = {}
+        else params[this.state.fieldParam] = this.state.field
+        axios.get(this.state.baseUrl + this.state.type[0], { params })
+        .then(res => this.parseCountries(res))
+        .catch(err => console.log(err))
+    }
+    setCountriesData = (apicall) => {
+        let params = {}
+        let type = 0
+        if (!this.state.field.length) {
+            params[this.state.peopleCountryParam] = this.state.country
+            type = 1
+        }
+        else {
+            params[this.state.countryParam] = this.state.country
+            params[this.state.fieldParam] = this.state.field
+            type = 0
+        }
+        axios.get(this.state.baseUrl + this.state.type[type], { params })
         .then(res => {
-            let codes = {}
-            res.data["hydra:member"].map(code => {
-                code = code.idcountry.code;
-                if (code in codes) codes[code] = codes[code] + 1
-                else codes[code] = 1
-                return null;
-            })
-            console.log(codes)
-            this.setState({ pricesPerCountries: codes}, () => this.setCountryColors())
+            const newState = {};
+            newState[apicall] = res.request.responseURL;
+            this.setState({
+                ...newState,
+                calls: this.state.calls + 1    
+            }, console.log(res.data["hydra:member"]))
         })
         .catch(err => console.log(err))
     }
+    parseCountries = (res) => {
+        let codes = {}
+        res.data["hydra:member"].map(code => {
+            code = code.idcountry.code;
+            if (code in codes) codes[code] = codes[code] + 1
+            else codes[code] = 1
+        })
+        console.log(codes)
+        this.setState({ pricesPerCountries: codes}, () => this.setCountryColors())
+    }
+    
     setCountryColors = () => {
         const codes = this.state.pricesPerCountries;
         [...document.querySelectorAll('.Map g')].map(g => {
@@ -50,33 +87,11 @@ class Map extends Component {
             }
         });
     }
-    getField = (e) => {
-        this.setState({field: e.target.dataset.label}, () =>  this.parseCountries(this.state.field === 'all' ? `people` : `people?idprice.idcategory.category=${this.state.field}`))
-
-        
-    }
+    
     getCountry = () => {
         [...document.querySelectorAll('.Map g')].map(g => g.addEventListener('click', () => {
-            this.setState({country: g.id}, () => this.getData("country", this.state.country, "apiCountryCall"))
+            this.setState({country: g.id}, () => this.setCountriesData("apiCountryCall"))
         }));
-    }
-    getData = (key, param, apicall) => {
-        console.log(this.state.field)
-        axios.get(this.state.field === 'all' ? `http://localhost:8000/api/prices?idpeople.idcountry.code=${this.state.country}` : `http://localhost:8000/api/people?idcountry.code=${this.state.country}&idprice.idcategory.category=${this.state.field}`, {
-            
-            // params: {
-            //     ...params
-            // }
-        })
-        .then(res => {
-            const newState = {};
-            newState[apicall] = res.request.responseURL;
-            this.setState({
-                ...newState,
-                calls: this.state.calls + 1    
-            }, console.log(res.data["hydra:member"]))
-        })
-        .catch(err => console.log(err))
     }
     
     render() {
