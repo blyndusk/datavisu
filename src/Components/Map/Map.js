@@ -19,13 +19,59 @@ class Map extends Component {
         }
     }
     componentDidMount = () => {
-        this.setCountryColors();
         this.getCountry()
+
+       
+        axios.get('http://localhost:8000/api/people', {
+            // params: {
+            //     ...params
+            // }
+        })
+        .then(res => {
+            const prices = res.data["hydra:member"]
+            let codes = {}
+            for (let i = 0; i < prices.length; i++) {
+                const code = prices[i].idcountry.code;
+                if (code in codes) {
+                    console.log(codes[code])
+                    codes[code] = parseInt(codes[code]) + 1
+                    // if (code) console.log('many')
+                }
+                else codes[code] = 1
+                
+                
+            }
+            console.log(codes)
+            let test = 0;
+            for (const key in codes) {
+                test = test + codes[key]
+            }
+            console.log(test)
+
+            this.setCountryColors(codes);
+        })
+        .catch(err => console.log(err))
     }
-    setCountryColors = () => {
-        [...document.querySelectorAll('.Map path')].map(path => {
-            const color = Math.floor(Math.random() * (66 - 24)) + 24;
-            return path.style.fill = `hsl(213, ${color}%, ${color}%)`
+    setCountryColors = (codes) => {
+        [...document.querySelectorAll('.Map g')].map(g => {
+            // const color = Math.floor(Math.random() * (66 - 24)) + 24;
+            // return path.style.fill = `hsl(213, ${color}%, ${color}%)`
+            for (const key in codes) {
+                if (codes.hasOwnProperty(key)) {
+                    const element = codes[key];
+                    if (g.id.toUpperCase() == key ) {
+                        for (let k = 0; k < g.querySelectorAll('path').length; k++) {
+                            const percent = (element / 500) * 100 + 25;
+                            console.log(percent)
+                            const path = g.querySelectorAll('path')[k];
+                            path.style.fill = `hsl(213, ${percent}%, ${percent}%`
+                        }
+                         // const color = Math.floor(Math.random() * (66 - 24)) + 24;
+            // return path.style.fill = `hsl(213, ${color}%, ${color}%)
+                    }
+                }
+            }
+
         });
         
     }
@@ -41,10 +87,10 @@ class Map extends Component {
     getData = (key, param, apicall) => {
         const params = {};
         params[key] = param;
-        axios.get('http://localhost:8000/api', {
-            params: {
-                ...params
-            }
+        axios.get('http://localhost:8000/api/prices?idpeople.idcountry.code=FR', {
+            // params: {
+            //     ...params
+            // }
         })
         .then(res => {
             const newState = {};
@@ -52,7 +98,7 @@ class Map extends Component {
             this.setState({
                 ...newState,
                 calls: this.state.calls + 1    
-            })
+            }, console.log(res))
         })
         .catch(err => console.log(err))
     }

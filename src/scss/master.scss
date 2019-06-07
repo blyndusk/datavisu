@@ -18,6 +18,10 @@
 
 // ===== comparator =======
 @import "../Components/Comparator/Comparator";
+@import "../Components/Comparator/CompareAge/CompareAge";
+@import "../Components/Comparator/CompareFields/CompareFields";
+@import "../Components/Comparator/CompareParity/CompareParity";
+@import "../Components/Comparator/CompareUniversities/CompareUniversities";
 
 // ===== filters =======
 @import "../Components/Filters/Filters";
