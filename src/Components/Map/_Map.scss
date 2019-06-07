@@ -40,6 +40,7 @@
             stroke-width: 5;
             stroke-miterlimit: 3.97446823;
             stroke-dasharray: none;
+            transition: fill 0.5s ease;
             &:hover {
                 stroke: #fff;
             }

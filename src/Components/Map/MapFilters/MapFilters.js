@@ -13,27 +13,27 @@ class MapFilters extends Component {
                 },
                 {
                     name: 'physics',
-                    label: 'phy'
+                    label: 'physics'
                 },
                 {
                     name: 'chemistry',
-                    label: 'che'
+                    label: 'chemistry'
                 },
                 {
-                    name: 'medecine',
-                    label: 'med'
+                    name: 'medicine',
+                    label: 'medicine'
                 },
                 {
-                    name: 'litterature',
-                    label: 'lit'
+                    name: 'literature',
+                    label: 'literature'
                 },
                 {
                     name: 'peace',
-                    label: 'pea'
+                    label: 'peace'
                 },
                 {
                     name: 'economics',
-                    label: 'eco'
+                    label: 'economics'
                 }
             ]
         }

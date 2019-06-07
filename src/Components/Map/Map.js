@@ -24,6 +24,7 @@ class Map extends Component {
         this.parseCountries('people')
     }
     parseCountries = (url) => {
+        console.log(url)
         axios.get(`http://localhost:8000/api/${url}`)
         .then(res => {
             let codes = {}
@@ -33,23 +34,26 @@ class Map extends Component {
                 else codes[code] = 1
                 return null;
             })
+            console.log(codes)
             this.setState({ pricesPerCountries: codes}, () => this.setCountryColors())
         })
         .catch(err => console.log(err))
     }
     setCountryColors = () => {
+        const codes = this.state.pricesPerCountries;
         [...document.querySelectorAll('.Map g')].map(g => {
-            for (const key in this.state.pricesPerCountries) {
-                const element = this.state.pricesPerCountries[key];
+            for (const key in codes) {
                 if (g.id.toUpperCase() === key ) [...g.querySelectorAll('path')].map(path => {
-                    const percent = (element / 500) * 100 + 33;
+                    const percent = (codes[key] / 500) * 100 + 33;
                     return path.style.fill = `hsl(213, ${percent}%, ${percent}%`;
                 })
             }
         });
     }
     getField = (e) => {
-        this.setState({field: e.target.dataset.label}, () => this.getData("field", this.state.field, "apiFieldCall"))
+        this.setState({field: e.target.dataset.label}, () =>  this.parseCountries(this.state.field === 'all' ? `people` : `people?idprice.idcategory.category=${this.state.field}`))
+
+        
     }
     getCountry = () => {
         [...document.querySelectorAll('.Map g')].map(g => g.addEventListener('click', () => {
@@ -59,7 +63,7 @@ class Map extends Component {
     getData = (key, param, apicall) => {
         const params = {};
         params[key] = param;
-        axios.get('http://localhost:8000/api/prices?idpeople.idcountry.code=FR', {
+        axios.get(`http://localhost:8000/api/people?idprice.idcategory.category=${param}`, {
             // params: {
             //     ...params
             // }
@@ -70,11 +74,10 @@ class Map extends Component {
             this.setState({
                 ...newState,
                 calls: this.state.calls + 1    
-            }, console.log(res))
+            }, console.log(res.data["hydra:member"]))
         })
         .catch(err => console.log(err))
     }
-    
     
     render() {
         return <section className="Map">   
