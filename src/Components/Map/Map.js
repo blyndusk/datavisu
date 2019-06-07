@@ -15,69 +15,41 @@ class Map extends Component {
             field: '',
             apiFieldCall: '',
             apiCountryCall: '',
-            calls: 0
+            calls: 0,
+            pricesPerCountries: {}
         }
     }
     componentDidMount = () => {
         this.getCountry()
-
-       
-        axios.get('http://localhost:8000/api/people', {
-            // params: {
-            //     ...params
-            // }
-        })
+        this.parseCountries('people')
+    }
+    parseCountries = (url) => {
+        axios.get(`http://localhost:8000/api/${url}`)
         .then(res => {
-            const prices = res.data["hydra:member"]
             let codes = {}
-            for (let i = 0; i < prices.length; i++) {
-                const code = prices[i].idcountry.code;
-                if (code in codes) {
-                    console.log(codes[code])
-                    codes[code] = parseInt(codes[code]) + 1
-                    // if (code) console.log('many')
-                }
+            res.data["hydra:member"].map(code => {
+                code = code.idcountry.code;
+                if (code in codes) codes[code] = codes[code] + 1
                 else codes[code] = 1
-                
-                
-            }
-            console.log(codes)
-            let test = 0;
-            for (const key in codes) {
-                test = test + codes[key]
-            }
-            console.log(test)
-
-            this.setCountryColors(codes);
+                return null;
+            })
+            this.setState({ pricesPerCountries: codes}, () => this.setCountryColors())
         })
         .catch(err => console.log(err))
     }
-    setCountryColors = (codes) => {
+    setCountryColors = () => {
         [...document.querySelectorAll('.Map g')].map(g => {
-            // const color = Math.floor(Math.random() * (66 - 24)) + 24;
-            // return path.style.fill = `hsl(213, ${color}%, ${color}%)`
-            for (const key in codes) {
-                if (codes.hasOwnProperty(key)) {
-                    const element = codes[key];
-                    if (g.id.toUpperCase() == key ) {
-                        for (let k = 0; k < g.querySelectorAll('path').length; k++) {
-                            const percent = (element / 500) * 100 + 25;
-                            console.log(percent)
-                            const path = g.querySelectorAll('path')[k];
-                            path.style.fill = `hsl(213, ${percent}%, ${percent}%`
-                        }
-                         // const color = Math.floor(Math.random() * (66 - 24)) + 24;
-            // return path.style.fill = `hsl(213, ${color}%, ${color}%)
-                    }
-                }
+            for (const key in this.state.pricesPerCountries) {
+                const element = this.state.pricesPerCountries[key];
+                if (g.id.toUpperCase() === key ) [...g.querySelectorAll('path')].map(path => {
+                    const percent = (element / 500) * 100 + 33;
+                    return path.style.fill = `hsl(213, ${percent}%, ${percent}%`;
+                })
             }
-
         });
-        
     }
     getField = (e) => {
         this.setState({field: e.target.dataset.label}, () => this.getData("field", this.state.field, "apiFieldCall"))
-        
     }
     getCountry = () => {
         [...document.querySelectorAll('.Map g')].map(g => g.addEventListener('click', () => {
