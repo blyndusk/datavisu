@@ -12,7 +12,7 @@ class Map extends Component {
         super(props);
         this.state = {
             country: '',
-            field: '',
+            field: 'all',
             apiFieldCall: '',
             apiCountryCall: '',
             calls: 0,
@@ -61,9 +61,9 @@ class Map extends Component {
         }));
     }
     getData = (key, param, apicall) => {
-        const params = {};
-        params[key] = param;
-        axios.get(`http://localhost:8000/api/people?idprice.idcategory.category=${param}`, {
+        console.log(this.state.field)
+        axios.get(this.state.field === 'all' ? `http://localhost:8000/api/prices?idpeople.idcountry.code=${this.state.country}` : `http://localhost:8000/api/people?idcountry.code=${this.state.country}&idprice.idcategory.category=${this.state.field}`, {
+            
             // params: {
             //     ...params
             // }
