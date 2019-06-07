@@ -5,61 +5,72 @@ import MapLegend from './MapLegend/MapLegend';
 import MapPop from './MapPop/MapPop';
 import MapSVG from './MapSVG/MapSVG';
 import axios from 'axios';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class Map extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            // API
             baseUrl: 'http://localhost:8000/api/',
             type: [
                 'people',
                 'prices'
             ],
-            fieldParam: 'idprice.idcategory.category',
-            countryParam: 'idcountry.code',
-            peopleCountryParam: 'idpeople.idcountry.code',
-            country: '',
-            field: '',
-            apiFieldCall: '',
-            apiCountryCall: '',
+            params: {
+                field: 'idprice.idcategory.category',
+                country: 'idcountry.code',
+                peopleCountry: 'idpeople.idcountry.code'
+            },
+            // Codes
+            countryCode: '',
+            fieldCode: '',
+            lengthCode: 0,
+            lengthCountryCode: 0,
+            // call
+            apiCall: '',
             calls: 0,
             pricesPerCountries: {}
         }
     }
     componentDidMount = () => {
-        this.getCountry()
+        this.getCountryData()
         this.setCountriesField()
     }
-    getField = (e) => {
-        this.setState({field: e.target.dataset.label}, () =>  this.setCountriesField())        
+    setFieldFilter = (e) => {
+        this.setState({fieldCode: e.target.dataset.label}, () =>  this.setCountriesField())        
     }
     setCountriesField = () => {
         let params = {}
-        if (!this.state.field.length) params = {}
-        else params[this.state.fieldParam] = this.state.field
+        if (!this.state.fieldCode.length) params = {}
+        else params[this.state.params.field] = this.state.fieldCode
         axios.get(this.state.baseUrl + this.state.type[0], { params })
-        .then(res => this.parseCountries(res))
+        .then(res => {
+            this.setState({
+                apiCall: res.request.responseURL,
+                lengthCode: res.data["hydra:member"].length,
+                calls: this.state.calls + 1    
+            }, console.log(res.data["hydra:member"]))
+            this.parseCountries(res)
+        })
         .catch(err => console.log(err))
     }
-    setCountriesData = (apicall) => {
+    setCountriesData = () => {
         let params = {}
         let type = 0
-        if (!this.state.field.length) {
-            params[this.state.peopleCountryParam] = this.state.country
+        if (!this.state.fieldCode.length) {
+            params[this.state.params.peopleCountry] = this.state.countryCode;
             type = 1
         }
         else {
-            params[this.state.countryParam] = this.state.country
-            params[this.state.fieldParam] = this.state.field
+            params[this.state.params.country] = this.state.countryCode
+            params[this.state.params.field] = this.state.fieldCode
             type = 0
         }
         axios.get(this.state.baseUrl + this.state.type[type], { params })
         .then(res => {
-            const newState = {};
-            newState[apicall] = res.request.responseURL;
             this.setState({
-                ...newState,
+                apiCall: res.request.responseURL,
+                lengthCountryCode: res.data["hydra:member"].length,
                 calls: this.state.calls + 1    
             }, console.log(res.data["hydra:member"]))
         })
@@ -88,27 +99,28 @@ class Map extends Component {
         });
     }
     
-    getCountry = () => {
+    getCountryData = () => {
         [...document.querySelectorAll('.Map g')].map(g => g.addEventListener('click', () => {
-            this.setState({country: g.id}, () => this.setCountriesData("apiCountryCall"))
+            this.setState({countryCode: g.id}, () => this.setCountriesData())
         }));
     }
     
     render() {
         return <section className="Map">   
-        <ul className="infos">
-            <li>Field : <span>{this.state.field}</span></li>
-            <li>Country : <span>{this.state.country}</span></li>
-            <li>API fields call : <a href={this.state.apiFieldCall}>{this.state.apiFieldCall}</a></li>
-            <li>API country call : <a href={this.state.apiCountryCall}>{this.state.apiCountryCall}</a></li>
+        <ul className="infos" style={window.location.hash == "#dev" ? {display: "block"} : {display: "none"}}>
+            <li>Field : <span>{this.state.fieldCode}</span></li>
+            <li>Country : <span>{this.state.countryCode}</span></li>
+            <li>API call : <a href={this.state.apiCall}>{this.state.apiCall}</a></li>
             <li>calls : <span>{this.state.calls}</span></li>
+            <li>{this.state.lengthCountryCode} people in <span>{this.state.fieldCode}</span> in <span>{this.state.countryCode}</span></li>
+            <li>{this.state.lengthCode} people in <span>{this.state.fieldCode}</span></li>
         </ul>
             <MapFilters
-                getField={this.getField}
+                setFieldFilter={this.setFieldFilter}
             />
             <MapLegend/> 
             <MapPop 
-                country={this.state.country}    
+                country={this.state.countryCode}    
             />
             <MapSVG/>
             
