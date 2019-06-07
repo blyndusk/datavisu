@@ -33,47 +33,22 @@ class Map extends Component {
         }
     }
     componentDidMount = () => {
-        this.getCountryData()
-        this.setCountriesField()
+        this.handleCountryClick()
+        this.apiFieldsCall()
     }
     setFieldFilter = (e) => {
-        this.setState({fieldCode: e.target.dataset.label}, () =>  this.setCountriesField())        
+        this.setState({fieldCode: e.target.dataset.label}, () =>  this.apiFieldsCall())        
     }
-    setCountriesField = () => {
+    apiFieldsCall = () => {
         let params = {}
         if (!this.state.fieldCode.length) params = {}
         else params[this.state.params.field] = this.state.fieldCode
         axios.get(this.state.baseUrl + this.state.type[0], { params })
-        .then(res => {
-            this.setState({
-                apiCall: res.request.responseURL,
-                lengthCode: res.data["hydra:member"].length,
-                calls: this.state.calls + 1    
-            }, console.log(res.data["hydra:member"]))
-            this.parseCountries(res)
-        })
-        .catch(err => console.log(err))
-    }
-    setCountriesData = () => {
-        let params = {}
-        let type = 0
-        if (!this.state.fieldCode.length) {
-            params[this.state.params.peopleCountry] = this.state.countryCode;
-            type = 1
-        }
-        else {
-            params[this.state.params.country] = this.state.countryCode
-            params[this.state.params.field] = this.state.fieldCode
-            type = 0
-        }
-        axios.get(this.state.baseUrl + this.state.type[type], { params })
-        .then(res => {
-            this.setState({
-                apiCall: res.request.responseURL,
-                lengthCountryCode: res.data["hydra:member"].length,
-                calls: this.state.calls + 1    
-            }, console.log(res.data["hydra:member"]))
-        })
+        .then(res => this.setState({
+            apiCall: res.request.responseURL,
+            lengthCode: res.data["hydra:member"].length,
+            calls: this.state.calls + 1    
+        }, this.parseCountries(res)))
         .catch(err => console.log(err))
     }
     parseCountries = (res) => {
@@ -86,7 +61,6 @@ class Map extends Component {
         console.log(codes)
         this.setState({ pricesPerCountries: codes}, () => this.setCountryColors())
     }
-    
     setCountryColors = () => {
         const codes = this.state.pricesPerCountries;
         [...document.querySelectorAll('.Map g')].map(g => {
@@ -98,16 +72,34 @@ class Map extends Component {
             }
         });
     }
-    
-    getCountryData = () => {
+    handleCountryClick = () => {
         [...document.querySelectorAll('.Map g')].map(g => g.addEventListener('click', () => {
-            this.setState({countryCode: g.id}, () => this.setCountriesData())
+            this.setState({countryCode: g.id}, () => this.apiCountriesCall())
         }));
     }
-    
+    apiCountriesCall = () => {
+        let params = {}
+        let type = 0
+        if (!this.state.fieldCode.length) {
+            params[this.state.params.peopleCountry] = this.state.countryCode;
+            type = 1
+        }
+        else {
+            params[this.state.params.country] = this.state.countryCode
+            params[this.state.params.field] = this.state.fieldCode
+            type = 0
+        }
+        axios.get(this.state.baseUrl + this.state.type[type], { params })
+        .then(res => this.setState({
+            apiCall: res.request.responseURL,
+            lengthCountryCode: res.data["hydra:member"].length,
+            calls: this.state.calls + 1    
+        }, console.log(res.data["hydra:member"])))
+        .catch(err => console.log(err))
+    }
     render() {
         return <section className="Map">   
-        <ul className="infos" style={window.location.hash == "#dev" ? {display: "block"} : {display: "none"}}>
+        <ul className="infos" style={window.location.hash === "#dev" ? {display: "block"} : {display: "none"}}>
             <li>Field : <span>{this.state.fieldCode}</span></li>
             <li>Country : <span>{this.state.countryCode}</span></li>
             <li>API call : <a href={this.state.apiCall}>{this.state.apiCall}</a></li>
