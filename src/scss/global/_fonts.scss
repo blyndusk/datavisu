@@ -2,4 +2,50 @@
 // GLOBAL FONTS
 // ==============================================
 
-@import url('https://fonts.googleapis.com/css?family=Allerta+Stencil');
+/******
+Futura
+******/
+
+// Book (Courant)
+@font-face {
+    font-family: 'Futura';
+    src: url('../assets/fonts/futura/futuraBook.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+// Medium
+@font-face {
+    font-family: 'Futura';
+    src: url('../assets/fonts/futura/futuraMedium.ttf');
+    font-weight: 500;
+    font-style: normal;
+}
+
+// Bold
+@font-face {
+    font-family: 'Futura';
+    src: url('../assets/fonts/futura/futuraBold.ttf');
+    font-weight: bold;
+    font-style: normal;
+}
+
+/******
+Lemon Milk
+******/
+
+// Courant
+@font-face {
+    font-family: 'Lemon Milk';
+    src: url('../assets/fonts/lemonMilk/LemonMilk.woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+// Bold
+@font-face {
+    font-family: 'Lemon Milk';
+    src: url('../assets/fonts/lemonMilk/LemonMilkBold.woff');
+    font-weight: bold;
+    font-style: normal;
+}

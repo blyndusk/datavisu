@@ -1,7 +1,7 @@
 body {
   font-family: "Avenir", sans-serif;
   scroll-behavior: smooth;
-  background: $bg;
+  background: $blue;
 }
 #nav {
     position: fixed;
@@ -25,13 +25,13 @@ body {
         align-items: center;
         &:hover {
             background: #fff;
-            color: $gold;
-            border-color: $gold;
+            color: $brand;
+            border-color: $brand;
         }
     }
 }
 #comparator {
-    background: $gold;
+    background: $brand;
     border-radius: 25px;
     margin: 30px;
     padding: 15px;

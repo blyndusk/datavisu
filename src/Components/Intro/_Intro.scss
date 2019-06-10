@@ -1,3 +1,51 @@
 .Intro {
-    
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background: $blue;
+    &__container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    &__title {
+        margin-bottom: 15px;
+        font-family: $signatureFont;
+        font-size: 88px;
+        font-weight: bold;
+        color: $brand;
+        text-align: center;
+    }
+    &__subtitle {
+        font-family: $mainFont;
+        font-size: 18px;
+        color: $content;
+        text-align: center;
+    }
+    &__button {
+        position: absolute;
+        top: calc(100% + 44px);
+        width: 101px;
+        height: 40px;
+        font-family: Futura;
+        font-size: 12px;
+        font-weight: bold;
+        color: $content;
+        text-transform: uppercase;
+        background: $brand;
+        border-radius: 40px;
+        transition: .3s ease;
+        &:hover {
+            background: $brandActive;
+        }
+    }
 }
