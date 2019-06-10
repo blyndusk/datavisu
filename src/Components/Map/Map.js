@@ -10,6 +10,7 @@ class Map extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            data: [],
             // API
             baseUrl: 'http://localhost:8000/api/',
             type: [
@@ -45,6 +46,7 @@ class Map extends Component {
         else params[this.state.params.field] = this.state.fieldCode
         axios.get(this.state.baseUrl + this.state.type[0], { params })
         .then(res => this.setState({
+            data: res.data["hydra:member"],
             apiCall: res.request.responseURL,
             lengthCode: res.data["hydra:member"].length,
             calls: this.state.calls + 1    
@@ -82,7 +84,7 @@ class Map extends Component {
         let type = 0
         if (!this.state.fieldCode.length) {
             params[this.state.params.peopleCountry] = this.state.countryCode;
-            type = 1
+            type = 0
         }
         else {
             params[this.state.params.country] = this.state.countryCode
@@ -91,6 +93,7 @@ class Map extends Component {
         }
         axios.get(this.state.baseUrl + this.state.type[type], { params })
         .then(res => this.setState({
+            data: res.data["hydra:member"],
             apiCall: res.request.responseURL,
             lengthCountryCode: res.data["hydra:member"].length,
             calls: this.state.calls + 1    
@@ -111,9 +114,10 @@ class Map extends Component {
                 setFieldFilter={this.setFieldFilter}
             />
             <MapLegend/> 
-            <MapPop 
-                country={this.state.countryCode}    
-            />
+            {this.state.data.length ? <MapPop 
+                country={this.state.countryCode}  
+                data={this.state.data}  
+            /> : null}
             <MapSVG/>
             
         </section>
