@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react';
+import ParityTemplate from './ParityTemplate/ParityTemplate'
 
 class CompareParity extends Component {
     constructor(props) {
@@ -34,15 +35,9 @@ class CompareParity extends Component {
                 },
             }
         }
-    } 
-    componentDidMount = () => {
-        this.setPercentage(75, 0.2);
-        this.setRotation(0.2)
     }
-    componentDidUpdate = (prevProps, prevState) => {
-        console.log('change frist')
+    componentDidUpdate = (prevProps) => {
         if (this.props.firstCountryData !== prevProps.firstCountryData ) {
-            console.log('change frist')
             this.setState({firstCountry: {
                 name: this.props.firstCountryData[0].idcountry.name
             }})
@@ -50,26 +45,19 @@ class CompareParity extends Component {
             
         }
         if (this.props.secondCountryData !== prevProps.secondCountryData) {
-            console.log('change seco,d')
             this.setState({secondCountry: {
                 name: this.props.secondCountryData[0].idcountry.name
             }})
             this.setCountry(this.props.secondCountryData, 1)
-            
         }
-
     }
     setName = (countrybin) => {
-        if (countrybin === 0) {
-            this.setState({firstCountry: {
-                name: this.props.firstCountryData[0].idcountry.name
-            }})
-        }
-        else {
-            this.setState({secondCountry: {
-                name: this.props.firstCountryData[0].idcountry.name
-            }})
-        }
+        if (countrybin === 0) this.setState({firstCountry: {
+            name: this.props.firstCountryData[0].idcountry.name
+        }})
+        else if (countrybin === 1) this.setState({secondCountry: {
+            name: this.props.firstCountryData[0].idcountry.name
+        }})
     }
     setCountry = (data, countrybin) => {
         this.getParity(data, countrybin);
@@ -109,35 +97,14 @@ class CompareParity extends Component {
               })
         }
     }
-    setRotation = (percentage) => {
-        this.setState({svgStyle: {
-            transform: `rotate(${- 360 * percentage / 2}deg)`},
-        })
-    }
-    setPercentage = (rayon, percentage) => {
-        const perimeter = Math.PI * 2 * rayon;
-        this.setState({pathStyle: {
-            strokeDasharray: `${perimeter * percentage}, ${perimeter}`},
-        })
-    }
     render() {
         return <section className="CompareParity">   
-           <div className="first">
-           <h2>{this.state.firstCountry.name}</h2>
-           <span>men: {this.state.firstCountry.parity.m.amount} - women: {this.state.firstCountry.parity.f.amount}</span>
-            <svg xmlns="http://www.w3.org/2000/svg" height="200" style={this.state.svgStyle}>
-                <circle className="men" cy="100" cx="100" r="75"></circle>
-                <circle style={this.state.pathStyle} className="women" cy="100" cx="100" r="75"></circle>
-            </svg>
-           </div>
-           <div className="second">
-           <h2>{this.state.secondCountry.name}</h2>
-           <span>men: {this.state.secondCountry.parity.m.amount} - women: {this.state.secondCountry.parity.f.amount}</span>
-            <svg xmlns="http://www.w3.org/2000/svg" height="200" style={this.state.svgStyle}>
-                <circle className="men" cy="100" cx="100" r="75"></circle>
-                <circle style={this.state.pathStyle} className="women" cy="100" cx="100" r="75"></circle>
-            </svg>
-           </div>
+          <ParityTemplate
+            country={this.state.firstCountry}
+          />
+           <ParityTemplate
+            country={this.state.secondCountry}
+          />
         </section>
     }
 }
