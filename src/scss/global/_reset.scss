@@ -152,3 +152,10 @@ textarea {
 * {
   box-sizing: border-box;
 }
+button {
+  background: transparent;
+  border: none;
+  padding: 0px;
+  outline: none;
+  cursor: pointer;
+}

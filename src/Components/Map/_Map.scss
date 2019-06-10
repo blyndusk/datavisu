@@ -7,7 +7,7 @@
         left: 25px;
         z-index: 1000;
         span {
-            color: $gold;
+            color: $brand;
             text-transform: uppercase;
         }
         a {
@@ -52,7 +52,7 @@
         .ocean {
             opacity: 1;
             color: #000000;
-            fill: $bg !important;
+            fill: $blue !important;
             fill-opacity:1;
             fill-rule:nonzero;
             stroke:#000000;
