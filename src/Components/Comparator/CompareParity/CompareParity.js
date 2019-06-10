@@ -124,7 +124,7 @@ class CompareParity extends Component {
         return <section className="CompareParity">   
            <div className="first">
            <h2>{this.state.firstCountry.name}</h2>
-           <span>men: 0 - women: 0</span>
+           <span>men: {this.state.firstCountry.parity.m.amount} - women: {this.state.firstCountry.parity.f.amount}</span>
             <svg xmlns="http://www.w3.org/2000/svg" height="200" style={this.state.svgStyle}>
                 <circle className="men" cy="100" cx="100" r="75"></circle>
                 <circle style={this.state.pathStyle} className="women" cy="100" cx="100" r="75"></circle>
@@ -132,7 +132,7 @@ class CompareParity extends Component {
            </div>
            <div className="second">
            <h2>{this.state.secondCountry.name}</h2>
-           <span>men: 0 - women: 0</span>
+           <span>men: {this.state.secondCountry.parity.m.amount} - women: {this.state.secondCountry.parity.f.amount}</span>
             <svg xmlns="http://www.w3.org/2000/svg" height="200" style={this.state.svgStyle}>
                 <circle className="men" cy="100" cx="100" r="75"></circle>
                 <circle style={this.state.pathStyle} className="women" cy="100" cx="100" r="75"></circle>
