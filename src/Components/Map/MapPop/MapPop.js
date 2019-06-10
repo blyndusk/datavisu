@@ -9,6 +9,7 @@ class MapPop extends Component {
                 x: window.innerWidth / 2,
                 y: window.innerHeight / 2
             },
+            fields: {},
             parity: {
                 m: {
                     amount: 0,
@@ -34,7 +35,16 @@ class MapPop extends Component {
         })        
     }
     getFieldsAmount = (data) => {
-        
+        const fields = {}
+        data.map(l => l.idprice.map(price => {
+                    const field = price.idcategory.category
+                    if (field in fields) fields[field] = fields[field] + 1
+                    // else, set to 1
+                    else fields[field] = 1
+                    return field;
+                })
+        )
+        this.setState({fields})
     }
     getAverageAge = (data) => {
         let ageTotal = 0;
@@ -77,6 +87,7 @@ class MapPop extends Component {
         //   this.fetchData(this.props.userID);
         this.getParity(this.props.data)
         this.getAverageAge(this.props.data)
+        this.getFieldsAmount(this.props.data)
         }
       }
     componentDidMount = () => this.displayPop()
@@ -85,15 +96,11 @@ class MapPop extends Component {
             className="MapPop"
             style={{top: `${this.state.pos.y}px`, left: `${this.state.pos.x}px`}}
         >
-            <h3 className="country">Country: {this.props.country.toUpperCase()}</h3>
+            <h3 className="country">Country: {this.props.data[0].idcountry.name.toUpperCase()}</h3>
             <span>Laureats: {this.props.data.length}</span>
             <ul className="fields">
-                {/* <li>Physics: <span>{}</span></li>
-                <li>Chemistry: <span>{}</span></li>
-                <li>Medecine: <span>{}</span></li>
-                <li>Litterature: <span>{}</span></li>
-                <li>Peace: <span>{}</span></li>
-                <li>Economics: <span>{}</span></li> */}
+                {
+                    Object.keys(this.state.fields).map(key =>  <li key={key}>{key}: <span>{this.state.fields[key]}</span></li>)}
             </ul>
             <div className="parity">
                 Men: {this.state.parity.m.percent}%
