@@ -37,13 +37,19 @@ class Map extends Component {
         this.handleCountryClick()
         this.apiFieldsCall()
     }
+    // set new field code ( PHYSICS, PEACE, ..)
     setFieldFilter = (e) => {
         this.setState({fieldCode: e.target.dataset.label}, () =>  this.apiFieldsCall())        
     }
+    // new api call with field param
     apiFieldsCall = () => {
         let params = {}
+        if (!this.state.fieldCode.length && this.state.countryCode.length) params[this.state.params.country] = this.state.countryCode
         if (!this.state.fieldCode.length) params = {}
-        else params[this.state.params.field] = this.state.fieldCode
+        else {
+            params[this.state.params.country] = this.state.countryCode
+            params[this.state.params.field] = this.state.fieldCode
+        }
         axios.get(this.state.baseUrl + this.state.type[0], { params })
         .then(res => this.setState({
             data: res.data["hydra:member"],
@@ -53,6 +59,7 @@ class Map extends Component {
         }, this.parseCountries(res)))
         .catch(err => console.log(err))
     }
+    // set an object with amount of prices per country
     parseCountries = (res) => {
         let codes = {}
         res.data["hydra:member"].map(code => {
@@ -63,6 +70,7 @@ class Map extends Component {
         console.log(codes)
         this.setState({ pricesPerCountries: codes}, () => this.setCountryColors())
     }
+    // colorize countries
     setCountryColors = () => {
         const codes = this.state.pricesPerCountries;
         [...document.querySelectorAll('.Map g')].map(g => {
@@ -74,19 +82,22 @@ class Map extends Component {
             }
         });
     }
+    // update call with country code
     handleCountryClick = () => {
         [...document.querySelectorAll('.Map g')].map(g => g.addEventListener('click', () => {
             this.setState({countryCode: g.id}, () => this.apiCountriesCall())
         }));
     }
+    // new call with country param (FR, US, GB, ...)
     apiCountriesCall = () => {
         let params = {}
         let type = 0
         if (!this.state.fieldCode.length) {
-            params[this.state.params.peopleCountry] = this.state.countryCode;
+            params[this.state.params.country] = this.state.countryCode;
             type = 0
         }
         else {
+            console.log('trogger')
             params[this.state.params.country] = this.state.countryCode
             params[this.state.params.field] = this.state.fieldCode
             type = 0
