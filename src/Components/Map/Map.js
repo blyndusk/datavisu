@@ -37,16 +37,58 @@ class Map extends Component {
         this.handleCountryClick()
         this.apiFieldsCall()
     }
-    // set new field code ( PHYSICS, PEACE, ..)
-    setFieldFilter = (e) => {
-        this.setState({fieldCode: e.target.dataset.label}, () =>  this.apiFieldsCall())        
-    }
-    // new api call with field param
-    apiFieldsCall = () => {
+    setCountriesColorization = () => {
+        // by default, there isn't params
         let params = {}
-        if (!this.state.fieldCode.length && this.state.countryCode.length) params[this.state.params.country] = this.state.countryCode
-        if (!this.state.fieldCode.length) params = {}
-        else {
+        // if a field param is detected, update the colorization
+        if (this.state.fieldCode.length) params[this.state.params.field] = this.state.fieldCode;
+        // api call, with custom param (field or no field)
+        axios.get(this.state.baseUrl + this.state.type[0], { params })
+        // then, update #dev status
+        .then(res => this.setState({
+            apiCall: res.request.responseURL,
+            lengthCode: res.data["hydra:member"].length,
+            calls: this.state.calls + 1    
+        }, () => {
+            console.log('1st call', this.state.apiCall)
+            // and parse countries with the result
+            this.parseCountries(res.data["hydra:member"])
+        }))
+        .catch(err => console.log(err))
+        
+    }
+    setCountryData = () => {
+        let params = {}
+        // no field, no country
+        if (!this.state.fieldCode.length && !this.state.countryCode.length) {
+            console.group('STATUS')
+            console.log('field,', this.state.fieldCode)
+            console.log('country,', this.state.countryCode)
+            console.groupEnd();
+            params = {}
+        }
+        // field but not country
+        else if (this.state.fieldCode.length && !this.state.countryCode.length) {
+            console.group('STATUS')
+            console.log('field,', this.state.fieldCode)
+            console.log('country,', this.state.countryCode)
+            console.groupEnd();
+            params[this.state.params.field] = this.state.fieldCode
+        }
+        // no field, but country
+        else if (!this.state.fieldCode.length && this.state.countryCode.length) {
+            console.group('STATUS')
+            console.log('field,', this.state.fieldCode)
+            console.log('country,', this.state.countryCode)
+            console.groupEnd();
+            params[this.state.params.country] = this.state.countryCode
+        }
+        // field & country
+        else if (this.state.fieldCode.length && this.state.countryCode.length) {
+            console.group('STATUS')
+            console.log('field,', this.state.fieldCode)
+            console.log('country,', this.state.countryCode)
+            console.groupEnd();
             params[this.state.params.country] = this.state.countryCode
             params[this.state.params.field] = this.state.fieldCode
         }
@@ -56,13 +98,24 @@ class Map extends Component {
             apiCall: res.request.responseURL,
             lengthCode: res.data["hydra:member"].length,
             calls: this.state.calls + 1    
-        }, this.parseCountries(res)))
+        }))
         .catch(err => console.log(err))
     }
+    // set new field code ( PHYSICS, PEACE, ..)
+    setFieldFilter = (e) => {
+        this.setState({fieldCode: e.target.dataset.label}, () =>  this.apiFieldsCall())        
+    }
+    // new api call with field param
+    apiFieldsCall = () => {
+        this.setCountriesColorization();
+        this.setCountryData();
+       
+        
+    }
     // set an object with amount of prices per country
-    parseCountries = (res) => {
+    parseCountries = (data) => {
         let codes = {}
-        res.data["hydra:member"].map(code => {
+        data.map(code => {
             code = code.idcountry.code;
             if (code in codes) codes[code] = codes[code] + 1
             else codes[code] = 1
