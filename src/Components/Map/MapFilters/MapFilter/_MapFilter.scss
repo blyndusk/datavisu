@@ -1,0 +1,15 @@
+.MapFilters {
+    li {
+        text-transform: uppercase;
+        padding: 10px 0;
+        cursor: pointer;
+        &:active {
+            color: $gold;
+            font-weight: bold;
+        }
+    } 
+    .focus {
+        color: $gold;
+        font-weight: bold;
+    }
+}
