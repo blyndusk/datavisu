@@ -5,6 +5,7 @@ import MapLegend from './MapLegend/MapLegend';
 import MapPop from './MapPop/MapPop';
 import MapSVG from './MapSVG/MapSVG';
 import axios from 'axios';
+import { config } from 'rxjs';
 
 class Map extends Component {
     constructor(props) {
@@ -35,12 +36,13 @@ class Map extends Component {
     }
     componentDidMount = () => {
         this.handleCountryClick()
-        this.apiFieldsCall()
+        this.setNewData()
     }
+    // api only called to update countries colorization
     setCountriesColorization = () => {
-        // by default, there isn't params
+        // no param by default
         let params = {}
-        // if a field param is detected, update the colorization
+        // if a field param is detected, add field param
         if (this.state.fieldCode.length) params[this.state.params.field] = this.state.fieldCode;
         // api call, with custom param (field or no field)
         axios.get(this.state.baseUrl + this.state.type[0], { params })
@@ -57,42 +59,35 @@ class Map extends Component {
         .catch(err => console.log(err))
         
     }
+    // api only called to update country's data
     setCountryData = () => {
+        const conf = {
+            field: {
+                exist: this.state.fieldCode.length, 
+                setParam(that) { params[that.state.params.field] = that.state.fieldCode }
+            },
+            country: {
+                exist: this.state.countryCode.length,
+                setParam(that) { params[that.state.params.country] = that.state.countryCode }
+            }
+        }
+        // no param by default
         let params = {}
-        // no field, no country
-        if (!this.state.fieldCode.length && !this.state.countryCode.length) {
-            console.group('STATUS')
-            console.log('field,', this.state.fieldCode)
-            console.log('country,', this.state.countryCode)
-            console.groupEnd();
-            params = {}
+        // if there is neither field nor country, don't change anything
+        if (!conf.field.exist && !conf.country.exist) params = {};
+        // if there is a field but no country, add field param
+        else if (conf.field.exist && !conf.country.exist) conf.field.setParam(this);
+        // if there is a country but no field, add country param
+        else if (!conf.field.exist && conf.country.exist) conf.country.setParam(this);
+        // if there are both field and country
+        else if (conf.field.exist && conf.country.exist) {
+            // add both params, field & country
+            conf.country.setParam(this)
+            conf.field.setParam(this)
         }
-        // field but not country
-        else if (this.state.fieldCode.length && !this.state.countryCode.length) {
-            console.group('STATUS')
-            console.log('field,', this.state.fieldCode)
-            console.log('country,', this.state.countryCode)
-            console.groupEnd();
-            params[this.state.params.field] = this.state.fieldCode
-        }
-        // no field, but country
-        else if (!this.state.fieldCode.length && this.state.countryCode.length) {
-            console.group('STATUS')
-            console.log('field,', this.state.fieldCode)
-            console.log('country,', this.state.countryCode)
-            console.groupEnd();
-            params[this.state.params.country] = this.state.countryCode
-        }
-        // field & country
-        else if (this.state.fieldCode.length && this.state.countryCode.length) {
-            console.group('STATUS')
-            console.log('field,', this.state.fieldCode)
-            console.log('country,', this.state.countryCode)
-            console.groupEnd();
-            params[this.state.params.country] = this.state.countryCode
-            params[this.state.params.field] = this.state.fieldCode
-        }
+        // api call, with no param, or field, or country, or both
         axios.get(this.state.baseUrl + this.state.type[0], { params })
+        // then, update the given data, and #dev status
         .then(res => this.setState({
             data: res.data["hydra:member"],
             apiCall: res.request.responseURL,
@@ -102,11 +97,11 @@ class Map extends Component {
         .catch(err => console.log(err))
     }
     // set new field code ( PHYSICS, PEACE, ..)
-    setFieldFilter = (e) => {
-        this.setState({fieldCode: e.target.dataset.label}, () =>  this.apiFieldsCall())        
+    handleFilterFieldClick = (e) => {
+        this.setState({fieldCode: e.target.dataset.label}, () => this.setNewData())        
     }
     // new api call with field param
-    apiFieldsCall = () => {
+    setNewData = () => {
         this.setCountriesColorization();
         this.setCountryData();
        
@@ -175,7 +170,7 @@ class Map extends Component {
             <li>{this.state.lengthCode} people in <span>{this.state.fieldCode}</span></li>
         </ul>
             <MapFilters
-                setFieldFilter={this.setFieldFilter}
+                setFieldFilter={this.handleFilterFieldClick}
             />
             <MapLegend/> 
             {this.state.data.length ? <MapPop 

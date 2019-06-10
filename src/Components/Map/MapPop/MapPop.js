@@ -8,28 +8,52 @@ class MapPop extends Component {
             pos: {
                 x: window.innerWidth / 2,
                 y: window.innerHeight / 2
-            }
+            },
+            parity: {}
         }
     }
 
     displayPop = () => {
-
-        document.querySelector('.Map svg').onclick = (e) => {
+        console.log(this.props.data)
+        document.querySelector('.Map svg').addEventListener('click', (e) => {
             [...document.querySelectorAll('.Map g')].map(g => g.addEventListener('click', () => document.querySelector('.MapPop').style.opacity = 1));
             this.setState({pos: {
                 x: e.clientX + 10,
                 y: e.clientY + 10
             }})
-        }
+        })        
+    }
+    getFieldsAmount = (data) => {
         
     }
+    getParity = (data) => {
+        let m = 0;
+        let f = 0;
+        data.map(p => {
+            p.gender === 'M' ? m++ : f++
+        })
+        this.setState({
+            parity: {
+                m, f
+            }
+        })
+    }
+    componentDidUpdate(prevProps) {
+        // Typical usage (don't forget to compare props):
+        if (this.props.data !== prevProps.data ||
+            this.props.country !== prevProps.country) {
+        //   this.fetchData(this.props.userID);
+            this.getParity(this.props.data)
+        }
+      }
     componentDidMount = () => this.displayPop()
     render() {
         return <section 
             className="MapPop"
             style={{top: `${this.state.pos.y}px`, left: `${this.state.pos.x}px`}}
         >
-            <h3 className="country">DEFAULT_COUNTRY</h3>
+            <h3 className="country">{this.props.country}</h3>
+            <span>total: {this.props.data.length}</span>
             <ul className="fields">
                 <li>Physics: <span>{}</span></li>
                 <li>Chemistry: <span>{}</span></li>
