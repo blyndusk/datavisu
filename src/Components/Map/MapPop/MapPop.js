@@ -20,12 +20,21 @@ class MapPop extends Component {
                     percent: 0
                 }
             },
-            ageAverage: 0
+            ageAverage: 0,
+            svgStyle: {},
+            pathStyle: {}
         }
     }
     componentDidMount = () => this.displayPop()
-    componentDidUpdate = (prevProps) => {
+    componentDidUpdate = (prevProps, prevState) => {
         if (this.props.data !== prevProps.data) this.getParsedData();
+        console.log('updated');
+        console.log(this.state)
+        if (this.state.parity !== prevState.parity) {
+            this.setPercentage(25, this.state.parity.f.percent / 100);
+            this.setRotation(this.state.parity.f.percent / 100)
+            
+        }
     }
     getParsedData = () => {
         this.getFieldsAmount(this.props.data)
@@ -33,8 +42,10 @@ class MapPop extends Component {
         this.getAverageAge(this.props.data)
     }
     displayPop = () => {
-        document.querySelector('.Map svg').addEventListener('click', (e) => {
-            [...document.querySelectorAll('.Map g')].map(g => g.addEventListener('click', () => document.querySelector('.MapPop').style.opacity = 1));
+        console.log('whzate')
+        document.querySelector('.Map #map').addEventListener('click', (e) => {
+            console.log('on map');
+            document.querySelector('.MapPop').style.opacity = 1
             this.setState({pos: {
                 x: e.clientX + 10,
                 y: e.clientY + 10
@@ -94,6 +105,19 @@ class MapPop extends Component {
         // then, set age average to state, doing the average
         this.setState({ageAverage: Math.floor(ageTotal / data.length)})
     }
+    setRotation = (percentage) => {
+        console.log(percentage)
+        this.setState({svgStyle: {
+            transform: `rotate(${- 360 * percentage / 2}deg)`},
+        })
+    }
+    setPercentage = (rayon, percentage) => {
+        const perimeter = Math.PI * 2 * rayon;
+        console.log(perimeter)
+        this.setState({pathStyle: {
+            strokeDasharray: `${perimeter * percentage}, ${perimeter}`},
+        })
+    }
     render() {
         return <section 
             className="MapPop"
@@ -106,7 +130,11 @@ class MapPop extends Component {
             </ul>
             <div className="parity">
                 Men: {this.state.parity.m.percent}%
-                Women: {this.state.parity.f.percent}%
+                Women: {this.state.parity.f.percent}%<br/>
+                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" style={this.state.svgStyle}>
+                    <circle className="men" cy="50" cx="50" r="25"></circle>
+                    <circle style={this.state.pathStyle} className="women" cy="50" cx="50" r="25"></circle>
+                </svg>
             </div>
             <div className="universities">
                 <h4>Top universities</h4>

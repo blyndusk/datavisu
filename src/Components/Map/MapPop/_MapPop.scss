@@ -19,4 +19,16 @@
             font-weight: bold;
         }
     }
+    svg {
+        stroke-width: 10;
+        stroke-opacity: 1;
+        fill: none;
+        .men {
+            stroke: #152b65;
+        }
+        
+        .women { 
+            stroke: #21d386;
+        }
+    } 
 }
