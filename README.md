@@ -1,6 +1,14 @@
 # Unknown genuis
 
-⏱ A 3month-project for @ecolehetic, with the aim of creating a data visualisation website, using @reactjs.
+<p>
+    <a href="https://github.com/blyndusk/unknown-genius/blob/master/package.json"><img src="https://img.shields.io/requires/github/blyndusk/unknown-genius.svg" alt="dependencies"/></a>
+    <a href="https://github.com/blyndusk/unknown-genius/releases/latest"><img src="https://img.shields.io/github/release-pre/blyndusk/unknown-genius.svg" alt="release"/></a>
+    <a href="https://github.com/blyndusk/unknown-genius/commits/master"><img src="https://img.shields.io/github/commits-since/blyndusk/unknown-genius/0.9.0.svg" alt="commits since last release"/></a>
+    <a href="https://github.com/blyndusk/unknown-genius/blob/master/LICENSE"><img src="https://img.shields.io/github/license/blyndusk/unknown-genius.svg" alt="license"/></a>
+    <img src="https://img.shields.io/github/languages/top/blyndusk/unknown-genius.svg" alt="top languages"/>
+</p>
+
+> 🏆 a data visualization, highlighting the winners of the Nobel Prizes, using @reactjs.
 
 ## Install
 
