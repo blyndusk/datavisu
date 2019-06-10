@@ -37,7 +37,6 @@ class Comparator extends Component {
         axios.get(this.state.baseUrl + this.state.type[0], { params })
         // then, update #dev status
         .then(res => {
-            console.log(res)  
             const newState = {}
             newState[countryData] = res.data["hydra:member"]
             this.setState({
@@ -50,8 +49,14 @@ class Comparator extends Component {
         return <section className="Comparator">   
             <h2>Comparator</h2>
             <CompareAge/>
-            <CompareFields/>
-            <CompareParity/>
+            <CompareFields
+                firstCountryData={this.state.firstCountryData}
+                secondCountryData={this.state.secondCountryData}
+            />
+            <CompareParity
+                firstCountryData={this.state.firstCountryData}
+                secondCountryData={this.state.secondCountryData}
+            />
             <CompareUniversities/>
         </section>
     }
