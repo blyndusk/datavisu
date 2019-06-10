@@ -28,8 +28,6 @@ class MapPop extends Component {
     componentDidMount = () => this.displayPop()
     componentDidUpdate = (prevProps, prevState) => {
         if (this.props.data !== prevProps.data) this.getParsedData();
-        console.log('updated');
-        console.log(this.state)
         if (this.state.parity !== prevState.parity) {
             this.setPercentage(25, this.state.parity.f.percent / 100);
             this.setRotation(this.state.parity.f.percent / 100)
@@ -42,9 +40,7 @@ class MapPop extends Component {
         this.getAverageAge(this.props.data)
     }
     displayPop = () => {
-        console.log('whzate')
         document.querySelector('.Map #map').addEventListener('click', (e) => {
-            console.log('on map');
             document.querySelector('.MapPop').style.opacity = 1
             this.setState({pos: {
                 x: e.clientX + 10,
