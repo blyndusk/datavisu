@@ -1,13 +1,13 @@
 {
-  "main.css": "/unknown-genius/static/css/main.ab293845.chunk.css",
-  "main.js": "/unknown-genius/static/js/main.6ede7065.chunk.js",
-  "main.js.map": "/unknown-genius/static/js/main.6ede7065.chunk.js.map",
+  "main.css": "/unknown-genius/static/css/main.c989fc66.chunk.css",
+  "main.js": "/unknown-genius/static/js/main.c0c20592.chunk.js",
+  "main.js.map": "/unknown-genius/static/js/main.c0c20592.chunk.js.map",
   "runtime~main.js": "/unknown-genius/static/js/runtime~main.ae075ded.js",
   "runtime~main.js.map": "/unknown-genius/static/js/runtime~main.ae075ded.js.map",
-  "static/js/2.31d62c10.chunk.js": "/unknown-genius/static/js/2.31d62c10.chunk.js",
-  "static/js/2.31d62c10.chunk.js.map": "/unknown-genius/static/js/2.31d62c10.chunk.js.map",
+  "static/js/2.a7683993.chunk.js": "/unknown-genius/static/js/2.a7683993.chunk.js",
+  "static/js/2.a7683993.chunk.js.map": "/unknown-genius/static/js/2.a7683993.chunk.js.map",
   "index.html": "/unknown-genius/index.html",
-  "precache-manifest.24d3a1366c0c435014b567fdc1b3abc3.js": "/unknown-genius/precache-manifest.24d3a1366c0c435014b567fdc1b3abc3.js",
+  "precache-manifest.cac40d8424f140d8b96509ca530e506c.js": "/unknown-genius/precache-manifest.cac40d8424f140d8b96509ca530e506c.js",
   "service-worker.js": "/unknown-genius/service-worker.js",
-  "static/css/main.ab293845.chunk.css.map": "/unknown-genius/static/css/main.ab293845.chunk.css.map"
+  "static/css/main.c989fc66.chunk.css.map": "/unknown-genius/static/css/main.c989fc66.chunk.css.map"
 }
