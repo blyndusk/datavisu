@@ -8,9 +8,14 @@ class FieldTemplate extends Component {
         }
     }
     render() {
-
-        return <div className="ParityTeamplate">
-           {/* <p>{this.props.country[0].name}</p> */}
+        let inc = -25;
+        return <div className="FieldTemplate">
+          <svg>
+          { Object.keys(this.props.country.fields).map(key =>  {
+            inc += 50
+            return <line key={key} x1={inc} x2={inc}y1="0" y2={this.props.country.fields[key] * 10}></line>
+          })}
+          </svg>
         </div>
     }
 }

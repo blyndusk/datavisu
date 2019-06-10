@@ -1,0 +1,13 @@
+.FieldTemplate {
+    svg {
+        background: red;
+        line {
+            stroke-width: 20px;
+            stroke: blue;
+        }
+    }
+    &:nth-child(1) {
+        transform: rotate(180deg);
+        border-top: 10px #000 solid;
+    }
+}
