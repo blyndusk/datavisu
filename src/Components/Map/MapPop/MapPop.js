@@ -23,9 +23,16 @@ class MapPop extends Component {
             ageAverage: 0
         }
     }
-
+    componentDidMount = () => this.displayPop()
+    componentDidUpdate = (prevProps) => {
+        if (this.props.data !== prevProps.data) this.getParsedData();
+    }
+    getParsedData = () => {
+        this.getFieldsAmount(this.props.data)
+        this.getParity(this.props.data)
+        this.getAverageAge(this.props.data)
+    }
     displayPop = () => {
-        console.log(this.props.data)
         document.querySelector('.Map svg').addEventListener('click', (e) => {
             [...document.querySelectorAll('.Map g')].map(g => g.addEventListener('click', () => document.querySelector('.MapPop').style.opacity = 1));
             this.setState({pos: {
@@ -34,63 +41,59 @@ class MapPop extends Component {
             }})
         })        
     }
+    // method to get field for reach price
     getFieldsAmount = (data) => {
-        const fields = {}
-        data.map(l => l.idprice.map(price => {
-                    const field = price.idcategory.category
-                    if (field in fields) fields[field] = fields[field] + 1
-                    // else, set to 1
-                    else fields[field] = 1
-                    return field;
-                })
-        )
+        // fields is an object which contain fields with amounts of prize for each field
+        const fields = {};
+        // map over all given data, and over each prize of each people
+        data.map(people => people.idprice.map(price => {
+            // get field of price
+            const field = price.idcategory.category
+            // if field exist in fields, increment it by 1
+            if (field in fields) fields[field] = fields[field] + 1
+            // else, set to 1
+            else fields[field] = 1
+            return field;
+        }))
+        // then, set fields to state
         this.setState({fields})
     }
+    // method to get percentage of M/W for each people
+    getParity = (data) => {
+        // parity content amount of men & women, and percentage
+        const parity = {
+            m: {
+                amount: 0,
+                percent: 0
+            },
+            f: {
+                amount: 0,
+                percent: 0
+            }
+        }
+        // set percent in terms of amount
+        const setPercent = (gender) => Math.floor((gender.amount / data.length) * 100);
+        // map over all people in given data, and of people if man, increment m, else f
+        data.map(people => people.gender === 'M' ? parity.m.amount++ : parity.f.amount++);
+        // set percent for men & women
+        parity.m.percent = setPercent(parity.m)
+        parity.f.percent = setPercent(parity.f)
+        // then, set parity to state
+        this.setState({ parity })
+    }
+    // method ot get average age of all people
     getAverageAge = (data) => {
+        // total age begins to 0
         let ageTotal = 0;
-        data.map(l => {
-            if (l.birthday && l.idprice[0].year) ageTotal = ageTotal + parseInt(l.idprice[0].year) - parseInt(l.birthday.replace(/-\w+|:\w+|\+\w+/g, ''));
-            return ageTotal
+        // map over all given data
+        data.map(people => {
+            // if people birthday && people's first price's year exist, increment total age with people age
+            if (people.birthday && people.idprice[0].year) ageTotal = ageTotal + parseInt(people.idprice[0].year) - parseInt(people.birthday.replace(/-\w+|:\w+|\+\w+/g, ''));
+            return ageTotal;
         })
+        // then, set age average to state, doing the average
         this.setState({ageAverage: Math.floor(ageTotal / data.length)})
     }
-    getParity = (data) => {
-        const m = {
-            amount: 0,
-            percent: 0
-        }
-        const f = {
-            amount: 0,
-            percent: 0
-        }
-        const setPercent = (gender) => Math.floor((gender.amount / data.length) * 100)
-        data.map(p => p.gender === 'M' ? m.amount++ : f.amount++)
-        m.percent = setPercent(m)
-        f.percent = setPercent(f)
-        this.setState({
-            parity: {
-                m: {
-                    amount: m.amount,
-                    percent: m.percent
-                }, 
-                f: {
-                    amount: f.amount,
-                    percent: f.percent
-                }
-            }
-        })
-    }
-    componentDidUpdate(prevProps) {
-        // Typical usage (don't forget to compare props):
-        if (this.props.data !== prevProps.data ||
-            this.props.country !== prevProps.country) {
-        //   this.fetchData(this.props.userID);
-        this.getParity(this.props.data)
-        this.getAverageAge(this.props.data)
-        this.getFieldsAmount(this.props.data)
-        }
-      }
-    componentDidMount = () => this.displayPop()
     render() {
         return <section 
             className="MapPop"
@@ -99,8 +102,7 @@ class MapPop extends Component {
             <h3 className="country">Country: {this.props.data[0].idcountry.name.toUpperCase()}</h3>
             <span>Laureats: {this.props.data.length}</span>
             <ul className="fields">
-                {
-                    Object.keys(this.state.fields).map(key =>  <li key={key}>{key}: <span>{this.state.fields[key]}</span></li>)}
+                { Object.keys(this.state.fields).map(key =>  <li key={key}>{key}: <span>{this.state.fields[key]}</span></li>)}
             </ul>
             <div className="parity">
                 Men: {this.state.parity.m.percent}%
