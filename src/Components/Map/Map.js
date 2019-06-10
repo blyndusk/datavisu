@@ -5,19 +5,22 @@ import MapLegend from './MapLegend/MapLegend';
 import MapPop from './MapPop/MapPop';
 import MapSVG from './MapSVG/MapSVG';
 import axios from 'axios';
-import { config } from 'rxjs';
 
 class Map extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            // the filled data
             data: [],
+            pricesPerCountries: {},
             // API
             baseUrl: 'http://localhost:8000/api/',
+            // 2 types of API filters
             type: [
                 'people',
                 'prices'
             ],
+            // 3 params
             params: {
                 field: 'idprice.idcategory.category',
                 country: 'idcountry.code',
@@ -31,12 +34,19 @@ class Map extends Component {
             // call
             apiCall: '',
             calls: 0,
-            pricesPerCountries: {}
         }
     }
+    // when the Map is mounted, handle country click & set new data
     componentDidMount = () => {
         this.handleCountryClick()
         this.setNewData()
+    }
+    // set new field code ( PHYSICS, PEACE, ..)
+    handleFilterFieldClick = (e) => this.setState({fieldCode: e.target.dataset.label}, () => this.setNewData());
+    // new api call with field param
+    setNewData = () => {
+        this.setCountriesColorization();
+        this.setCountryData();
     }
     // api only called to update countries colorization
     setCountriesColorization = () => {
@@ -52,15 +62,14 @@ class Map extends Component {
             lengthCode: res.data["hydra:member"].length,
             calls: this.state.calls + 1    
         }, () => {
-            console.log('1st call', this.state.apiCall)
             // and parse countries with the result
             this.parseCountries(res.data["hydra:member"])
         }))
         .catch(err => console.log(err))
-        
     }
     // api only called to update country's data
     setCountryData = () => {
+        // create a conf object for the long expressions
         const conf = {
             field: {
                 exist: this.state.fieldCode.length, 
@@ -96,67 +105,64 @@ class Map extends Component {
         }))
         .catch(err => console.log(err))
     }
-    // set new field code ( PHYSICS, PEACE, ..)
-    handleFilterFieldClick = (e) => {
-        this.setState({fieldCode: e.target.dataset.label}, () => this.setNewData())        
-    }
-    // new api call with field param
-    setNewData = () => {
-        this.setCountriesColorization();
-        this.setCountryData();
-       
-        
-    }
     // set an object with amount of prices per country
     parseCountries = (data) => {
         let codes = {}
+        // map over all data
         data.map(code => {
+            // get the country code
             code = code.idcountry.code;
+            // if the country code exist in codes, increment it by 1
             if (code in codes) codes[code] = codes[code] + 1
+            // else, set to 1
             else codes[code] = 1
+            return code;
         })
-        console.log(codes)
+        // update the price per contries object with new object
         this.setState({ pricesPerCountries: codes}, () => this.setCountryColors())
     }
     // colorize countries
     setCountryColors = () => {
+        // codes is a large array of object with each amount of prices per country
         const codes = this.state.pricesPerCountries;
+        // map over all DOM countries
         [...document.querySelectorAll('.Map g')].map(g => {
+            // for every country
             for (const key in codes) {
+                // if the country code match with the codes code, select all its children paths
                 if (g.id.toUpperCase() === key ) [...g.querySelectorAll('path')].map(path => {
+                    // and fill them with a hsl color depending on the amount of prices in %
                     const percent = (codes[key] / 500) * 100 + 33;
                     return path.style.fill = `hsl(213, ${percent}%, ${percent}%`;
                 })
             }
+            return codes;
         });
     }
     // update call with country code
     handleCountryClick = () => {
+        // for every DOM country, add a click event, 
         [...document.querySelectorAll('.Map g')].map(g => g.addEventListener('click', () => {
+            // update country code on click and make a new api call
             this.setState({countryCode: g.id}, () => this.apiCountriesCall())
         }));
     }
     // new call with country param (FR, US, GB, ...)
     apiCountriesCall = () => {
+        // no params by default
         let params = {}
-        let type = 0
-        if (!this.state.fieldCode.length) {
-            params[this.state.params.country] = this.state.countryCode;
-            type = 0
-        }
-        else {
-            console.log('trogger')
-            params[this.state.params.country] = this.state.countryCode
-            params[this.state.params.field] = this.state.fieldCode
-            type = 0
-        }
-        axios.get(this.state.baseUrl + this.state.type[type], { params })
+        // set country param (because we click on a country)
+        params[this.state.params.country] = this.state.countryCode;
+        // if there is a field filter, update param with field param
+        if (this.state.fieldCode.length) params[this.state.params.field] = this.state.fieldCode
+        // axios call with custom params
+        axios.get(this.state.baseUrl + this.state.type[0], { params })
         .then(res => this.setState({
             data: res.data["hydra:member"],
             apiCall: res.request.responseURL,
             lengthCountryCode: res.data["hydra:member"].length,
             calls: this.state.calls + 1    
-        }, console.log(res.data["hydra:member"])))
+        }))
         .catch(err => console.log(err))
     }
     render() {
