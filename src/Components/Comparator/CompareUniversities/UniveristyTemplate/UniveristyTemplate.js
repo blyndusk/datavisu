@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 
-class ParityTemplate extends Component {
+class UniversitiesTemplate extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -41,5 +41,5 @@ class ParityTemplate extends Component {
     }
 }
 
-export default ParityTemplate;
+export default UniversitiesTemplate;
 
