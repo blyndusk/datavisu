@@ -1,17 +1,16 @@
 import React from 'react';
 
 export default () => <svg
-    xmlnssvg="http://www.w3.org/2000/svg"
-    xmlns="http://www.w3.org/2000/svg"
-    xmlnssodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-    xmlnsinkscape="http://www.inkscape.org/namespaces/inkscape"
-    viewBox="-29.947200 60.986600 2754.066400 1396.573900"
-    version="1.0"
-    width="1100"
-    height="558"
-    id="map"
-    sodipodiversion="0.32"
-    sodipodidocname="BlankMap-FlatWorld6.svg">
+   className="MapSVG"
+   xmlnssvg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlnssodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlnsinkscape="http://www.inkscape.org/namespaces/inkscape"
+   viewBox="-29.947200 42.9866 2754.066400 1238.5739"
+   version="1.0"
+   id="map"
+   sodipodiversion="0.32"
+   sodipodidocname="BlankMap-FlatWorld6.svg">
   <defs id="defs1930" />    
 
   <path

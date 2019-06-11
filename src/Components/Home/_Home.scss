@@ -1,3 +1,28 @@
 .Home {
-
+    display: none;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    z-index: 2000;
+    width: 100vw;
+    height: 100vh;
+    background: $blue;
+    background-image: url('../assets/images/picture.png');
+    background-size: 100vh;
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    &__container {
+        position: absolute;
+        top: 30%;
+        left: 50%;
+    }
+    &__title {
+        margin-bottom: 42px;
+        font-family: $signatureFont;
+        font-size: 80px;
+        font-weight: bold;
+        color: $brand;
+    }
 }

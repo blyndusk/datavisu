@@ -1,26 +1,29 @@
 .MapLegend {
-    color: #fff;
     position: fixed;
-    top: 50px;
-    right: 50px;
-    .legend {
-        width: 25px;
-        height: 150px;
+    top: 40px;
+    right: 40px;
+    z-index: 10;
+    display: flex;
+    &__jauge {
+        width: 26px;
+        height: 166px;
         background: linear-gradient(#8fb7e8, #354456);
-        border-radius: 25px;
+        border-radius: 26px;
     }
-    span {
-        width: 50px;
+    &__container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 40px;
+        padding: 8px 0px;
+        margin-right: 16px;
+    }
+    &__text {
+        font-family: $mainFont;
+        font-size: 9px;
+        line-height: 12px;
+        text-align: right;
         text-transform: uppercase;
-        @include fs(9px);
-        position: absolute;
-        left: -60px;
-        &:nth-of-type(1) {
-            top: 10px;
-            
-        }
-        &:nth-of-type(2) {
-            bottom: 10px;
-        }
+        color: $content;
     }
 }

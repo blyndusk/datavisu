@@ -1,15 +1,20 @@
-.MapFilters {
-    li {
-        text-transform: uppercase;
-        padding: 10px 0;
-        cursor: pointer;
-        &:active {
-            color: $brand;
-            font-weight: bold;
-        }
-    } 
-    .focus {
+.MapFilter {
+    font-family: $mainFont;
+    font-size: 14px;
+    color: $content;
+    opacity: .7;
+    text-transform: uppercase;
+    transition: .1s ease;
+    cursor: pointer;
+    &:not(:last-child) {
+        margin-bottom: 16px;
+    }
+    &:hover {
         color: $brand;
-        font-weight: bold;
+        opacity: 1;
+    }
+    &--active {
+        color: $brand;
+        opacity: 1;
     }
 }

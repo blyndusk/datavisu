@@ -1,0 +1,32 @@
+.Compare {
+    position: fixed;
+    right: 40px;
+    bottom: 40px;
+    z-index: 10;
+    display: inline-flex;
+    align-items: center;
+    height: 40px;
+    padding: 0px 24px 0px 16px;
+    border-radius: 40px;
+    background: $brand;
+    text-decoration: none;
+    transition: .3s ease;
+    &:hover {
+        background: $brandActive;
+    }
+    &__icon {
+        display: block;
+        width: 20px;
+        height: 16px;
+        margin-right: 12px;
+        background: url('../assets/icons/compare.svg');
+        background-size: cover;
+    }
+    &__text {
+        font-family: $mainFont;
+        font-size: 12px;
+        font-weight: bold;
+        color: $content;
+        text-transform: uppercase;
+    }
+}

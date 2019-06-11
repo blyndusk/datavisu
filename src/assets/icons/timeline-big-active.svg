@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="74px" height="74px" viewBox="0 0 76 76" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54 (76480) - https://sketchapp.com -->
+    <title>menu__icon</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Menu-(hovers)" transform="translate(-879.000000, -380.000000)">
+            <g id="menu__content" transform="translate(764.000000, 236.000000)">
+                <g id="menu__buttons" transform="translate(4.000000, 145.000000)">
+                    <g id="menu__button" transform="translate(112.000000, 0.000000)">
+                        <g id="menu__icon">
+                            <g id="icon" transform="translate(0.000000, 26.000000)" fill="#CEA152">
+                                <text id="1983" font-family="FuturaBT-Medium, Futura" font-size="10" font-weight="400">
+                                    <tspan x="24" y="35">1983</tspan>
+                                </text>
+                                <g fill-rule="nonzero" id="Rectangle">
+                                    <rect x="0" y="8.84615385" width="72" height="5.30769231"></rect>
+                                    <rect x="7.2" y="5.30769231" width="1.8" height="12.3846154"></rect>
+                                    <rect x="21.6" y="0" width="1.8" height="23"></rect>
+                                    <rect x="34.2" y="5.30769231" width="1.8" height="12.3846154"></rect>
+                                    <rect x="48.6" y="0" width="1.8" height="23"></rect>
+                                    <rect x="61.2" y="5.30769231" width="1.8" height="12.3846154"></rect>
+                                </g>
+                            </g>
+                            <circle id="border" stroke="#CEA152" cx="36" cy="36" r="36"></circle>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

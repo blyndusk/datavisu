@@ -39,12 +39,22 @@
 // ===== loader =======
 @import "../Components/Loader/Loader";
 
+// ===== nav =======
+@import "../Components/Nav/Nav";
+
+// ===== compare =======
+@import "../Components/Compare/Compare";
+
+// ===== brand =======
+@import "../Components/Brand/Brand";
+
 // ===== map =======
 @import "../Components/Map/Map";
 @import "../Components/Map/MapFilters/MapFilters";
 @import "../Components/Map/MapFilters/MapFilter/MapFilter";
 @import "../Components/Map/MapLegend/MapLegend";
 @import "../Components/Map/MapPop/MapPop";
+@import "../Components/Map/MapSVG/MapSVG";
 
 // ===== timeline =======
 @import "../Components/Tl/Tl";

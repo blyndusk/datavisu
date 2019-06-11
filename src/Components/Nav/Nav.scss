@@ -1,0 +1,105 @@
+.Nav {
+    position: fixed;
+    top: 40px;
+    left: 50%;
+    z-index: 10;
+    display: flex;
+    transform: translateX(-50%);
+    &__button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        &:not(:last-child) {
+            margin-right: 32px;
+        }
+        &:hover {
+            .Nav__icon {
+                &--map {
+                    background: url('../assets/icons/map-active.svg');
+                }
+                &--timeline {
+                    background: url('../assets/icons/timeline-active.svg');
+                }
+            }
+            .Nav__text {
+                color: $brand;
+            }
+        }
+        &--active {
+            .Nav__icon {
+                &--map:hover {
+                    background: url('../assets/icons/map-active.svg');
+                }
+                &--timeline:hover {
+                    background: url('../assets/icons/timeline-active.svg');
+                }
+            }
+            .Nav__text {
+                color: $brand;
+            }
+        }
+    }
+    &__icon {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 9px;
+        background-size: cover;
+        transition: .3s ease;
+        &--map {
+            background: url('../assets/icons/map.svg');
+            
+        }
+        &--timeline {
+            background: url('../assets/icons/timeline.svg');
+        }
+    }
+    &__text {
+        font-family: $mainFont;
+        font-size: 9px;
+        color: $content;
+        transition: .3 ease;
+    }
+}
+
+.Home .Nav {
+    position: static;
+    transform: translateX(0%);
+    &__button {
+        &:hover {
+            .Nav__icon {
+                &--map {
+                    background: url('../assets/icons/map-big-active.svg');
+                }
+                &--timeline {
+                    background: url('../assets/icons/timeline-big-active.svg');
+                }
+            }
+        }
+        &--active {
+            .Nav__icon {
+                &--map:hover {
+                    background: url('../assets/icons/map-big-active.svg');
+                }
+                &--timeline:hover {
+                    background: url('../assets/icons/timeline-big-active.svg');
+                }
+            }
+        }
+    }
+    &__icon {
+        width: 72px;
+        height: 72px;
+        &--map {
+            background: url('../assets/icons/map-big.svg');
+            
+        }
+        &--timeline {
+            background: url('../assets/icons/timeline-big.svg');
+        }
+    }
+    &__text {
+        font-size: 12px;
+        font-weight: 500;
+    }
+}
