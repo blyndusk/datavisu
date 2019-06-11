@@ -1,13 +1,30 @@
 .FieldTemplate {
     svg {
-        background: red;
-        line {
+        g {
             stroke-width: 20px;
-            stroke: blue;
+            text {
+                fill: #fff;
+                font-size: 15px;
+            }
+            &:nth-child(1) line {
+                stroke: #dce775
+            }
+            &:nth-child(2) line {
+                stroke: #aed581
+            }
+            &:nth-child(3) line {
+                stroke: #81c784
+            }
+            &:nth-child(4) line {
+                stroke: #4db6ac
+            }
+            &:nth-child(5) line {
+                stroke: #4dd0e1
+            }
+            &:nth-child(6) line {
+                stroke: #4fc3f7
+            }
+
         }
-    }
-    &:nth-child(1) {
-        transform: rotate(180deg);
-        border-top: 10px #000 solid;
     }
 }

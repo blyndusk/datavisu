@@ -12,7 +12,7 @@ class Comparator extends Component {
         super(props);
         this.state = {
             firstCountryCode: "FR",
-            secondCountryCode: "RU",
+            secondCountryCode: "US",
             firstCountryData: [],
             secondCountryData: [],
             baseUrl: 'http://localhost:8000/api/',

@@ -16,7 +16,7 @@ class CompareFields extends Component {
     }
     componentDidUpdate = (prevProps) => {
         if (this.props.firstCountryData !== prevProps.firstCountryData ) {
-            console.log('first');
+
             this.setState({firstCountry: {
                 name: this.props.firstCountryData[0].idcountry.name
             }})
@@ -24,7 +24,7 @@ class CompareFields extends Component {
             
         }
         if (this.props.secondCountryData !== prevProps.secondCountryData) {
-            console.log('second');
+
             this.setState({secondCountry: {
                 name: this.props.secondCountryData[0].idcountry.name
             }})
@@ -62,9 +62,11 @@ class CompareFields extends Component {
         return <section className="CompareFields">   
             <FieldTemplate
                 country={this.state.firstCountry}
+                order={0}
             />
             <FieldTemplate
                 country={this.state.secondCountry}
+                order={1}
             />
         </section>
     }

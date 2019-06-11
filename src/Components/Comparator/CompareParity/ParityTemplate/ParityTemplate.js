@@ -28,9 +28,9 @@ class ParityTemplate extends Component {
     }
     render() {
         const country = this.props.country
-        return <div className="ParityTeamplate">
+        return <div className="ParityTemplate">
            <h2>{country.name}</h2>
-           <span>men: {country.parity.m.amount} - women: {country.parity.f.amount}</span>
+           <span>{country.parity.m.amount} <i className="fas fa-mars"></i> | <i className="fas fa-venus"></i> {country.parity.f.amount}</span>
             <svg xmlns="http://www.w3.org/2000/svg" height="200" style={this.state.svgStyle}>
                 <circle className="men" cy="100" cx="100" r={this.state.rayon}></circle>
                 <circle style={this.state.pathStyle} className="women" cy="100" cx="100" r={this.state.rayon}></circle>

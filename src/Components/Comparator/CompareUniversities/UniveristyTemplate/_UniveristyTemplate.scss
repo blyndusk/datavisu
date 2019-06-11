@@ -1,0 +1,20 @@
+.UniversitiesTemplate {
+    svg {
+        g {
+            stroke-width: 70px;
+            text {
+                fill: #fff;
+                font-size: 15px;
+            }
+            &:nth-child(1) line {
+                stroke: #4db6ac
+            }
+            &:nth-child(2) line {
+                stroke: #152b65
+            }
+            &:nth-child(3) line {
+                stroke: #4fc3f7
+            }
+        }
+    }
+}
