@@ -62,6 +62,7 @@ class CompareFields extends Component {
         return <section className="CompareFields">   
             <FieldTemplate
                 country={this.state.firstCountry}
+                
             />
             <FieldTemplate
                 country={this.state.secondCountry}
