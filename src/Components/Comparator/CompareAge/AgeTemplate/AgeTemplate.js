@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 
-class ParityTemplate extends Component {
+class AgeTemplate extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -34,28 +34,28 @@ class ParityTemplate extends Component {
     // }
    
     render() {
-            let inc = -50;
+            let inc = -25;
             let maxHeight = 0;
-            return <div className="dah">
-              {/* <svg className="UniversitiesTemplateSvg">
-                  {
-                      this.props.country.sortedUniversities.map(university => {
-                          console.log(university[1])
-                        if (maxHeight < university[1] ) {
-                            maxHeight = university[1]
-                          }
-                          [...document.querySelectorAll('.UniversitiesTemplate')].map(svg => svg.querySelector('svg').style.height = `${maxHeight * 4 +  20}px`)
-                          inc += 100
-                return <g key={university[0]}>
-                  <text  x={inc - 8} y={this.props.order ? university[1] * 4  + 15 : 160  - (university[1] * 4 + 15)} >{university[0]} - {university[1]}</text>
-                  <line x1={inc} x2={inc} y1={this.props.order ? 0 : 160} y2={this.props.order ? university[1] * 4 : 160 - (university[1] * 4)}></line>
-                </g>
-                      })
-                  }
-              
-              </svg>*/}
+            return <div className="AgeTemplate">
+                <svg className="">
+                    {Object.keys(this.props.country).map((key, index) => {
+                        const age = this.props.country[key]
+                        console.log(age)
+
+                        if (maxHeight < age ) maxHeight = age;
+                        [...document.querySelectorAll('.AgeTemplateSvg')].map(svg => svg.querySelector('svg').style.height = `${maxHeight * 2 +  50}px`)
+                        inc += 50
+                        return <g key={key}>
+                            <text  x={inc - 8} y={this.props.order ? age * 2  + 15 : 174  - (age * 2 + 15)} >{age}</text>
+                            <line x1={inc} x2={inc} y1={this.props.order ? 0 : 174} y2={this.props.order ? age * 2 : 174 - (age * 2)}></line>
+                        </g>
+                        })
+                        
+                    }
+                
+                </svg>
             </div> 
     }
 }
 
-export default ParityTemplate;
+export default AgeTemplate;
