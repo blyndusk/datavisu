@@ -15,24 +15,11 @@ class CompareFields extends Component {
         }
     }
     componentDidUpdate = (prevProps) => {
-        if (this.props.firstCountryData !== prevProps.firstCountryData ) {
-
-            this.setState({firstCountry: {
-                name: this.props.firstCountryData[0].idcountry.name
-            }})
-            this.setCountry(this.props.firstCountryData, 0)
-            
+        if (this.props.countries.total !== prevProps.countries.total ) {
+            console.log(this.props.countries.first)
+            this.getFieldsAmount(this.props.countries.first.data, 0)
+            this.getFieldsAmount(this.props.countries.second.data, 1)
         }
-        if (this.props.secondCountryData !== prevProps.secondCountryData) {
-
-            this.setState({secondCountry: {
-                name: this.props.secondCountryData[0].idcountry.name
-            }})
-            this.setCountry(this.props.secondCountryData, 1)
-        }
-    }
-    setCountry = (data, countrybin) => {
-        this.getFieldsAmount(data, countrybin);
     }
     getFieldsAmount = (data, countrybin) => {
         // fields is an object which contain fields with amounts of prize for each field
@@ -49,12 +36,8 @@ class CompareFields extends Component {
         }))
         // then, set fields to state
         this.setState({fields})
-        if (countrybin === 0) {
-            this.setState({ firstCountry: { fields }})
-        }
-        if (countrybin === 1) {
-            this.setState({ secondCountry: { fields }})
-        }
+        if (countrybin === 0) this.setState({ firstCountry: { fields }})
+        if (countrybin === 1) this.setState({ secondCountry: { fields }})
         
     }
     
