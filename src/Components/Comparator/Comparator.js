@@ -22,6 +22,7 @@ class Comparator extends Component {
                 first: {
                     // code for the country
                     code: "FR",
+                    data: [],
                     // parity
                     parity: {
                         f: [],
@@ -33,6 +34,7 @@ class Comparator extends Component {
                 // same pattern
                 second: {
                     code: "US",
+                    data: [],
                     parity: {
                         f: [],
                         m: [],
@@ -67,8 +69,8 @@ class Comparator extends Component {
                 'second'
             ]
         ]
-        this.getData(this.state.firstCountryCode, 'firstCountryData');
-        this.getData(this.state.secondCountryCode, 'secondCountryData');
+        this.getData(this.state.firstCountryCode, 'firstCountryData', 'first');
+        this.getData(this.state.secondCountryCode, 'secondCountryData', 'second');
         // 4 calls:
         //  - men of 1st country
         //  - women of 1st country
@@ -79,16 +81,23 @@ class Comparator extends Component {
         this.getCountryDataWithGender(codes[1][0], codes[1][1], 'm')
         this.getCountryDataWithGender(codes[1][0], codes[1][1], 'f')
     }
-    getData = (countryCode, countryData) => {
+    getData = (countryCode, countryData, index) => {
         let params = {}
         params[this.state.params.country] = countryCode;
         axios.get(this.state.baseUrl + this.state.type[0], { params })
         // then, update #dev status
         .then(res => {
             const newState = {}
+            const response = res.data["hydra:member"];
             newState[countryData] = res.data["hydra:member"]
             this.setState({
                 ...newState
+            })
+            this.setState(prevState => {
+                let countries = Object.assign({}, prevState.countries);
+                // set response to code,  
+                countries[index].data = response;
+                return { countries };
             })
             
         })
@@ -110,16 +119,16 @@ class Comparator extends Component {
         // then, set state with parsed data
         .then(res => {
             // arayy of people (M/F) of a country
-            const response = res.data["hydra:member"].length;
+            const response = res.data["hydra:member"];
             // update state, conserving previous state
             this.setState(prevState => {
                 let countries = Object.assign({}, prevState.countries);
                 // set response to code,  
                 countries[index].parity[genderCode] = response;
                 // total of the country
-                countries[index].parity.total += response;
+                countries[index].parity.total += response.length;
                 // & global total
-                countries.total += response
+                countries.total += response.length
                 return { countries };
             })
         })
@@ -131,16 +140,16 @@ class Comparator extends Component {
         return <section className="Comparator">   
             
             <CompareFields
-                firstCountryData={this.state.firstCountryData}
-                secondCountryData={this.state.secondCountryData}
+                // give all country object
+                countries={this.state.countries}
             />
             <CompareParity
-            // give all country object
+                // give all country object
                 countries={this.state.countries}
             />
             <CompareAge
-                firstCountryData={this.state.firstCountryGenderData}
-                secondCountryData={this.state.secondCountryGenderData}
+               // give all country object
+               countries={this.state.countries}
             />
             <CompareUniversities
                 firstCountryData={this.state.firstCountryData}
