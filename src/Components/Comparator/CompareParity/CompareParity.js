@@ -37,7 +37,7 @@ class CompareParity extends Component {
         }
      }
     componentDidUpdate = (prevProps) => {
-        if ( this.props.countries.total !==  prevProps.countries.total ) {
+        if ( this.props.countries.total !== prevProps.countries.total ) {
             console.log('updated')
             // get parity of the 1st country
             this.getParity(this.props.countries.first, "firstCountry")
@@ -49,12 +49,12 @@ class CompareParity extends Component {
         // parity state pattern
         const parity = {
             m: {
-                amount: data.parity.m,
-                percent:  Math.floor((data.parity.m / data.parity.total) * 100)
+                amount: data.parity.m.length,
+                percent:  Math.floor((data.parity.m.length / data.parity.total) * 100)
             },
             f: {
-                amount: data.parity.f,
-                percent: Math.floor((data.parity.f / data.parity.total) * 100)
+                amount: data.parity.f.length,
+                percent: Math.floor((data.parity.f.length / data.parity.total) * 100)
             }
         }
         // update state with custom key
