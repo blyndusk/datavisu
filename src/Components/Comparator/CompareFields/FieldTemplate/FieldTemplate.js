@@ -10,7 +10,7 @@ class FieldTemplate extends Component {
     }
     componentDidUpdate = (prevProps, prevState) => {
         if (this.props.country !== prevProps.country ) {
-            console.log('done')
+
         }
         if (this.state.maxHeight !== prevState.maxHeight) {
           // [...document.querySelectorAll('FieldTemplate svg')].map(svg => svg.style.height = `${this.state.maxHeight * 10}px`)
