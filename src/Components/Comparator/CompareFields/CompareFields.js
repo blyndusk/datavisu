@@ -62,10 +62,11 @@ class CompareFields extends Component {
         return <section className="CompareFields">   
             <FieldTemplate
                 country={this.state.firstCountry}
-                
+                order={0}
             />
             <FieldTemplate
                 country={this.state.secondCountry}
+                order={1}
             />
         </section>
     }
