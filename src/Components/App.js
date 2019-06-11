@@ -7,6 +7,7 @@ import Home from './Home/Home'
 import Tl from './Tl/Tl';
 import Filters from './Filters/Filters'
 import Map from './Map/Map'
+import Intro from './Intro/Intro';
 
 class App extends Component {
     constructor(props) {
@@ -35,8 +36,6 @@ class App extends Component {
             }
         })
         .then(res => {
-            console.log(`new Axios call:`)
-            console.log(res.config.params)
             this.setState({ timeline: res.data})
         })
         .catch(err => console.log(err))
@@ -75,7 +74,7 @@ class App extends Component {
     }
     render() {
         return <div className="App">
-            
+            <Intro/>
             <Router>
             <Route path="/" component={Home} />
                 <Route path="/timeline/" component={() => (<Fragment>
