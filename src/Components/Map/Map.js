@@ -127,6 +127,7 @@ class Map extends Component {
         const codes = this.state.pricesPerCountries;
         // map over all DOM countries
         [...document.querySelectorAll('.Map g')].map(g => {
+            g.classList.add('for-max');
             // for every country
             for (const key in codes) {
                 // if the country code match with the codes code, select all its children paths

@@ -129,14 +129,14 @@ class MapPop extends Component {
         })
     }
     setRotation = (percentage) => {
-        console.log(percentage)
+
         this.setState({svgStyle: {
             transform: `rotate(${- 360 * percentage / 2}deg)`},
         })
     }
     setPercentage = (rayon, percentage) => {
         const perimeter = Math.PI * 2 * rayon;
-        console.log(perimeter)
+
         this.setState({pathStyle: {
             strokeDasharray: `${perimeter * percentage}, ${perimeter}`},
         })
