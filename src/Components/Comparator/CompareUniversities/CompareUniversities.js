@@ -18,13 +18,13 @@ class CompareUniversities extends Component {
     }
     componentDidUpdate = (prevProps) => {
         if (this.props.firstCountryData !== prevProps.firstCountryData ) {
-            console.log('first');
+
             
             this.setCountry(this.props.firstCountryData, 0)
             
         }
         if (this.props.secondCountryData !== prevProps.secondCountryData) {
-            console.log('second');
+
             this.setCountry(this.props.secondCountryData, 1)
         }
     }

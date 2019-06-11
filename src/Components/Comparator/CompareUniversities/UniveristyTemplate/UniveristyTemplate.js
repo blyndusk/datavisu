@@ -23,7 +23,7 @@ class ParityTemplate extends Component {
           <svg className="UniversitiesTemplateSvg">
               {
                   this.props.country.sortedUniversities.map(university => {
-                      console.log(university[1])
+
                     if (maxHeight < university[1] ) {
                         maxHeight = university[1]
                       }
