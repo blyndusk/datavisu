@@ -19,10 +19,13 @@
 // ===== comparator =======
 @import "../Components/Comparator/Comparator";
 @import "../Components/Comparator/CompareAge/CompareAge";
+@import "../Components/Comparator/CompareAge/AgeTemplate/AgeTemplate";
 @import "../Components/Comparator/CompareFields/CompareFields";
 @import "../Components/Comparator/CompareParity/CompareParity";
+@import "../Components/Comparator/CompareParity/ParityTemplate/ParityTemplate";
 @import "../Components/Comparator/CompareUniversities/CompareUniversities";
 @import "../Components/Comparator/CompareFields/FieldTemplate/FieldTemplate";
+@import "../Components/Comparator/CompareUniversities/UniveristyTemplate/UniveristyTemplate";
 
 // ===== filters =======
 @import "../Components/Filters/Filters";
