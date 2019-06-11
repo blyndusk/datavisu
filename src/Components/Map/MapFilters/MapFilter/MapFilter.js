@@ -11,9 +11,10 @@ class MapFilter extends Component {
     
     render() {
         return <li 
+            className="MapFilter"
             onClick={(e) => {
-                [...document.querySelectorAll('.MapFilters li')].map(li => li.className = '');
-                e.target.className = 'focus';
+                [...document.querySelectorAll('.MapFilters li')].map(li => li.className = 'MapFilter');
+                e.target.className = 'MapFilter MapFilter--active';
                 this.props.getField(e)
             }}
             data-label={this.props.label}

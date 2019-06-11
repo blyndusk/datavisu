@@ -1,5 +1,10 @@
 .Nav {
+    position: fixed;
+    top: 40px;
+    left: 50%;
+    z-index: 10;
     display: flex;
+    transform: translateX(-50%);
     &__button {
         display: flex;
         flex-direction: column;
@@ -58,6 +63,8 @@
 }
 
 .Home .Nav {
+    position: static;
+    transform: translateX(0%);
     &__button {
         &:hover {
             .Nav__icon {

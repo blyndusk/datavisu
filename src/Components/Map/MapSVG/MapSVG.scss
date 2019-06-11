@@ -1,0 +1,33 @@
+.MapSVG {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    z-index: 2;
+    width: calc(100vw - (40px * 2 + 82px + 48px));
+    height: auto;
+    transform: translate(-50%, -50%);
+    g {
+        // stroke: red !important;
+    }
+    .land {
+        fill: $blueMedium;
+        stroke-width: 2;
+        transition: .3s ease;
+        &:hover {
+            stroke: $content;
+        }
+    }
+    .circle {
+        display: none;
+    }
+    .ocean {
+        display: none;
+    }
+    .lake {
+        fill: $blue;
+        stroke: none;
+    }
+    .kosovo {
+        stroke: none;
+    }
+}

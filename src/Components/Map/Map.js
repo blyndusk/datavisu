@@ -1,10 +1,13 @@
 
 import React, { Component } from 'react';
+import Nav from './../Nav/Nav';
+import Brand from './../Brand/Brand';
 import MapFilters from './MapFilters/MapFilters';
 import MapLegend from './MapLegend/MapLegend';
 import MapPop from './MapPop/MapPop';
 import MapSVG from './MapSVG/MapSVG';
 import axios from 'axios';
+import Compare from './../Compare/Compare';
 
 class Map extends Component {
     constructor(props) {
@@ -166,24 +169,33 @@ class Map extends Component {
         .catch(err => console.log(err))
     }
     render() {
-        return <section className="Map">   
-        <ul className="infos" style={window.location.hash === "#dev" ? {display: "block"} : {display: "none"}}>
-            <li>Field : <span>{this.state.fieldCode}</span></li>
-            <li>Country : <span>{this.state.countryCode}</span></li>
-            <li>API call : <a href={this.state.apiCall}>{this.state.apiCall}</a></li>
-            <li>calls : <span>{this.state.calls}</span></li>
-            <li>{this.state.lengthCountryCode} people in <span>{this.state.fieldCode}</span> in <span>{this.state.countryCode}</span></li>
-            <li>{this.state.lengthCode} people in <span>{this.state.fieldCode}</span></li>
-        </ul>
+        return <section className="Map">
+        
+            <ul className="infos" style={window.location.hash === "#dev" ? {display: "block"} : {display: "none"}}>
+                <li>Field : <span>{this.state.fieldCode}</span></li>
+                <li>Country : <span>{this.state.countryCode}</span></li>
+                <li>API call : <a href={this.state.apiCall}>{this.state.apiCall}</a></li>
+                <li>calls : <span>{this.state.calls}</span></li>
+                <li>{this.state.lengthCountryCode} people in <span>{this.state.fieldCode}</span> in <span>{this.state.countryCode}</span></li>
+                <li>{this.state.lengthCode} people in <span>{this.state.fieldCode}</span></li>
+            </ul>
+
+            <Brand />
+
+            <Nav />
+
+            <MapLegend />
+            {this.state.data.length ? <MapPop
+                country={this.state.countryCode}
+                data={this.state.data}
+            /> : null}
+            <MapSVG />
+
             <MapFilters
                 setFieldFilter={this.handleFilterFieldClick}
             />
-            <MapLegend/> 
-            {this.state.data.length ? <MapPop 
-                country={this.state.countryCode}  
-                data={this.state.data}  
-            /> : null}
-            <MapSVG/>
+
+            <Compare />
             
         </section>
     }
