@@ -10,6 +10,8 @@ class MapPop extends Component {
                 y: window.innerHeight / 2
             },
             fields: {},
+            universities: {},
+            sortedUniversities: [],
             parity: {
                 m: {
                     amount: 0,
@@ -38,6 +40,7 @@ class MapPop extends Component {
         this.getFieldsAmount(this.props.data)
         this.getParity(this.props.data)
         this.getAverageAge(this.props.data)
+        this.getuniversities(this.props.data)
     }
     displayPop = () => {
         document.querySelector('.Map #map').addEventListener('click', (e) => {
@@ -101,6 +104,30 @@ class MapPop extends Component {
         // then, set age average to state, doing the average
         this.setState({ageAverage: Math.floor(ageTotal / data.length)})
     }
+    getuniversities = (data) => {
+        let universities = {};
+        // map over all given data, and over each prize of each people
+        data.map(people => {
+            // get field of price
+            let university;
+            if (people.idaffiliation) university = people.idaffiliation.address;
+            if (university !== undefined) {
+                // if university exist in universities, increment it by 1
+                if (university in universities ) universities[university] = universities[university] + 1
+                // else, set to 1
+                else universities[university] = 1
+            }
+            return university;
+        })
+        let sortedUniversities = [];
+        for (var university in universities) sortedUniversities.push([university, universities[university]]);
+        sortedUniversities.sort((a, b) => b[1] - a[1]);
+        sortedUniversities = sortedUniversities.splice(0, 3);
+        this.setState({
+            universities: {...universities},
+            sortedUniversities
+        })
+    }
     setRotation = (percentage) => {
         console.log(percentage)
         this.setState({svgStyle: {
@@ -135,9 +162,7 @@ class MapPop extends Component {
             <div className="universities">
                 <h4>Top universities</h4>
                 <ul>
-                    <li>1. <span>DEFAULT_UNIVERSITY_1</span><span></span></li>
-                    <li>2. <span>DEFAULT_UNIVERSITY_2</span><span></span></li>
-                    <li>3. <span>DEFAULT_UNIVERSITY_3</span><span></span></li>
+                    {this.state.sortedUniversities.map(university => <li key={university[0]}>1. <span>{university[0]}</span> - <span>{university[1]}</span></li>)}
                 </ul>
             </div>
             <div className="age">
