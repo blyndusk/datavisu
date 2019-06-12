@@ -201,6 +201,8 @@ class Map extends Component {
             />
 
             <Compare />
+
+            <p className="Map__tutorial">Select colored countries to visualize data</p>
             
         </section>
     }
