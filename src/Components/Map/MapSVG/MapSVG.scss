@@ -1,11 +1,11 @@
 .MapSVG {
     position: fixed;
-    left: 50%;
+    left: 88px;
     top: 50%;
     z-index: 2;
     width: calc(100vw - (40px * 2 + 82px + 48px));
     height: auto;
-    transform: translate(-50%, -50%);
+    transform: translateY(-50%);
     .land {
         fill: $blueMedium;
         opacity: .3;
@@ -19,7 +19,7 @@
         cursor: pointer;
         &:hover {
             stroke: $brand;
-            stroke-width: 3;
+            stroke-width: 4;
             stroke-opacity: 1;
         }
     }
