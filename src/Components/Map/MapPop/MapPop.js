@@ -29,11 +29,11 @@ class MapPop extends Component {
     }
     componentDidMount = () => this.displayPop()
     componentDidUpdate = (prevProps, prevState) => {
+        console.log(Math.floor(window.innerHeight * 0.33))
         if (this.props.data !== prevProps.data) this.getParsedData();
         if (this.state.parity !== prevState.parity) {
             this.setPercentage(25, this.state.parity.f.percent / 100);
-            this.setRotation(this.state.parity.f.percent / 100)
-            
+            this.setRotation(this.state.parity.f.percent / 100);
         }
     }
     getParsedData = () => {
@@ -54,9 +54,10 @@ class MapPop extends Component {
                 [...child.childNodes].map(grandchild => {
                     if (grandchild.tagName === 'g') grandchild.addEventListener('click', (e) => {
                         e.stopPropagation();
+                        grandchild.classList.add('max')
                         this.setState({pos: {
-                            x: e.clientX + 10,
-                            y: e.clientY + 10
+                            x: e.clientX > Math.floor(window.innerWidth * 0.66) ? Math.floor(window.innerWidth * 0.66) : e.clientX + 10,
+                            y: e.clientY > Math.floor(window.innerHeight * 0.33) ? Math.floor(window.innerHeight * 0.33) : e.clientY + 10
                         }})
                         setTimeout(() => MapPop.style.opacity = 1, 200);
                     })
@@ -83,12 +84,11 @@ class MapPop extends Component {
         data.map(people => people.idprice.map(price => {
             // get field of price
             const field = price.idcategory.category
-            console.log(fields)
             // if field exist in fields, increment it by 1
             if (field in fields) fields[field] = fields[field] + 1
             // else, set to 1
             else fields[field] = 1
-            return console.log(fields);
+            return field;
         }))
         // then, set fields to state
         // this.setState({fields})

@@ -23,6 +23,10 @@ git clone git@github.com:blyndusk/unknown-genius.git
 #### 2. Launch
 
 ```bash
+yarn || npm
+```
+
+```bash
 yarn start || npm run start
 ```
 
