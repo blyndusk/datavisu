@@ -28,10 +28,10 @@
         }
         &--active {
             .Nav__icon {
-                &--map:hover {
+                &--map {
                     background: url('../assets/icons/map-active.svg');
                 }
-                &--timeline:hover {
+                &--timeline {
                     background: url('../assets/icons/timeline-active.svg');
                 }
             }
