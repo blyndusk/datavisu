@@ -39,8 +39,7 @@ class AgeTemplate extends Component {
             return <div className="AgeTemplate">
                 <svg className="">
                     {Object.keys(this.props.country).map((key, index) => {
-                        const age = this.props.country[key]
-                        console.log(age)
+                        const age =  !isNaN(this.props.country[key]) ? this.props.country[key] : 0
 
                         if (maxHeight < age ) maxHeight = age;
                         [...document.querySelectorAll('.AgeTemplateSvg')].map(svg => svg.querySelector('svg').style.height = `${maxHeight * 2 +  50}px`)
