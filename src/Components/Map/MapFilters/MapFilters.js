@@ -24,7 +24,7 @@ class MapFilters extends Component {
         axios.get(this.state.baseUrl + this.state.type[2])
             .then(res => {
                 const response = res.data["hydra:member"];
-                response.push({category: 'all'})
+                response.unshift({category: 'all'})
                 this.setState({data: res.data["hydra:member"]}, () => console.log(this.state.data))
             })
             .catch(err => console.log(err))
