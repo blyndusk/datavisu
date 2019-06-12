@@ -5,7 +5,7 @@
     bottom: 0px;
     left: 0px;
     z-index: 1000;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     width: 100vw;
@@ -26,7 +26,6 @@
         text-align: center;
     }
     &__subtitle {
-        font-family: $mainFont;
         font-size: 18px;
         color: $content;
         text-align: center;
