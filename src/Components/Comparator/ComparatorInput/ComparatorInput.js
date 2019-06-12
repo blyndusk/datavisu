@@ -17,16 +17,15 @@ class ComparatorInput extends Component {
         return <form className="ComparatorInput" action="/action_page.php" method="get">
 
         {/* onClick={this.renderClick}></div> */}
-            <input list="browsers" name="browser" placeholder="FR" onChange={(e) => this.props.onInputChanged(e)}/>
+            <input className="ComparatorInput__search" list="browsers" name="browser" placeholder="FR" onChange={(e) => this.props.onInputChanged(e)}/>
+            <span className="ComparatorInput__icon"></span>
             <datalist id="browsers">
                 {
                     this.props.codes.length ? this.props.codes.map(code => <option key={code} value={code} onClick={(e) => {
                         this.props.getCode(e)
                     }}/>) : null
                 }
-              
             </datalist>
-            <input type="submit"/>
       </form>
     }
 }
