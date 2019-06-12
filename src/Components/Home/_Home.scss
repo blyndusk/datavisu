@@ -1,11 +1,11 @@
 .Home {
-    display: none;
+    display: flex;
     position: fixed;
     top: 0px;
     right: 0px;
     bottom: 0px;
     left: 0px;
-    z-index: 2000;
+    z-index: 1;
     width: 100vw;
     height: 100vh;
     background: $blue;

@@ -5,7 +5,10 @@ import TlPrizes from './TlYear/TlPrizes/TlPrizes';
 import TlCategory from './TlYear/TlPrizes/TlCategory/TlCategory';
 import TlPriceWinner from './TlYear/TlPrizes/TlCategory/TlPriceWinner/TlPriceWinner'
 import Pop from './Pop/Pop'
+import Nav from '../Nav/Nav';
+import Compare from './../Compare/Compare';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import CompareAge from '../Comparator/CompareAge/CompareAge';
 
 class Timeline extends Component {
     constructor(props) {
@@ -257,6 +260,8 @@ class Timeline extends Component {
     render() {
         // render a svg with all child Components
         return <Fragment>
+            <Nav/>
+            <Compare/>
             <svg 
                 id="Timeline"
                 width={this.props.data.length * 20}

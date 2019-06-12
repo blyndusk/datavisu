@@ -5,6 +5,7 @@ import CompareAge from './CompareAge/CompareAge';
 import CompareFields from './CompareFields/CompareFields';
 import CompareParity from './CompareParity/CompareParity';
 import CompareUniversities from './CompareUniversities/CompareUniversities';
+import Nav from '../Nav/Nav';
 import axios from 'axios';
 
 class Comparator extends Component {
@@ -138,7 +139,7 @@ class Comparator extends Component {
     
     render() {
         return <section className="Comparator">   
-            
+            <Nav/>
             <CompareFields
                 // give all country object
                 countries={this.state.countries}

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class Intro extends Component {
     componentDidMount() {
-        document.querySelector('.Intro').style.display = 'none'
+        // document.querySelector('.Intro').style.display = 'none'
     }
     hideIntro = (e) => {
         e.target.parentNode.parentNode.style.display = 'none'

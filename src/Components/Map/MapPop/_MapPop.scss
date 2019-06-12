@@ -9,9 +9,10 @@
     @include fs(14px);
     position: fixed;
     pointer-events: none;
-    opacity: 0;
+    opacity: 1;
     transition: all 0.2s ease;
     z-index: 3;
+    
     p {
         margin: 5px 10px;
         span {
@@ -31,4 +32,8 @@
             stroke: #21d386;
         }
     } 
+}
+
+.displayed {
+    opacity: 1;
 }

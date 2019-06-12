@@ -43,13 +43,25 @@ class MapPop extends Component {
         this.getuniversities(this.props.data)
     }
     displayPop = () => {
-        document.querySelector('.Map #map').addEventListener('click', (e) => {
-            document.querySelector('.MapPop').style.opacity = 1
-            this.setState({pos: {
-                x: e.clientX + 10,
-                y: e.clientY + 10
-            }})
-        })        
+        const map = document.querySelector('.Map #map')
+        const mapPop = document.querySelector('.Map .MapPop')
+        map.addEventListener('click', () => {
+            console.log('dag');
+            // mapPop.style.background = 'red';
+           
+        });
+        [...map.querySelectorAll('g')].map(g => {
+            
+            g.addEventListener('click',(e) => {
+                console.log(mapPop)
+                mapPop.style.background = 'blue !important';
+                this.setState({pos: {
+                    x: e.clientX + 10,
+                    y: e.clientY + 10
+                }})
+            })
+        })
+       
     }
     // method to get field for reach price
     getFieldsAmount = (data) => {
