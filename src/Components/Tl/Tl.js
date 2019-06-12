@@ -7,8 +7,6 @@ import TlPriceWinner from './TlYear/TlPrizes/TlCategory/TlPriceWinner/TlPriceWin
 import Pop from './Pop/Pop'
 import Nav from '../Nav/Nav';
 import Compare from './../Compare/Compare';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import CompareAge from '../Comparator/CompareAge/CompareAge';
 
 class Timeline extends Component {
     constructor(props) {
