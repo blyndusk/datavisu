@@ -5,14 +5,12 @@
     flex-direction: column;
     align-items: center;
     width: 350px;
-    // padding: 16px;
     background: rgba(0, 0, 0, .8);
     border-radius: 8px;
     opacity: 0;
     & > * {
-        padding: 0 16px;
+        padding: 0px 16px;
     }
-    // opacity: 0;
     &__country {
         margin-bottom: 8px;
         font-size: 12px;
@@ -29,18 +27,18 @@
         span {
             color: $content;
             &:first-child {
-                padding-bottom: 2px;
-                margin-bottom: 3px;
                 font-size: 25px;
                 font-weight: bold;
                 text-align: center;
-                border-bottom: 1px solid $content;
             }
             &:last-child {
+                padding-top: 3px;
+                margin-top: 3px;
                 font-size: 10px;
                 letter-spacing: .7px;
                 text-align: center;
                 text-transform: uppercase;
+                border-top: 1px solid $content;
             }
         }
     }
