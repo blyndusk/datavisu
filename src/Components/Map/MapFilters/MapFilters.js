@@ -8,7 +8,7 @@ class MapFilters extends Component {
         super(props);
         this.state = {
             data: [],
-            baseUrl: 'http://f4fc5758.ngrok.io/api/',
+            baseUrl: 'http://9f712c9f.ngrok.io/api/',
             // 2 types of API filters
             type: [
                 'people',
@@ -33,7 +33,7 @@ class MapFilters extends Component {
     
     render() {
         return <ul className="MapFilters">
-            <h4 className="MapFilters__title">Prizes</h4> 
+            <h3 className="MapFilters__title">Prizes</h3> 
             {this.state.data.map(field => <MapFilter
                 getField={this.props.setFieldFilter}
                 key={field.category}

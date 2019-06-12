@@ -158,28 +158,52 @@ class MapPop extends Component {
             className="MapPop"
             style={{top: `${this.state.pos.y}px`, left: `${this.state.pos.x}px`}}
         >
-            <h3 className="country">Country: {this.props.data[0].idcountry.name.toUpperCase()}</h3>
-            <span>Laureats: {this.props.data.length}</span>
-            <ul className="fields">
-                { Object.keys(this.state.fields).map(key =>  <li key={key}>{key}: <span>{this.state.fields[key]}</span></li>)}
-            </ul>
-            <div className="parity">
-                Men: {this.state.parity.m.percent}%
-                Women: {this.state.parity.f.percent}%<br/>
-                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" style={this.state.svgStyle}>
-                    <circle className="men" cy="50" cx="50" r="25"></circle>
-                    <circle style={this.state.pathStyle} className="women" cy="50" cx="50" r="25"></circle>
-                </svg>
+            <h3 className="MapPop__country">{this.props.data[0].idcountry.name.toUpperCase()}</h3>
+
+            <div className="MapPop__laureats">
+                <span>{this.props.data.length}</span>
+                <span>Laureats</span>
             </div>
-            <div className="universities">
-                <h4>Top universities</h4>
-                <ul>
-                    {this.state.sortedUniversities.map(university => <li key={university[0]}>1. <span>{university[0]}</span> - <span>{university[1]}</span></li>)}
+            
+            <ul className="MapPop__fields">
+                { Object.keys(this.state.fields).map(key =>
+                    <li className="MapPop__field" key={key}>
+                        <span>{this.state.fields[key]}</span>
+                        <span>{key}</span>
+                    </li>
+                )}
+            </ul>
+            
+            <div className="MapPop__parity">
+                <div>
+                    <span>{this.state.parity.m.percent}%</span>
+                    <span>Men</span>
+                </div>
+                <svg className="MapPop__circle" xmlns="http://www.w3.org/2000/svg" width="100" height="100" style={this.state.svgStyle}>
+                    <circle className="MapPop__jauge MapPop__jauge--men" cy="50" cx="50" r="25"></circle>
+                    <circle className="MapPop__jauge MapPop__jauge--women" style={this.state.pathStyle} cy="50" cx="50" r="25"></circle>
+                </svg>
+                <div>
+                    <span>{this.state.parity.f.percent}%</span>
+                    <span>Woman</span>
+                </div>
+            </div>
+
+            <div className="MapPop__top">
+                <h4 className="MapPop__subtitle">Top universities</h4>
+                <ul className="MapPop__universities">
+                    {this.state.sortedUniversities.map(university =>
+                        <li className="MapPop__university" key={university[0]}>
+                            <span>1. {university[0]}</span>
+                            <span>{university[1]}</span>
+                        </li>
+                    )}
                 </ul>
             </div>
-            <div className="age">
-                <span>Average age: {this.state.ageAverage}</span>
-                <span></span>
+
+            <div className="MapPop__age">
+                <span>{this.state.ageAverage}</span>
+                <span>Average age</span>
             </div>
             
         </section>

@@ -44,7 +44,7 @@ class Comparator extends Component {
                 }
             },
             // base url for API call
-            baseUrl: 'http://f4fc5758.ngrok.io/api/',
+            baseUrl: 'http://9f712c9f.ngrok.io/api/',
             // 2 types of routes
             type: [
                 'people',
