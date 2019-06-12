@@ -188,10 +188,10 @@ class Map extends Component {
             <Nav />
 
             <MapLegend />
-            {this.state.data.length ? <MapPop
+            <MapPop
                 country={this.state.countryCode}
                 data={this.state.data}
-            /> : null}
+            />
             <MapSVG />
 
             <MapFilters

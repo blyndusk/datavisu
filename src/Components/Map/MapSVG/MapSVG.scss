@@ -6,9 +6,6 @@
     width: calc(100vw - (40px * 2 + 82px + 48px));
     height: auto;
     transform: translate(-50%, -50%);
-    g {
-        // stroke: red !important;
-    }
     .land {
         fill: $blueMedium;
         stroke-width: 2;
