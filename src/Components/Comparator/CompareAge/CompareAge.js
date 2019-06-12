@@ -20,7 +20,6 @@ class CompareAge extends Component {
     }
     componentDidUpdate = (prevProps) => {
         if ( this.props.countries.total !== prevProps.countries.total ) {
-            console.log('updated age')
             this.getAverageAge(this.props.countries.first.parity, "firstCountry")
             this.getAverageAge(this.props.countries.second.parity, "secondCountry")
         }

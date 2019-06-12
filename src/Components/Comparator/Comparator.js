@@ -21,6 +21,7 @@ class Comparator extends Component {
             countries: {
                 // total of people
                 total: 0,
+                codes: [],
                 first: {
                     // code for the country
                     code: "FR",
@@ -44,6 +45,7 @@ class Comparator extends Component {
                     }
                 }
             },
+            codes:  [],
             // base url for API call
             baseUrl: 'http://localhost:8000/api/',
             // 2 types of routes
@@ -82,6 +84,36 @@ class Comparator extends Component {
         this.getCountryDataWithGender(codes[0][0], codes[0][1], 'f')
         this.getCountryDataWithGender(codes[1][0], codes[1][1], 'm')
         this.getCountryDataWithGender(codes[1][0], codes[1][1], 'f')
+        this.getCodes()
+    }
+    componentDidUpdate(prevProps, prevState) {
+        console.log('actual', this.state.countries.first.code)
+        console.log('prev', prevState.countries.first.code)
+        if (this.state.firstCountryCode !== prevState.firstCountryCode ||
+            this.state.secondCountryCode !== prevState.secondCountryCode) {
+            const codes = [
+                [
+                    this.state.countries.first.code,
+                    'first'
+                ],
+                [
+                    this.state.countries.second.code,
+                    'second'
+                ]
+            ]
+            this.getData(this.state.firstCountryCode, 'firstCountryData', 'first');
+            this.getData(this.state.secondCountryCode, 'secondCountryData', 'second');
+            // 4 calls:
+            //  - men of 1st country
+            //  - women of 1st country
+            //  - men of 2nd country
+            //  - women of 2nd country
+            this.getCountryDataWithGender(codes[0][0], codes[0][1], 'm')
+            this.getCountryDataWithGender(codes[0][0], codes[0][1], 'f')
+            this.getCountryDataWithGender(codes[1][0], codes[1][1], 'm')
+            this.getCountryDataWithGender(codes[1][0], codes[1][1], 'f')
+            this.getCodes()
+        }
     }
     getData = (countryCode, countryData, index) => {
         let params = {}
@@ -137,12 +169,47 @@ class Comparator extends Component {
         .catch(err => console.log(err))
         
     }
-    
+    getCodes = () => {
+        axios.get(this.state.baseUrl + this.state.type[0])
+            .then(res => {
+                const response =  res.data["hydra:member"]
+                const codes = []
+                response.map(people => {
+                    const code = people.idcountry.code
+                    if (codes.indexOf(code) === -1) codes.push(code)
+                    return code
+                })
+                this.setState({
+                    codes
+                }, () => console.log(this.state.codes))
+            })
+            .catch(err => console.log(err))
+    }
+    onInputChanged = (e, index) => {
+        if (e.target.value.length === 2 && this.state.codes.indexOf(e.target.value.toUpperCase()) > -1) {
+            console.log('inputcode', e.target.value);
+            const newCode = e.target.value
+            this.setState(prevState => {
+                let countries = Object.assign({}, prevState.countries);
+                // set response to code,  
+                countries[index].code = newCode
+            
+                return { countries };
+            })
+            if (index === 'first') this.setState({
+                firstCountryCode: newCode
+            })
+            else if (index === 'second') this.setState({
+                secondCountryCode: newCode
+            })
+        }
+    }  
     render() {
         return <section className="Comparator">   
             <Nav/>
             <ComparatorInput
-                getCode={(e) => console.log(e.target.value)}
+                codes={this.state.codes}
+                onInputChanged={(e) => this.onInputChanged(e, 'first')}
             />
             <CompareFields
                 // give all country object
@@ -159,6 +226,10 @@ class Comparator extends Component {
             <CompareUniversities
                 firstCountryData={this.state.firstCountryData}
                 secondCountryData={this.state.secondCountryData}
+            />
+            <ComparatorInput
+                codes={this.state.codes}
+                onInputChanged={(e) => this.onInputChanged(e, 'second')}
             />
         </section>
     }

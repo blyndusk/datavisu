@@ -16,7 +16,6 @@ class CompareFields extends Component {
     }
     componentDidUpdate = (prevProps) => {
         if (this.props.countries.total !== prevProps.countries.total ) {
-            console.log(this.props.countries.first)
             this.getFieldsAmount(this.props.countries.first.data, 0)
             this.getFieldsAmount(this.props.countries.second.data, 1)
         }
