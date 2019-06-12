@@ -1,56 +1,40 @@
 
 import React, { Component } from 'react';
 import MapFilter from './MapFilter/MapFilter'
+import axios from 'axios'
 
 class MapFilters extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            fields: [
-                {
-                    name: 'all',
-                    label: ''
-                },
-                {
-                    name: 'physics',
-                    label: 'physics'
-                },
-                {
-                    name: 'chemistry',
-                    label: 'chemistry'
-                },
-                {
-                    name: 'medicine',
-                    label: 'medicine'
-                },
-                {
-                    name: 'literature',
-                    label: 'literature'
-                },
-                {
-                    name: 'peace',
-                    label: 'peace'
-                },
-                {
-                    name: 'economics',
-                    label: 'economics'
-                }
-            ]
+            data: [],
+            baseUrl: 'http://localhost:8000/api/',
+            // 2 types of API filters
+            type: [
+                'people',
+                'prices', 
+                'categories'
+            ],
         }
     }
     componentDidMount = () => {
-        
+        this.getCategories()
+    }
+    getCategories = () => {
+        axios.get(this.state.baseUrl + this.state.type[2])
+            .then(res => this.setState({data: res.data["hydra:member"]}))
+            .catch(err => console.log(err))
     }
     
     
     render() {
         return <ul className="MapFilters">
             <h4 className="MapFilters__title">Prizes</h4> 
-            {this.state.fields.map(field => <MapFilter
+            {this.state.data.map(field => <MapFilter
                 getField={this.props.setFieldFilter}
-                key={field.name}
-                name={field.name}
-                label={field.label}
+                key={field.category}
+                name={field.category}
+                label={field.category}
             />)}
          </ul>
     }

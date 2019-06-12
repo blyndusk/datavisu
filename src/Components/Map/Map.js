@@ -21,7 +21,8 @@ class Map extends Component {
             // 2 types of API filters
             type: [
                 'people',
-                'prices'
+                'prices', 
+                'categories'
             ],
             // 3 params
             params: {
@@ -41,6 +42,7 @@ class Map extends Component {
     }
     // when the Map is mounted, handle country click & set new data
     componentDidMount = () => {
+        
         this.handleCountryClick()
         this.setNewData()
     }
