@@ -22,7 +22,11 @@ class MapFilters extends Component {
     }
     getCategories = () => {
         axios.get(this.state.baseUrl + this.state.type[2])
-            .then(res => this.setState({data: res.data["hydra:member"]}))
+            .then(res => {
+                const response = res.data["hydra:member"];
+                response.push({category: 'all'})
+                this.setState({data: res.data["hydra:member"]}, () => console.log(this.state.data))
+            })
             .catch(err => console.log(err))
     }
     
@@ -34,7 +38,7 @@ class MapFilters extends Component {
                 getField={this.props.setFieldFilter}
                 key={field.category}
                 name={field.category}
-                label={field.category}
+                label={field.category === 'all' ? '' : field.category}
             />)}
          </ul>
     }
