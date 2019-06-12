@@ -35,6 +35,8 @@ class MapFilters extends Component {
         return <ul className="MapFilters">
             <h4 className="MapFilters__title">Prizes</h4> 
             {this.state.data.map(field => <MapFilter
+            duh="dah"
+                classState={field.category === 'all' ? 'MapFilter--active' : ''}
                 getField={this.props.setFieldFilter}
                 key={field.category}
                 name={field.category}

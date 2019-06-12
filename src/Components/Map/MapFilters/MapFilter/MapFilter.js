@@ -11,7 +11,7 @@ class MapFilter extends Component {
     
     render() {
         return <li 
-            className="MapFilter"
+            className={`MapFilter ${this.props.classState}`}
             onClick={(e) => {
                 [...document.querySelectorAll('.MapFilters li')].map(li => li.className = 'MapFilter');
                 e.target.className = 'MapFilter MapFilter--active';
