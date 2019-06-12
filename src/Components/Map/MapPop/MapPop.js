@@ -175,17 +175,17 @@ class MapPop extends Component {
             </ul>
             
             <div className="MapPop__parity">
-                <div>
+                <div className="MapPop__gender">
                     <span>{this.state.parity.m.percent}%</span>
                     <span>Men</span>
                 </div>
-                <svg className="MapPop__circle" xmlns="http://www.w3.org/2000/svg" width="100" height="100" style={this.state.svgStyle}>
-                    <circle className="MapPop__jauge MapPop__jauge--men" cy="50" cx="50" r="25"></circle>
-                    <circle className="MapPop__jauge MapPop__jauge--women" style={this.state.pathStyle} cy="50" cx="50" r="25"></circle>
+                <svg className="MapPop__circle" xmlns="http://www.w3.org/2000/svg" style={this.state.svgStyle}>
+                    <circle className="MapPop__jauge MapPop__jauge--men" cy="34" cx="34" r="25"></circle>
+                    <circle className="MapPop__jauge MapPop__jauge--women" style={this.state.pathStyle} cy="34" cx="34" r="25"></circle>
                 </svg>
-                <div>
+                <div className="MapPop__gender">
                     <span>{this.state.parity.f.percent}%</span>
-                    <span>Woman</span>
+                    <span>Women</span>
                 </div>
             </div>
 
