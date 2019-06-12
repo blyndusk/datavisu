@@ -2,7 +2,7 @@
     font-size: 14px;
     color: $content;
     opacity: .7;
-    text-transform: capitalize;
+    text-transform: uppercase;
     transition: .1s ease;
     cursor: pointer;
     &:not(:last-child) {

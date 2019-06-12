@@ -71,19 +71,29 @@ class MapPop extends Component {
     // method to get field for reach price
     getFieldsAmount = (data) => {
         // fields is an object which contain fields with amounts of prize for each field
-        const fields = {};
+        const fields = {
+            physics: 0,
+            chemistry: 0,
+            peace: 0,
+            medicine: 0,
+            literature: 0,
+            economics: 0
+        };
         // map over all given data, and over each prize of each people
         data.map(people => people.idprice.map(price => {
             // get field of price
             const field = price.idcategory.category
+            console.log(fields)
             // if field exist in fields, increment it by 1
             if (field in fields) fields[field] = fields[field] + 1
             // else, set to 1
             else fields[field] = 1
-            return field;
+            return console.log(fields);
         }))
         // then, set fields to state
-        this.setState({fields})
+        // this.setState({fields})
+        this.setState({ fields
+        })
     }
     // method to get percentage of M/W for each people
     getParity = (data) => {
@@ -194,19 +204,17 @@ class MapPop extends Component {
                     <span>Women</span>
                 </div>
             </div>
-
-            <div className="MapPop__top">
-                <h4 className="MapPop__subtitle">Top universities</h4>
-                <ul className="MapPop__universities">
-                    {this.state.sortedUniversities.map(university =>
-                        <li className="MapPop__university" key={university[0]}>
-                            <span>1. {university[0]}</span>
-                            <span>{university[1]}</span>
-                        </li>
-                    )}
-                </ul>
-            </div>
-
+            {this.state.sortedUniversities.length ? <div className="MapPop__top">
+               <h4 className="MapPop__subtitle">Top universities</h4>
+               <ul className="MapPop__universities">
+                   {this.state.sortedUniversities.map((university, i) =>
+                       <li className="MapPop__university" key={university[0]}>
+                           <span>{i + 1}. {university[0]}</span>
+                           <span>{university[1]}</span>
+                       </li>
+                   )}
+               </ul>
+            </div> : null}
             <div className="MapPop__age">
                 <span>{this.state.ageAverage}</span>
                 <span>Average age</span>
