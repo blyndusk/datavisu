@@ -25,7 +25,7 @@ class FieldTemplate extends Component {
             if (maxHeight < this.props.country.fields[key] ) {
               maxHeight = this.props.country.fields[key] 
             }
-            [...document.querySelectorAll('.FieldTemplate')].map(svg => svg.querySelector('svg').style.height = `${maxHeight * 4 +  20}px`)
+            [...document.querySelectorAll('.FieldTemplate')].map(svg => svg.querySelector('svg').style.height = `316px`)
             inc += 50
             return <g key={key}>
               <text  x={inc - 8} y={this.props.order ? this.props.country.fields[key] * 4  + 15 : 316  - (this.props.country.fields[key] * 4 + 15)} >{this.props.country.fields[key]}</text>

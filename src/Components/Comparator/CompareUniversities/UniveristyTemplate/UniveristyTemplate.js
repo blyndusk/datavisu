@@ -27,7 +27,7 @@ class UniversitiesTemplate extends Component {
                     if (maxHeight < university[1] ) {
                         maxHeight = university[1]
                       }
-                      [...document.querySelectorAll('.UniversitiesTemplate')].map(svg => svg.querySelector('svg').style.height = `${maxHeight * 4 +  20}px`)
+                      [...document.querySelectorAll('.UniversitiesTemplate')].map(svg => svg.querySelector('svg').style.height = '160px')
                       inc += 100
             return <g key={university[0]}>
               <text  x={inc - 8} y={this.props.order ? university[1] * 4  + 15 : 160  - (university[1] * 4 + 15)} >{university[0]} - {university[1]}</text>
