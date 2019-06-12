@@ -1,5 +1,5 @@
 
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 class MapPop extends Component {
     constructor(props) {
@@ -43,25 +43,30 @@ class MapPop extends Component {
         this.getuniversities(this.props.data)
     }
     displayPop = () => {
-        const map = document.querySelector('.Map #map')
-        const mapPop = document.querySelector('.Map .MapPop')
-        map.addEventListener('click', () => {
-            console.log('dag');
-            // mapPop.style.background = 'red';
-           
-        });
-        [...map.querySelectorAll('g')].map(g => {
-            
-            g.addEventListener('click',(e) => {
-                console.log(mapPop)
-                mapPop.style.background = 'blue !important';
-                this.setState({pos: {
-                    x: e.clientX + 10,
-                    y: e.clientY + 10
-                }})
-            })
+        const map = document.querySelector('.Map');
+        const MapPop = document.querySelector('.MapPop');
+        [...map.childNodes].map(child => {
+            if (child.tagName  === "svg") {
+                child.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    MapPop.style.opacity = 0;
+                });
+                [...child.childNodes].map(grandchild => {
+                    if (grandchild.tagName === 'g') grandchild.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        this.setState({pos: {
+                            x: e.clientX + 10,
+                            y: e.clientY + 10
+                        }})
+                        setTimeout(() => MapPop.style.opacity = 1, 200);
+                    })
+                    else grandchild.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        MapPop.style.opacity = 0;
+                    })
+                })
+            }
         })
-       
     }
     // method to get field for reach price
     getFieldsAmount = (data) => {
@@ -158,6 +163,7 @@ class MapPop extends Component {
             className="MapPop"
             style={{top: `${this.state.pos.y}px`, left: `${this.state.pos.x}px`}}
         >
+            {this.props.data.length ? <Fragment>
             <h3 className="MapPop__country">{this.props.data[0].idcountry.name.toUpperCase()}</h3>
 
             <div className="MapPop__laureats">
@@ -205,7 +211,8 @@ class MapPop extends Component {
                 <span>{this.state.ageAverage}</span>
                 <span>Average age</span>
             </div>
-            
+            </Fragment> : null
+            }
         </section>
     }
 }
