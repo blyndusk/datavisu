@@ -17,7 +17,7 @@ class Map extends Component {
             data: [],
             pricesPerCountries: {},
             // API
-            baseUrl: 'http://9f712c9f.ngrok.io/api/',
+            baseUrl: 'http://localhost:8000/api/',
             // 2 types of API filters
             type: [
                 'people',
@@ -139,8 +139,8 @@ class Map extends Component {
                 if (g.id.toUpperCase() === key ) [...g.querySelectorAll('path')].map(path => {
                     path.parentNode.classList.add('available');
                     // and fill them with a hsl color depending on the amount of prices in %
-                    const percent = (codes[key] / 500) * 100 + 33;
-                    return path.style.fill = `hsl(213, ${percent}%, ${percent}%`;
+                    const percent = codes[key] + 33;
+                    return path.style.fill = `hsl(213, ${percent}%, ${percent}%)`;
                 })
             }
             return codes;

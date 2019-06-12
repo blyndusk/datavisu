@@ -29,7 +29,6 @@ class MapPop extends Component {
     }
     componentDidMount = () => this.displayPop()
     componentDidUpdate = (prevProps, prevState) => {
-        console.log(Math.floor(window.innerHeight * 0.33))
         if (this.props.data !== prevProps.data) this.getParsedData();
         if (this.state.parity !== prevState.parity) {
             this.setPercentage(25, this.state.parity.f.percent / 100);
@@ -54,7 +53,6 @@ class MapPop extends Component {
                 [...child.childNodes].map(grandchild => {
                     if (grandchild.tagName === 'g') grandchild.addEventListener('click', (e) => {
                         e.stopPropagation();
-                        grandchild.classList.add('max')
                         this.setState({pos: {
                             x: e.clientX > Math.floor(window.innerWidth * 0.66) ? Math.floor(window.innerWidth * 0.66) : e.clientX + 10,
                             y: e.clientY > Math.floor(window.innerHeight * 0.33) ? Math.floor(window.innerHeight * 0.33) : e.clientY + 10
@@ -65,8 +63,10 @@ class MapPop extends Component {
                         e.stopPropagation();
                         MapPop.style.opacity = 0;
                     })
+                    return grandchild;
                 })
             }
+            return child;
         })
     }
     // method to get field for reach price
