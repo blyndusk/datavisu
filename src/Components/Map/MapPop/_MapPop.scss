@@ -9,9 +9,9 @@
     @include fs(14px);
     position: fixed;
     pointer-events: none;
-    opacity: 1;
+    opacity: 0;
     transition: all 0.2s ease;
-    z-index: 3;
+    z-index: 1000000;
     
     p {
         margin: 5px 10px;
