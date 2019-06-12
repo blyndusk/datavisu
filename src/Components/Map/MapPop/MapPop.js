@@ -181,14 +181,14 @@ class MapPop extends Component {
                 <span>Laureats</span>
             </div>
             
-            <ul className="MapPop__fields">
-                { Object.keys(this.state.fields).map(key =>
+           {!this.props.fieldCode.length ? <ul className="MapPop__fields">
+                {Object.keys(this.state.fields).map(key =>
                     <li className="MapPop__field" key={key}>
                         <span>{this.state.fields[key]}</span>
                         <span>{key}</span>
                     </li>
-                )}
-            </ul>
+                ) }
+            </ul> : null }
             
             <div className="MapPop__parity">
                 <div className="MapPop__gender">
