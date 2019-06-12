@@ -42,7 +42,7 @@ git clone git@github.com:AmauryFaveriel/backend-unknowngenius.git
 - `bin/console make:migration`
 - `bin/console doctrine:migration:migrate`
 - `bin/console server:run`
-- open localhost:8000/api to get JSONS
+- open f4fc5758.ngrok.io/api to get JSONS
 
 ## Links
 

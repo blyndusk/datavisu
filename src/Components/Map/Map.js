@@ -17,7 +17,7 @@ class Map extends Component {
             data: [],
             pricesPerCountries: {},
             // API
-            baseUrl: 'http://localhost:8000/api/',
+            baseUrl: 'http://f4fc5758.ngrok.io/api/',
             // 2 types of API filters
             type: [
                 'people',
