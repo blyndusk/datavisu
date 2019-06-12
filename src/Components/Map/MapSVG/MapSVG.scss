@@ -6,17 +6,22 @@
     width: calc(100vw - (40px * 2 + 82px + 48px));
     height: auto;
     transform: translate(-50%, -50%);
-    g {
-        cursor: pointer;
-        &:hover {
-            stroke: $content;
-        }
-    }
     .land {
         fill: $blueMedium;
-        stroke-width: 2;
-        transition: .3s ease;
-        
+        opacity: .3;
+    }
+    .available {
+        opacity: 1;
+        stroke: $content;
+        stroke-width: 1;
+        stroke-opacity: .3;
+        transition: .2s ease;
+        cursor: pointer;
+        &:hover {
+            stroke: $brand;
+            stroke-width: 3;
+            stroke-opacity: 1;
+        }
     }
     .circle {
         display: none;

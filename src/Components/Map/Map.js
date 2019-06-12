@@ -137,7 +137,7 @@ class Map extends Component {
             for (const key in codes) { 
                 // if the country code match with the codes code, select all its children paths
                 if (g.id.toUpperCase() === key ) [...g.querySelectorAll('path')].map(path => {
-                    path.parentNode.classList.add('for-max');
+                    path.parentNode.classList.add('available');
                     // and fill them with a hsl color depending on the amount of prices in %
                     const percent = (codes[key] / 500) * 100 + 33;
                     return path.style.fill = `hsl(213, ${percent}%, ${percent}%`;
