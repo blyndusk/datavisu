@@ -1,3 +1,10 @@
+*,
+*:before,
+*:after { box-sizing: border-box; }
+
 .App {
     display: flex;
+    font-family: $mainFont;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
