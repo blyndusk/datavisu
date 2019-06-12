@@ -192,6 +192,7 @@ class Map extends Component {
             <MapPop
                 country={this.state.countryCode}
                 data={this.state.data}
+                fieldCode={this.state.fieldCode}
             />
             <MapSVG />
 
