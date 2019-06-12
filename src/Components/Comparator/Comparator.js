@@ -206,7 +206,6 @@ class Comparator extends Component {
     }  
     render() {
         return <section className="Comparator">   
-            <Nav/>
             <ComparatorInput
                 codes={this.state.codes}
                 onInputChanged={(e) => this.onInputChanged(e, 'first')}
