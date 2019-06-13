@@ -13,7 +13,7 @@ class ComparatorInput extends Component {
             <span className="ComparatorInput__icon"></span>
             <datalist id="browsers">
                 {
-                    this.props.codes.length ? this.props.codes.map(code => <option key={code} value={code} onClick={(e) => {
+                    this.props.codes.length ? this.props.codes.map(code => <option key={code.code} value={code.code} data-name={code.name} onClick={(e) => {
                         this.props.getCode(e)
                     }}/>) : null
                 }

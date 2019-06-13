@@ -24,6 +24,7 @@ class Comparator extends Component {
                 first: {
                     // code for the country
                     code: "FR",
+                    name: "France",
                     data: [],
                     // parity
                     parity: {
@@ -36,6 +37,7 @@ class Comparator extends Component {
                 // same pattern
                 second: {
                     code: "US",
+                    name: "USA",
                     data: [],
                     parity: {
                         f: [],
@@ -50,7 +52,8 @@ class Comparator extends Component {
             // 2 types of routes
             type: [
                 'people',
-                'prices'
+                'prices',
+                'countries'
             ],
             // diffrent params
             params: {
@@ -186,29 +189,41 @@ class Comparator extends Component {
                     if (codes.indexOf(code) === -1) codes.push(code)
                     return code
                 })
+                // this.setState({
+                //     codes: codes.sort()
+                // })
+            })
+            .catch(err => console.log(err))
+            axios.get(this.state.baseUrl + this.state.type[2])
+            .then(res => {
+                const response = res.data["hydra:member"]
+                console.log(response);
                 this.setState({
-                    codes: codes.sort()
+                    codes: response.sort((a, b) => {
+                        if (a.code < b.code) return -1; 
+                        if (a.code > b.code) return 1; 
+                        return 0;
+                    })
                 })
             })
             .catch(err => console.log(err))
     }
     onInputChanged = (e, index) => {
-        if (e.target.value.length === 2 && this.state.codes.indexOf(e.target.value.toUpperCase()) > -1) {
-            const newCode = e.target.value
-            this.setState(prevState => {
-                let countries = Object.assign({}, prevState.countries);
-                // set response to code,  
-                countries[index].code = newCode
-            
-                return { countries };
-            })
-            if (index === 'first') this.setState({
-                firstCountryCode: newCode
-            })
-            else if (index === 'second') this.setState({
-                secondCountryCode: newCode
-            })
-        }
+        this.state.codes.map(code => {
+            if (e.target.value.length === 2 && e.target.value === code.code) {
+                const newCode = e.target.value
+                this.state.codes.map(code => newCode === code.code ? this.setState(prevState => {
+                    let countries = Object.assign({}, prevState.countries);
+                    // set response to code,  
+                    countries[index].name = code.name
+                    countries[index].code = code.code
+                    return { countries };
+                }) : null)
+                if (index === 'first') this.setState({firstCountryCode: newCode})
+                else if (index === 'second') this.setState({secondCountryCode: newCode})
+            }
+        })
+        
     }  
     render() {
         return <section className="Comparator" onClick={(e) => {
@@ -216,9 +231,9 @@ class Comparator extends Component {
             [...document.querySelectorAll('form')].map(form => form.classList.remove('ComparatorInput--active'))
         }}>
             <h3 className="Comparator__title">
-                <span className="Comparator__country">{this.state.countries.first.code}</span>
+                <span className="Comparator__country">{this.state.countries.first.name}</span>
                 <span className="Comparator__versus">vs</span>
-                <span className="Comparator__country">{this.state.countries.second.code}</span>
+                <span className="Comparator__country">{this.state.countries.second.name}</span>
             </h3>
             <ComparatorInput
                 codes={this.state.codes}
