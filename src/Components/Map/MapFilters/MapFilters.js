@@ -8,7 +8,7 @@ class MapFilters extends Component {
         super(props);
         this.state = {
             data: [],
-            baseUrl: 'http://localhost:8000/api/',
+            baseUrl: 'http://eb73eedf.ngrok.io/api/',
             // 2 types of API filters
             type: [
                 'people',
