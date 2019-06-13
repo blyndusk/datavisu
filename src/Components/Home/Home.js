@@ -5,7 +5,6 @@ import Nav from './../Nav/Nav';
 import Compare from './../Compare/Compare';
 
 class Home extends Component {
-    
     render() {
         return <section className="Home">
             <Brand />

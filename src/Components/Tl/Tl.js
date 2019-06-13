@@ -101,7 +101,6 @@ class Timeline extends Component {
             })
             .catch(err => console.error(err))
         
-        this.setState({svg : { w: this.props.data.length * 10, h: 200}})
     } 
     
     // generation of price winners (dots)

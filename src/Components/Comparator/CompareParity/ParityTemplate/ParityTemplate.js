@@ -12,19 +12,18 @@ class ParityTemplate extends Component {
     } 
     componentDidUpdate = (prevProps) => {
         if (this.props.country !== prevProps.country ) {
+            // set percentage it terms of props
             const percentage = this.props.country.parity.f.percent / 100
             this.setPercentage(this.state.rayon, percentage);
             this.setRotation(percentage)
         }
     }
-    setRotation = (percentage) => this.setState({svgStyle: {
-        transform: `rotate(${- 360 * percentage / 2}deg)`},
-    })
+    // set rotation of the svg to be aligned horizontally
+    setRotation = (percentage) => this.setState({svgStyle: {transform: `rotate(${- 360 * percentage / 2}deg)`}})
+    // set percentage of the svg
     setPercentage = (rayon, percentage) => {
         const perimeter = Math.PI * 2 * rayon;
-        this.setState({pathStyle: {
-            strokeDasharray: `${perimeter * percentage}, ${perimeter}`},
-        })
+        this.setState({pathStyle: {strokeDasharray: `${perimeter * percentage}, ${perimeter}`},})
     }
     render() {
         const country = this.props.country
@@ -34,7 +33,6 @@ class ParityTemplate extends Component {
                 <circle className="men" cy="91" cx="91" r={this.state.rayon}></circle>
                 <circle style={this.state.pathStyle} className="women" cy="91" cx="91" r={this.state.rayon}></circle>
             </svg>
-            
             <div className="ParityTemplate__items">
                 <div className="ParityTemplate__item">
                     <span className="ParityTemplate__number">{country.parity.m.amount}</span>

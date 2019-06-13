@@ -1,17 +1,14 @@
 
 import React, { Component } from 'react';
 import FieldTemplate from './FieldTemplate/FieldTemplate'
+import FieldsLegend from './FieldsLegend/FieldsLegend'
 
 class CompareFields extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            firstCountry: {
-                fields: {}
-            },
-            secondCountry: {
-                fields: {}
-            }
+            firstCountry: { fields: {} },
+            secondCountry: { fields: {} }
         }
     }
     componentDidUpdate = (prevProps) => {
@@ -37,30 +34,12 @@ class CompareFields extends Component {
         this.setState({fields})
         if (countrybin === 0) this.setState({ firstCountry: { fields }})
         if (countrybin === 1) this.setState({ secondCountry: { fields }})
-        
     }
     
     render() {
         return <section className="CompareFields Comparator__section">
             <h3 className="Comparator__subtitle">Fields</h3>
-            <div className="Comparator__legend">
-                <div className="Comparator__dots">
-                    <div className="Comparator__dot"></div>
-                    <div className="Comparator__dot"></div>
-                    <div className="Comparator__dot"></div>
-                    <div className="Comparator__dot"></div>
-                    <div className="Comparator__dot"></div>
-                    <div className="Comparator__dot"></div>
-                </div>
-                <div className="Comparator__labels">
-                    <span className="Comparator__label">Phy</span>
-                    <span className="Comparator__label">Chem</span>
-                    <span className="Comparator__label">Med</span>
-                    <span className="Comparator__label">Pea</span>
-                    <span className="Comparator__label">Litt</span>
-                    <span className="Comparator__label">Eco</span>
-                </div>
-            </div>
+            <FieldsLegend/>
             <FieldTemplate
                 country={this.state.firstCountry}
                 order={0}

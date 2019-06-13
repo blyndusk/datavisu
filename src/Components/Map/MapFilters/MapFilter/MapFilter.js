@@ -2,13 +2,7 @@
 import React, { Component } from 'react';
 
 class MapFilter extends Component {
-   
-    componentDidMount = () => {
-        
-    }
     addFilter = (e) => e.target.dataset.label;
-    
-    
     render() {
         return <li 
             className={`MapFilter ${this.props.classState}`}

@@ -86,21 +86,21 @@ class Comparator extends Component {
         this.getCountryDataWithGender(codes[0][0], codes[0][1], 'f')
         this.getCountryDataWithGender(codes[1][0], codes[1][1], 'm')
         this.getCountryDataWithGender(codes[1][0], codes[1][1], 'f')
-        this.getCodes()
+        this.getCodes();
     }
     componentDidUpdate(prevProps, prevState) {
         if (this.state.firstCountryCode !== prevState.firstCountryCode ||
             this.state.secondCountryCode !== prevState.secondCountryCode) {
-                this.setState(prevState => {
-                    let countries = Object.assign({}, prevState.countries);
-                    // set response to code,  
-                    countries.first.parity.total = 0;
-                    // total of the country
-                    countries.second.parity.total = 0;
-                    // & global total
-                    countries.total = 0;
-                    return { countries };
-                })
+            this.setState(prevState => {
+                let countries = Object.assign({}, prevState.countries);
+                // set response to code,  
+                countries.first.parity.total = 0;
+                // total of the country
+                countries.second.parity.total = 0;
+                // & global total
+                countries.total = 0;
+                return { countries };
+            })
             const codes = [
                 [
                     this.state.countries.first.code,
@@ -177,7 +177,6 @@ class Comparator extends Component {
             })
         })
         .catch(err => console.log(err))
-        
     }
     getCodes = () => {
         axios.get(this.state.baseUrl + this.state.type[0])
@@ -223,7 +222,6 @@ class Comparator extends Component {
                 else if (index === 'second') this.setState({secondCountryCode: newCode})
             }
         })
-        
     }  
     render() {
         return <section className="Comparator" onClick={(e) => {

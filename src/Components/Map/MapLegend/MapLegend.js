@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 
 class MapLegend extends Component {
-    componentDidMount = () => {
-        
-    }
-    
     render() {
         return <div className="MapLegend">
             <div className="MapLegend__container">

@@ -7,30 +7,34 @@ class CompareAge extends Component {
         super(props);
         this.state = {
             firstCountry: {
-                    m: 0,
-                    f: 0
-
+                m: 0,
+                f: 0
             },
             secondCountry: {
-
-                    m: 0,
-                    f: 0
+                m: 0,
+                f: 0
             }
         }
     }
     componentDidUpdate = (prevProps) => {
         if ( this.props.countries.total !== prevProps.countries.total ) {
+            // get average age for the 2 countries
             this.getAverageAge(this.props.countries.first.parity, "firstCountry")
             this.getAverageAge(this.props.countries.second.parity, "secondCountry")
         }
     }
-   
+    // get avergae age for a country
     getAverageAge = (data, index) => {
         const averageAge = { m: 0, f: 0 }
+        // set men average age
         this.getAvegrageAgeGender(data, averageAge, 'm')
+        // set women average age
         this.getAvegrageAgeGender(data, averageAge, 'f')
+        // new state template
         const newState = {};
+        // add average age for a country
         newState[index] = averageAge;
+        // spread new state
         this.setState({ ...newState })
     }
     getAvegrageAgeGender = (data, avagerageAge,  genderCode) => {

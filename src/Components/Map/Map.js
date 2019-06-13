@@ -42,7 +42,6 @@ class Map extends Component {
     }
     // when the Map is mounted, handle country click & set new data
     componentDidMount = () => {
-        
         this.handleCountryClick()
         this.setNewData()
     }
@@ -174,7 +173,6 @@ class Map extends Component {
     }
     render() {
         return <section className="Map">
-        
             <ul className="infos" style={window.location.hash === "#dev" ? {display: "block"} : {display: "none"}}>
                 <li>Field : <span>{this.state.fieldCode}</span></li>
                 <li>Country : <span>{this.state.countryCode}</span></li>
@@ -183,27 +181,21 @@ class Map extends Component {
                 <li>{this.state.lengthCountryCode} people in <span>{this.state.fieldCode}</span> in <span>{this.state.countryCode}</span></li>
                 <li>{this.state.lengthCode} people in <span>{this.state.fieldCode}</span></li>
             </ul>
-
-            <Brand />
-
-            <Nav />
-
-            <MapLegend />
+            <Brand/>
+            <Nav/>
+            <MapLegend/>
             <MapPop
                 country={this.state.countryCode}
                 data={this.state.data}
                 fieldCode={this.state.fieldCode}
             />
-            <MapSVG />
-
+            <MapSVG/>
             <MapFilters
                 setFieldFilter={this.handleFilterFieldClick}
             />
 
-            <Compare />
-
+            <Compare/>
             <p className="Map__tutorial">Select colored countries to visualize data</p>
-            
         </section>
     }
 }

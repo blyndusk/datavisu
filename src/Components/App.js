@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Comparator from './Comparator/Comparator'
 import Home from './Home/Home'
 import Tl from './Tl/Tl';
-import Filters from './Filters/Filters'
 import Map from './Map/Map'
 import Intro from './Intro/Intro';
 import Mobile from './Mobile/Mobile'
@@ -73,14 +72,7 @@ class App extends Component {
             <Intro/>
             <Router>
             <Route path="/" component={Home} />
-                <Route path="/timeline/" component={() => (<Fragment>
-                    <Tl data={this.state.timeline}/>
-                    <Filters
-                        setAge={this.setAge}
-                        setFields={this.setFields}
-                        setGender={this.setGender}
-                    />
-                </Fragment>)}/>
+                <Route path="/timeline/" component={Tl}/>
                 <Route path="/map/" component={Map} />
                 <Route path="/comparator/" component={Comparator} />
             </Router>

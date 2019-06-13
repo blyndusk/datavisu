@@ -17,9 +17,7 @@ class MapFilters extends Component {
             ],
         }
     }
-    componentDidMount = () => {
-        this.getCategories()
-    }
+    componentDidMount = () => this.getCategories();
     getCategories = () => {
         axios.get(this.state.baseUrl + this.state.type[2])
             .then(res => {
@@ -29,8 +27,6 @@ class MapFilters extends Component {
             })
             .catch(err => console.log(err))
     }
-    
-    
     render() {
         return <ul className="MapFilters">
             <h3 className="MapFilters__title">Prizes</h3> 
@@ -42,7 +38,7 @@ class MapFilters extends Component {
                 name={field.category}
                 label={field.category === 'all' ? '' : field.category}
             />)}
-         </ul>
+        </ul>
     }
 }
 
