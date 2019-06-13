@@ -1,6 +1,42 @@
 .ParityTemplate {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    &:first-child {
+        span {
+            bottom: 8px;
+        }
+        svg {
+            bottom: 50px !important;
+        }
+    }
+    &:last-child {
+        span {
+            top: 8px;
+        }
+        svg {
+            top: 50px !important;
+        }
+    }
+    span {
+        position: absolute;
+        display: flex;
+        font-size: 20px;
+        color: $content;
+        i {
+            &:first-child {
+                color: #152b65;
+            }
+            &:last-child {
+                color: #21d386;
+            }
+        }
+    }
+    svg {
+        stroke-width: 30;
+        fill: none;
+        .men {
+            stroke: #152b65;
+        }
+        .women { 
+            stroke: #21d386;
+        }
+    }
 }
