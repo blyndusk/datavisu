@@ -1,18 +1,6 @@
-
 import React, { Component } from 'react';
-import axios from 'axios';
 
 class ComparatorInput extends Component {
-   constructor(props) {
-       super(props); 
-       
-   }
-    componentDidMount = () => {
-        console.log(this.props.codes)
-    }
-    
-    
-    
     render() {
         return <form className="ComparatorInput" action="/action_page.php" method="get">
 
