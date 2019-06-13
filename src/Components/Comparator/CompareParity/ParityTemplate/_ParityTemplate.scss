@@ -1,6 +1,6 @@
 .ParityTemplate {
     &:first-child {
-        span {
+        .ParityTemplate__items {
             bottom: 8px;
         }
         svg {
@@ -8,25 +8,11 @@
         }
     }
     &:last-child {
-        span {
+        .ParityTemplate__items {
             top: 8px;
         }
         svg {
-            top: 50px !important;
-        }
-    }
-    span {
-        position: absolute;
-        display: flex;
-        font-size: 20px;
-        color: $content;
-        i {
-            &:first-child {
-                color: #152b65;
-            }
-            &:last-child {
-                color: #21d386;
-            }
+            top: 48px !important;
         }
     }
     svg {
@@ -37,6 +23,38 @@
         }
         .women { 
             stroke: #21d386;
+        }
+    }
+
+    &__items {
+        position: absolute;
+        display: flex;
+        font-size: 20px;
+        color: $content;
+    }
+    &__item {
+        display: flex;
+        align-items: center;
+        &:first-child {
+            padding-right: 12px;
+            margin-right: 12px;
+            border-right: 1px solid rgba(255, 255, 255, .3);
+            .ParityTemplate__number {
+                margin-right: 8px;
+            }
+        }
+        &:last-child {
+            .ParityTemplate__number {
+                margin-left: 8px;
+            }
+        }
+    }
+    &__icon {
+        &:first-child {
+            color: #152b65;
+        }
+        &:last-child {
+            color: #21d386;
         }
     }
 }

@@ -1,12 +1,16 @@
 .UniversitiesTemplate {
     svg {
         g {
-            stroke-width: 70px;
-            width: 70px;
             text {
-                fill: #fff;
-                font-size: 15px;
+                fill: $content;
+                font-size: 14px;
                 text-anchor: middle;
+                &:nth-child(2) {
+                    font-weight: 500;
+                }
+            }
+            line {
+                stroke-width: 70px;
             }
             &:nth-child(1) line {
                 stroke: #4db6ac

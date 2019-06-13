@@ -47,7 +47,7 @@ class CompareAge extends Component {
         avagerageAge[genderCode] = Math.floor(ageTotal / data.length)
     }
     render() {
-        return <section className="CompareAge">   
+        return <section className="CompareAge Comparator__section">   
             <AgeTemplate
                 country={this.state.firstCountry}
                 order={0}
