@@ -1,35 +1,37 @@
-# Docs 
+# Documentation
 
-## Technos choices
+## Choix fonctionnelles
 
 ### Back-end
 
-- symfony/api-platform :
-    - structures de données simplifiées et  définies
-    - génération de routes et de filtres automatique
-    - requêtes automatisées
-    - grosse communauté
-- MySQL:
-    - base de données relationnel
-    - grosse communauté
+**Repository**: [backend-unknowngenius](https://github.com/AmauryFaveriel/backend-unknowngenius)
+
+- `symfony / api-platform` :
+  - structures de données **définies** et **simplifiées**
+  - génération de **routes** et de **filtres** automatique
+  - requêtes **automatisées**
+  - **grosse** communauté
+- `MySQL` :
+  - base de données **relationnelle**
+  - **grosse** communauté
 
 ### Front-end
 
-- React:
-    - structure OOP
-    - virtual dom
-    - grosse communauté
-- react router dom
-    - gestion du router, des routes et des liens sous forme de component
-- axios:
-    - requete get / post simplifiée
-    - gestion des params 
-    - grosse communauté
+- `React`:
+  - structure **orientée-objet**
+  - **virtual** DOM
+  - **grosse** communauté
+- `react-router-dom`:
+  - gestion du **router**, des **routes** et des **liens** sous forme de **component**
+- **axios**:
+  - **requête** get / post simplifiée
+  - gestion des **paramètres** de l'**API**
+    - **grosse** communauté
 
-## DB structure
+## Structure de base de données
 
 ![db strucure](./db_schema.png)
 
 ## Données brutes
 
-=> [data](./data.json)
+> [docs/data.json](./data.json)
