@@ -5,6 +5,7 @@
             text {
                 fill: $content;
                 font-size: 15px;
+                text-anchor: middle;
             }
             &:nth-child(1) line {
                 stroke: #dce775

@@ -1,7 +1,15 @@
 .AgeTemplate {
     svg {
+        width: 131px;
         g {
-            stroke-width: 20px;
+            stroke-width: 36px;
+            transform: translateX(100px);
+            &:first-child {
+                transform: translateX(-6px);
+            }
+            &:last-child {
+                transform: translateX(37px);
+            }
             text {
                 fill: #fff;
                 font-size: 15px;

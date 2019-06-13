@@ -41,7 +41,7 @@ class CompareFields extends Component {
     }
     
     render() {
-        return <section className="CompareFields">   
+        return <section className="CompareFields Comparator__section">   
             <FieldTemplate
                 country={this.state.firstCountry}
                 order={0}
