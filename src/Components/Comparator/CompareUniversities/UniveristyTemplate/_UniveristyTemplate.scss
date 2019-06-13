@@ -2,9 +2,11 @@
     svg {
         g {
             stroke-width: 70px;
+            width: 70px;
             text {
                 fill: #fff;
                 font-size: 15px;
+                text-anchor: middle;
             }
             &:nth-child(1) line {
                 stroke: #4db6ac

@@ -65,7 +65,6 @@ class CompareUniversities extends Component {
     }
     render() {
         return <section className="CompareUniversities">   
-            <h2>CompareUniversities</h2>
             <UniversityTemplate
                 country={this.state.firstCountry}
                 order={0}
