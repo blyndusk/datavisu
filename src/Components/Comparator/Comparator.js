@@ -194,7 +194,6 @@ class Comparator extends Component {
     }
     onInputChanged = (e, index) => {
         if (e.target.value.length === 2 && this.state.codes.indexOf(e.target.value.toUpperCase()) > -1) {
-            console.log('inputcode', e.target.value);
             const newCode = e.target.value
             this.setState(prevState => {
                 let countries = Object.assign({}, prevState.countries);
