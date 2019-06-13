@@ -4,9 +4,10 @@ import TlYear from './TlYear/TlYear';
 import TlPrizes from './TlYear/TlPrizes/TlPrizes';
 import TlCategory from './TlYear/TlPrizes/TlCategory/TlCategory';
 import TlPriceWinner from './TlYear/TlPrizes/TlCategory/TlPriceWinner/TlPriceWinner'
-import Pop from './Pop/Pop'
+// import Pop from './Pop/Pop'
 import Nav from '../Nav/Nav';
 import Compare from './../Compare/Compare';
+import axios from 'axios';
 
 class Timeline extends Component {
     constructor(props) {
@@ -32,8 +33,14 @@ class Timeline extends Component {
             },
             infos: {
 
-            }
-            
+            },
+            baseUrl: 'http://localhost:8000/api/',
+            // 2 types of routes
+            type: [
+                'people',
+                'prices'
+            ],
+            data: []
         }
         // total length of the timeline
         this.totalLength = 0;
@@ -60,7 +67,32 @@ class Timeline extends Component {
 
     }
     componentDidMount = () => {
-        console.log(this.props)
+        axios.get(this.state.baseUrl + this.state.type[1])
+            .then(res => {
+                this.setState({
+                    data: res.data["hydra:member"]
+                }, () => {
+                    console.log(this.state.data)
+                    const newData = {}
+                    this.state.data.map((x, i) => {
+                        console.log(x)
+                        
+                        // if (newData[i]in newData[i]) 
+                        
+                        // if field exist in fields, increment it by 1
+                        if (x.year in newData) {
+                            const test = newData[x.year]
+                            test.push(x.idpeople)
+                            newData[x.year] = test
+                        }
+                        // else, set to 1
+                        else newData[x.year] = [x.idpeople]
+                    })
+                    console.log(newData)
+                })
+            })
+            .catch(err => console.error(err))
+        
         this.setState({svg : { w: this.props.data.length * 10, h: 200}})
     } 
     
@@ -268,7 +300,7 @@ class Timeline extends Component {
                 {this.resetTlParams()}
                 {this.generateTimeline()}
             </svg>
-            <Pop data={this.state.infos}/>
+            {/* <Pop data={this.state.infos}/> */}
         </Fragment>
     }
 }
