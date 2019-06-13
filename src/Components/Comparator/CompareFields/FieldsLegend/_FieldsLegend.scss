@@ -1,0 +1,79 @@
+.Comparator {
+    &__legend {
+        position: absolute;
+        top: 109px;
+        left: 50%;
+        transform: translateX(-49%);
+        display: flex;
+        flex-direction: column;
+    }
+    &__dots {
+        position: relative;
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+        &:after {
+            position: absolute;
+            width: 96%;
+            height: 2px;
+            content: '';
+            background: rgba(255, 255, 255, .1);
+            z-index: -1;
+        }
+    }
+    &__dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        &:not(:last-child) {
+            margin-right: 20px;
+        }
+        &:first-child {
+            background: #dce775;
+        }
+        &:nth-child(2) {
+            background: #aed581;
+        }
+        &:nth-child(3) {
+            background: #81c784;
+        }
+        &:nth-child(4) {
+            background: #4db6ac;
+            
+        }
+        &:nth-child(5) {
+            background: #4dd0e1;
+            
+        }
+        &:last-child {
+            background: #4fc3f7;
+        }
+    }
+    &__labels {
+        display: flex;
+        align-items: center;
+        margin-left: -4px;
+    }
+    &__label {
+        font-size: 9px;
+        font-weight: 500;
+        color: $content;
+        text-transform: uppercase;
+        &:first-child {
+            margin-right: 8px;
+        }
+        &:nth-child(2) {
+            margin-right: 8px;
+        }
+        &:nth-child(3) {
+            margin-right: 12px;
+        }
+        &:nth-child(4) {
+            margin-right: 14px;
+        }
+        &:nth-child(5) {
+            margin-right: 14px;
+        }
+    }
+    
+}
