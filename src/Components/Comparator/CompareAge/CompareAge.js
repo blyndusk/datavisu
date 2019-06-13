@@ -48,6 +48,7 @@ class CompareAge extends Component {
     }
     render() {
         return <section className="CompareAge Comparator__section">   
+            <h3 className="Comparator__subtitle">Average age</h3>
             <AgeTemplate
                 country={this.state.firstCountry}
                 order={0}

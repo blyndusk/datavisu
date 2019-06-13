@@ -245,6 +245,7 @@ class Comparator extends Component {
                 firstCountryData={this.state.firstCountryData}
                 secondCountryData={this.state.secondCountryData}
             />
+            <button className="Comparator__close"></button>
             <ComparatorInput
                 codes={this.state.codes}
                 code={this.state.countries.second.code}

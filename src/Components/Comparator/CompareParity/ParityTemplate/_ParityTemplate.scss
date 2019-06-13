@@ -1,5 +1,5 @@
 .ParityTemplate {
-    &:first-child {
+    &:nth-child(2) {
         .ParityTemplate__items {
             bottom: 8px;
         }
@@ -13,6 +13,25 @@
         }
         svg {
             top: 48px !important;
+        }
+        .ParityTemplate__percent {
+            top: 130px;
+            bottom: auto !important;
+        }
+    }
+    &__percent {
+        position: absolute;
+        bottom: 130px;
+        font-size: 12px;
+        color: $content;
+        text-transform: uppercase;
+        &:first-child {
+            left: 30px;
+            text-align: right;
+        }
+        &:last-child {
+            right: 10px;
+            text-align: left;
         }
     }
     svg {
@@ -51,10 +70,10 @@
     }
     &__icon {
         &:first-child {
-            color: #152b65;
+            color: #21d386;
         }
         &:last-child {
-            color: #21d386;
+            color: #152b65;
         }
     }
 }
