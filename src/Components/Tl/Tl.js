@@ -4,21 +4,22 @@ import TlYear from './TlYear/TlYear';
 import TlPrizes from './TlYear/TlPrizes/TlPrizes';
 import TlCategory from './TlYear/TlPrizes/TlCategory/TlCategory';
 import TlPriceWinner from './TlYear/TlPrizes/TlCategory/TlPriceWinner/TlPriceWinner'
-import Pop from './Pop/Pop'
+// import Pop from './Pop/Pop'
 import Nav from '../Nav/Nav';
 import Compare from './../Compare/Compare';
+import axios from 'axios';
 
 class Timeline extends Component {
     constructor(props) {
         super(props);
         this.state = {
             svg: {
-                w: 200,
+                w: 1000,
                 h: 200
             },
             line: {
-                inc: 20,
-                multiplier: 20
+                inc: 12,
+                multiplier: 60
             },
             dot: {
                 inc: 10,
@@ -32,8 +33,15 @@ class Timeline extends Component {
             },
             infos: {
 
-            }
-            
+            },
+            baseUrl: 'http://localhost:8000/api/',
+            // 2 types of routes
+            type: [
+                'people',
+                'prices'
+            ],
+            data: [],
+            newData: {}
         }
         // total length of the timeline
         this.totalLength = 0;
@@ -60,12 +68,45 @@ class Timeline extends Component {
 
     }
     componentDidMount = () => {
-        console.log(this.props)
+        axios.get(this.state.baseUrl + this.state.type[1])
+            .then(res => {
+                this.setState({
+                    data: res.data["hydra:member"]
+                }, () => {
+                    console.log(this.state.data)
+                    const newData = {}
+                    this.state.data.map((x, i) => {
+                        
+                        // if field exist in fields, increment it by 1
+                        if (x.year in newData) {
+                            const test = newData[x.year]
+                            test.push(x.idpeople)
+                            newData[x.year] = test
+                        }
+                        // else, set to 1
+                        else newData[x.year] = [x.idpeople]
+                    })
+                    
+                    
+                    Object.keys(newData).map(key => {
+                        let total = 0;
+                        newData[key].map(x => total += x.length)
+                        newData[key].total = total
+                    });
+
+                    this.setState({
+                        newData
+                    }, () => console.log(this.state.newData))
+                })
+            })
+            .catch(err => console.error(err))
+        
         this.setState({svg : { w: this.props.data.length * 10, h: 200}})
     } 
     
     // generation of price winners (dots)
     generatePriceWinners = (parent, i, j) => parent.map((pricewinner, k) => {
+        // console.log(pricewinner)
         // update the cdot y position by one dot incrementation
         this.dot.y += this.state.dot.inc;
         // push a <TlPriceWinner/> for each price winner
@@ -75,15 +116,15 @@ class Timeline extends Component {
             // unique key
             key={`${i}${j}${k}`} 
             // the content is a SVG circle
-            content={pricewinner.data.gender ? <circle 
+            content={pricewinner.gender ? <circle 
                 className="dot" 
                 // unique id
                 data-id={`${i}${j}${k}`}
                 // category
-                data-age={pricewinner.data.age}
-                data-coutry={pricewinner.data.coutry}
-                data-field={pricewinner.data.field}
-                data-gender={pricewinner.data.gender}
+                data-age={'duh'}
+                data-coutry={pricewinner.idcountry.name}
+                data-field={'field'}
+                data-gender={pricewinner.gender}
                 // position
                 cx={this.dot.x}
                 cy={this.state.svg.h - this.dot.y}
@@ -110,9 +151,10 @@ class Timeline extends Component {
             />}
         />);
     })
-    // generation of categories (<g><TlPrizeWinner/></g>)
-    generateCategories = (parent, i) => parent.prizeList.map((category, j) => {
+    // // generation of categories (<g><TlPrizeWinner/></g>)
+    generateCategories = (parent, i) => parent.map((category, j) => {
         if (category.length !== 0) {
+            console.log(category)
             // increment the total length with each prize winners in a category length
             this.totalLength += category.length;
             // update the dot y position by one dot incrementation, again
@@ -156,17 +198,18 @@ class Timeline extends Component {
         />)
     }
     // generation of all the timeline
-    generateTimeline = () => this.props.data.map((year, i) => {
+    generateTimeline = () => Object.keys(this.state.newData).map((year, i) => {
         // reset the prizes array
         this.prizesArr = [];
-        this.generatePrizes(year, i)
+        this.generatePrizes(this.state.newData[year], i)
+        console.log(this.prizesArr)
         return (
             // group all categories in a year
             <TlYear 
                 // unique key & id
                 key={i}
                 data-id={i}
-                year={year.year}
+                year={year}
                 // the content is the line & all the <TlPrizes/>
                 content={<Fragment>
                     <line 
@@ -174,9 +217,9 @@ class Timeline extends Component {
                         data-id={i}
                         // position
                         x1={this.line.x} 
-                        y1={this.line.y}
+                        y1={(15 - this.state.newData[year].total) * 10 + 20}
                         x2={this.line.x} 
-                        y2={this.state.svg.h} 
+                        y2={200} 
                     />
                     {this.prizesArr}
                 </Fragment>}
@@ -260,15 +303,16 @@ class Timeline extends Component {
         return <Fragment>
             <Nav/>
             <Compare/>
+            <div className="timelineBox">
             <svg 
                 id="Timeline"
-                width={this.props.data.length * 20}
                 height={this.state.svg.h}
             >
                 {this.resetTlParams()}
                 {this.generateTimeline()}
             </svg>
-            <Pop data={this.state.infos}/>
+            </div>
+            {/* <Pop data={this.state.infos}/> */}
         </Fragment>
     }
 }
