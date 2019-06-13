@@ -18,6 +18,7 @@ class ComparatorInput extends Component {
 
         {/* onClick={this.renderClick}></div> */}
             <input className="ComparatorInput__search" list="browsers" name="browser" placeholder={this.props.code} onClick={(e) => {
+                e.target.value = '';
                 e.stopPropagation(); 
                 e.target.parentNode.classList.toggle('ComparatorInput--active')
             }} onChange={(e) => this.props.onInputChanged(e)}/>
