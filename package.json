@@ -1,6 +1,6 @@
 {
   "name": "unknown-genius",
-  "version": "0.12.0",
+  "version": "0.13.0",
   "private": true,
   "homepage": "https://blyndusk.github.io/unknown-genius",
   "dependencies": {
@@ -32,7 +32,6 @@
   ],
   "description": "⏱ A 3month-project for @ecolehetic, with the aim of creating a data visualisation website, using @reactjs.",
   "main": "index.js",
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/blyndusk/unknown-genius.git"
