@@ -16,54 +16,62 @@
 
 @import "../Components/App";
 
-// ===== comparator =======
+// ===== brand ======
+@import "../Components/Brand/Brand";
+
+// ===== comparator ======
 @import "../Components/Comparator/Comparator";
+// === input
+@import "../Components/Comparator/ComparatorInput/ComparatorInput";
+// === age
 @import "../Components/Comparator/CompareAge/CompareAge";
 @import "../Components/Comparator/CompareAge/AgeTemplate/AgeTemplate";
+// === fields
 @import "../Components/Comparator/CompareFields/CompareFields";
+@import "../Components/Comparator/CompareFields/FieldTemplate/FieldTemplate";
+// === parity
 @import "../Components/Comparator/CompareParity/CompareParity";
 @import "../Components/Comparator/CompareParity/ParityTemplate/ParityTemplate";
+// === universities
 @import "../Components/Comparator/CompareUniversities/CompareUniversities";
-@import "../Components/Comparator/CompareFields/FieldTemplate/FieldTemplate";
 @import "../Components/Comparator/CompareUniversities/UniveristyTemplate/UniveristyTemplate";
-@import "../Components/Comparator/ComparatorInput/ComparatorInput";
-// ===== filters =======
-@import "../Components/Filters/Filters";
 
-// ===== comparator =======
-@import "../Components/Home/Home";
-
-// ===== intro =======
-@import "../Components/Intro/Intro";
-
-// ===== loader =======
-@import "../Components/Loader/Loader";
-
-// ===== nav =======
-@import "../Components/Nav/Nav";
-
-// ===== compare =======
+// ===== compare ======
 @import "../Components/Compare/Compare";
 
-// ===== brand =======
-@import "../Components/Brand/Brand";
+// ===== comparator ======
+@import "../Components/Home/Home";
+
+// ===== intro =====
+@import "../Components/Intro/Intro";
 
 // ===== map =======
 @import "../Components/Map/Map";
+// === filters
 @import "../Components/Map/MapFilters/MapFilters";
 @import "../Components/Map/MapFilters/MapFilter/MapFilter";
+// === legend
 @import "../Components/Map/MapLegend/MapLegend";
+// === pop
 @import "../Components/Map/MapPop/MapPop";
+// === svg
 @import "../Components/Map/MapSVG/MapSVG";
+
+// ==== mobile =====
+@import "../Components/Mobile/Mobile";
+
+// ===== nav ======
+@import "../Components/Nav/Nav";
 
 // ===== timeline =======
 @import "../Components/Tl/Tl";
-
-// ===== pop =======
+// === pop
 @import "../Components/Tl/Pop/Pop";
+// === year
 @import "../Components/Tl/TlYear/TlYear";
+// === prizes
 @import "../Components/Tl/TlYear/TlPrizes/TlPrizes";
+// === category
 @import "../Components/Tl/TlYear/TlPrizes/TlCategory/TlCategory";
+// === pricewinner
 @import "../Components/Tl/TlYear/TlPrizes/TlCategory/TlPriceWinner/TlPrizeWinner";
-
-@import "../Components/Mobile/Mobile"
