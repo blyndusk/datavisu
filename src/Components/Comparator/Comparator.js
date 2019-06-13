@@ -91,6 +91,16 @@ class Comparator extends Component {
         console.log('prev', prevState.countries.first.code)
         if (this.state.firstCountryCode !== prevState.firstCountryCode ||
             this.state.secondCountryCode !== prevState.secondCountryCode) {
+                this.setState(prevState => {
+                    let countries = Object.assign({}, prevState.countries);
+                    // set response to code,  
+                    countries.first.parity.total = 0;
+                    // total of the country
+                    countries.second.parity.total = 0;
+                    // & global total
+                    countries.total = 0;
+                    return { countries };
+                })
             const codes = [
                 [
                     this.state.countries.first.code,
