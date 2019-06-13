@@ -13,7 +13,15 @@ class BrandNewTl extends Component {
                 'prices', 
                 'categories'
             ],
-            data: []
+            data: [],
+            dates: [
+                "1901-1920",
+                "1921-1940",
+                "1941-1960",
+                "1961-1980",
+                "1981-2000",
+                "2001-2018",
+            ]
         }
     }
     componentDidMount = () => {
@@ -40,6 +48,7 @@ class BrandNewTl extends Component {
         return <section className="BrandNewTl">
             {this.state.data.map((woman, i) => <div key={i}>
                 <span>{woman.length}</span>
+                <span>{this.state.dates[i]}</span>
                 <ul>
                     {woman.map((li, i) => {
                         console.log(li)
