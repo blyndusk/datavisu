@@ -1,24 +1,39 @@
 import React, { Component } from 'react';
 
 class ComparatorInput extends Component {
+    toggleClass = (e) => {
+        // empty input
+        e.target.value = '';
+        // stop propagation
+        e.stopPropagation(); 
+        // toggle class
+        e.target.parentNode.classList.toggle('ComparatorInput--active')
+    }
     render() {
-        return <form className="ComparatorInput" action="/action_page.php" method="get">
-
-        {/* onClick={this.renderClick}></div> */}
-            <input className="ComparatorInput__search" list="browsers" name="browser" placeholder={this.props.code} onClick={(e) => {
-                e.target.value = '';
-                e.stopPropagation(); 
-                e.target.parentNode.classList.toggle('ComparatorInput--active')
-            }} onChange={(e) => this.props.onInputChanged(e)}/>
+        return <form className="ComparatorInput">
+            <input 
+                className="ComparatorInput__search"
+                list="countries"
+                name="countries"
+                // props value
+                placeholder={this.props.code}
+                // toggle class on click
+                onClick={this.toggleClass} 
+                // props method on input change
+                onChange={this.props.onInputChanged}
+            />
             <span className="ComparatorInput__icon"></span>
-            <datalist id="browsers">
-                {
-                    this.props.codes.length ? this.props.codes.map(code => <option key={code.code} value={code.code} data-name={code.name} onClick={(e) => {
-                        this.props.getCode(e)
-                    }}/>) : null
-                }
+            <datalist id="countries">
+                {this.props.codes.length ? this.props.codes.map(code => <option 
+                    // for every code, DOM an option
+                    key={code.code}
+                    // same key & value
+                    value={code.code}
+                    // name on dataset
+                    data-name={code.name}
+                />) : null}
             </datalist>
-      </form>
+        </form>
     }
 }
 
