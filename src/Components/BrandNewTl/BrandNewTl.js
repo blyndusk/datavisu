@@ -39,10 +39,13 @@ class BrandNewTl extends Component {
                     else if (year <= 1981 ) data[3].push(woman)
                     else if (year <= 2001 ) data[4].push(woman)
                     else if (year <= 2020 ) data[5].push(woman)
-                    return woman
+                    return woman;
                 })
                 this.setState({ data })
             })
+    }
+    displayWoman = (li) => {
+        console.log(li)
     }
     render() {
         return <section className="BrandNewTl">
@@ -51,8 +54,7 @@ class BrandNewTl extends Component {
                 <span>{this.state.dates[i]}</span>
                 <ul>
                     {woman.map((li, i) => {
-                        console.log(li)
-                        return <li key={i}>{li.firstname}</li>
+                        return <li key={i} onClick={() => this.displayWoman(li)}>{li.firstname}</li>
                     })}
                 </ul>
             </div>)}
