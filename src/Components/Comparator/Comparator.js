@@ -47,7 +47,7 @@ class Comparator extends Component {
             },
             codes:  [],
             // base url for API call
-            baseUrl: 'http://eb73eedf.ngrok.io/api/',
+            baseUrl: 'http://localhost:8000/api/',
             // 2 types of routes
             type: [
                 'people',
@@ -235,6 +235,7 @@ class Comparator extends Component {
                 firstCountryData={this.state.firstCountryData}
                 secondCountryData={this.state.secondCountryData}
             />
+            <button className="Comparator__close"></button>
             <ComparatorInput
                 codes={this.state.codes}
                 code={this.state.countries.second.code}

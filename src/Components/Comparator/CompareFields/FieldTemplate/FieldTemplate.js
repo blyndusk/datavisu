@@ -26,8 +26,10 @@ class FieldTemplate extends Component {
               maxHeight = this.props.country.fields[key] 
             }
             [...document.querySelectorAll('.FieldTemplate')].map(svg => svg.querySelector('svg').style.height = `248px`)
+            console.log(this.props.country.fields);
             inc += 50
             return <g key={key}>
+            
               <text  x={inc} y={this.props.order ? this.props.country.fields[key] * 3  + 24 : 248  - (this.props.country.fields[key] * 3 + 15)} >{this.props.country.fields[key]}</text>
               <line x1={inc} x2={inc} y1={this.props.order ? 0 : 248} y2={this.props.order ? this.props.country.fields[key] * 3 : 248 - (this.props.country.fields[key] * 3)}></line>
             </g>

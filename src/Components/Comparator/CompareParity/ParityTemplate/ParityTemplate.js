@@ -29,20 +29,23 @@ class ParityTemplate extends Component {
     render() {
         const country = this.props.country
         return <div className="ParityTemplate Comparator__template">
+            <span className="ParityTemplate__percent">{country.parity.m.percent}%<br></br>Men</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="182" height="182" style={this.state.svgStyle}>
                 <circle className="men" cy="91" cx="91" r={this.state.rayon}></circle>
                 <circle style={this.state.pathStyle} className="women" cy="91" cx="91" r={this.state.rayon}></circle>
             </svg>
+            
             <div className="ParityTemplate__items">
                 <div className="ParityTemplate__item">
-                    <span className="ParityTemplate__number">{country.parity.m.amount} ({country.parity.m.percent}%)</span>
+                    <span className="ParityTemplate__number">{country.parity.m.amount}</span>
                     <i className="ParityTemplate__icon fas fa-mars"></i>
                 </div>
                 <div className="ParityTemplate__item">
                     <i className="ParityTemplate__icon fas fa-venus"></i>
-                    <span className="ParityTemplate__number">{country.parity.f.amount} ({country.parity.f.percent}%)</span>
+                    <span className="ParityTemplate__number">{country.parity.f.amount}</span>
                 </div>
             </div>
+            <span className="ParityTemplate__percent">{country.parity.f.percent}%<br></br>Women</span>
         </div>
     }
 }
