@@ -1,0 +1,17 @@
+.BrandNewTl {
+    width: 100%;
+    height: 100vh;
+    background: #000;
+    position: fixed;
+    color: #fff;
+    z-index: 2;
+    svg {
+        width: 100%;
+        position: fixed;
+        top: 150px;
+    left: 0;
+    }
+    &:hover ~ .Pop {
+        opacity: 1;
+    }
+}
