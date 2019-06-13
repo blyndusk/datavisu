@@ -23,7 +23,7 @@
   - **grosse** communauté
 - `react-router-dom`:
   - gestion du **router**, des **routes** et des **liens** sous forme de **component**
-- **axios**:
+- `axios`:
   - **requête** get / post simplifiée
   - gestion des **paramètres** de l'**API**
     - **grosse** communauté
