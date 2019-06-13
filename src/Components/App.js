@@ -8,6 +8,7 @@ import Tl from './Tl/Tl';
 import Filters from './Filters/Filters'
 import Map from './Map/Map'
 import Intro from './Intro/Intro';
+import Mobile from './Mobile/Mobile'
 
 class App extends Component {
     constructor(props) {
@@ -68,6 +69,7 @@ class App extends Component {
     }
     render() {
         return <div className="App">
+            <Mobile/>
             <Intro/>
             <Router>
             <Route path="/" component={Home} />
