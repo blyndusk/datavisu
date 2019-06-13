@@ -205,9 +205,15 @@ class Comparator extends Component {
         }
     }  
     render() {
-        return <section className="Comparator">   
+        return <section className="Comparator">
+            <h3 className="Comparator__title">
+                <span className="Comparator__country">USA</span>
+                <span className="Comparator__versus">vs</span>
+                <span className="Comparator__country">France</span>
+            </h3>
             <ComparatorInput
                 codes={this.state.codes}
+                code={this.state.countries.first.code}
                 onInputChanged={(e) => this.onInputChanged(e, 'first')}
             />
             <CompareFields
@@ -228,6 +234,7 @@ class Comparator extends Component {
             />
             <ComparatorInput
                 codes={this.state.codes}
+                code={this.state.countries.second.code}
                 onInputChanged={(e) => this.onInputChanged(e, 'second')}
             />
         </section>

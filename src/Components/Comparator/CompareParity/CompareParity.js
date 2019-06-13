@@ -64,7 +64,7 @@ class CompareParity extends Component {
     }
     setPercent = (amount, totalAmount) => Math.floor((amount / totalAmount) * 100);
     render() {
-        return <section className="CompareParity">
+        return <section className="CompareParity Comparator__section">
             <ParityTemplate
                 country={this.state.firstCountry}
             />
