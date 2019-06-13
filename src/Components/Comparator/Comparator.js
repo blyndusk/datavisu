@@ -187,7 +187,7 @@ class Comparator extends Component {
                     return code
                 })
                 this.setState({
-                    codes
+                    codes: codes.sort()
                 })
             })
             .catch(err => console.log(err))
