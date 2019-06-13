@@ -22,7 +22,7 @@ class UniversitiesTemplate extends Component {
         return <div className="UniversitiesTemplate Comparator__template">
           <svg className="UniversitiesTemplateSvg">
               {
-                this.props.country.sortedUniversities.map(university => {
+                  this.props.country.sortedUniversities.map(university => {
 
                     if (maxHeight < university[1] ) {
                         maxHeight = university[1]
