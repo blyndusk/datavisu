@@ -1,10 +1,10 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import Comparator from './Comparator/Comparator'
 import Home from './Home/Home'
-import Tl from './Tl/Tl';
+import BrandNewTl from './BrandNewTl/BrandNewTl'
 import Map from './Map/Map'
 import Intro from './Intro/Intro';
 import Mobile from './Mobile/Mobile'
@@ -72,7 +72,7 @@ class App extends Component {
             <Intro/>
             <Router>
             <Route path="/" component={Home} />
-                <Route path="/timeline/" component={Tl}/>
+                <Route path="/timeline/" component={BrandNewTl}/>
                 <Route path="/map/" component={Map} />
                 <Route path="/comparator/" component={Comparator} />
             </Router>
