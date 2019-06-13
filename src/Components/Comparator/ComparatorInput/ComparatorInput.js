@@ -17,7 +17,10 @@ class ComparatorInput extends Component {
         return <form className="ComparatorInput" action="/action_page.php" method="get">
 
         {/* onClick={this.renderClick}></div> */}
-            <input className="ComparatorInput__search" list="browsers" name="browser" placeholder={this.props.code} onClick={(e) => e.target.parentNode.classList.toggle('ComparatorInput--active')} onChange={(e) => this.props.onInputChanged(e)}/>
+            <input className="ComparatorInput__search" list="browsers" name="browser" placeholder={this.props.code} onClick={(e) => {
+                e.stopPropagation(); 
+                e.target.parentNode.classList.toggle('ComparatorInput--active')
+            }} onChange={(e) => this.props.onInputChanged(e)}/>
             <span className="ComparatorInput__icon"></span>
             <datalist id="browsers">
                 {

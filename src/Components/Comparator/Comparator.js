@@ -205,7 +205,10 @@ class Comparator extends Component {
         }
     }  
     render() {
-        return <section className="Comparator">
+        return <section className="Comparator" onClick={(e) => {
+            e.stopPropagation();
+            [...document.querySelectorAll('form')].map(form => form.classList.remove('ComparatorInput--active'))
+        }}>
             <h3 className="Comparator__title">
                 <span className="Comparator__country">USA</span>
                 <span className="Comparator__versus">vs</span>
