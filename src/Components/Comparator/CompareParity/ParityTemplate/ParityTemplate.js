@@ -35,12 +35,12 @@ class ParityTemplate extends Component {
             </svg>
             <div className="ParityTemplate__items">
                 <div className="ParityTemplate__item">
-                    <span className="ParityTemplate__number">{country.parity.m.amount}</span>
+                    <span className="ParityTemplate__number">{country.parity.m.amount} ({country.parity.m.percent}%)</span>
                     <i className="ParityTemplate__icon fas fa-mars"></i>
                 </div>
                 <div className="ParityTemplate__item">
                     <i className="ParityTemplate__icon fas fa-venus"></i>
-                    <span className="ParityTemplate__number">{country.parity.f.amount}</span>
+                    <span className="ParityTemplate__number">{country.parity.f.amount} ({country.parity.f.percent}%)</span>
                 </div>
             </div>
         </div>

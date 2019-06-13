@@ -210,9 +210,9 @@ class Comparator extends Component {
             [...document.querySelectorAll('form')].map(form => form.classList.remove('ComparatorInput--active'))
         }}>
             <h3 className="Comparator__title">
-                <span className="Comparator__country">USA</span>
+                <span className="Comparator__country">{this.state.countries.first.code}</span>
                 <span className="Comparator__versus">vs</span>
-                <span className="Comparator__country">France</span>
+                <span className="Comparator__country">{this.state.countries.second.code}</span>
             </h3>
             <ComparatorInput
                 codes={this.state.codes}
