@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react';
+import BrandNewPop from './BrandNewPop/BrandNewPop'
 import axios from 'axios';
 
 class BrandNewTl extends Component {
@@ -21,7 +22,8 @@ class BrandNewTl extends Component {
                 "1961-1980",
                 "1981-2000",
                 "2001-2018",
-            ]
+            ],
+            woman: {}
         }
     }
     componentDidMount = () => {
@@ -45,7 +47,9 @@ class BrandNewTl extends Component {
             })
     }
     displayWoman = (li) => {
-        console.log(li)
+        this.setState({
+            woman: li
+        })
     }
     render() {
         return <section className="BrandNewTl">
@@ -58,6 +62,9 @@ class BrandNewTl extends Component {
                     })}
                 </ul>
             </div>)}
+            <BrandNewPop
+                data={this.state.woman}
+            />
         </section>
     }
 }
