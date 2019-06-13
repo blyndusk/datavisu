@@ -216,7 +216,7 @@ class Timeline extends Component {
                         x1={this.line.x} 
                         y1={this.line.y}
                         x2={this.line.x} 
-                        y2={(15 - this.state.newData[year].total) * 10 + 10} 
+                        y2={(15 - this.state.newData[year].total) * 10 + 20} 
                     />
                     {/* {this.prizesArr} */}
                 </Fragment>}
@@ -300,14 +300,15 @@ class Timeline extends Component {
         return <Fragment>
             <Nav/>
             <Compare/>
+            <div className="timelineBox">
             <svg 
                 id="Timeline"
-                width={this.props.data.length * 20}
                 height={this.state.svg.h}
             >
                 {this.resetTlParams()}
                 {this.generateTimeline()}
             </svg>
+            </div>
             {/* <Pop data={this.state.infos}/> */}
         </Fragment>
     }
