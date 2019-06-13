@@ -105,73 +105,75 @@ class Timeline extends Component {
     } 
     
     // generation of price winners (dots)
-    // generatePriceWinners = (parent, i, j) => parent.map((pricewinner, k) => {
-    //     // update the cdot y position by one dot incrementation
-    //     this.dot.y += this.state.dot.inc;
-    //     // push a <TlPriceWinner/> for each price winner
-    //     this.rect.x = this.dot.x - 4;
-    //     this.rect.y = (this.state.svg.h - this.dot.y) - 4;
-    //     return this.prizeWinnersArr.push(<TlPriceWinner 
-    //         // unique key
-    //         key={`${i}${j}${k}`} 
-    //         // the content is a SVG circle
-    //         content={pricewinner.data.gender ? <circle 
-    //             className="dot" 
-    //             // unique id
-    //             data-id={`${i}${j}${k}`}
-    //             // category
-    //             data-age={pricewinner.data.age}
-    //             data-coutry={pricewinner.data.coutry}
-    //             data-field={pricewinner.data.field}
-    //             data-gender={pricewinner.data.gender}
-    //             // position
-    //             cx={this.dot.x}
-    //             cy={this.state.svg.h - this.dot.y}
-    //             // rayon
-    //             r={this.state.dot.scaleOut}
-    //             // mouse events
-    //             onMouseOver={(e) => this.dotMouseOver(e)}
-    //             onMouseOut={(e) => this.dotMouseOut(e)}
-    //         /> : <rect 
-    //             className="dot" 
-    //             // unique id
-    //             data-id={`${i}${j}${k}`}
-    //             // category
-    //             data-age={pricewinner.data.age}
-    //             data-coutry={pricewinner.data.coutry}
-    //             data-field={pricewinner.data.field}
-    //             data-gender={pricewinner.data.gender}
-    //             width="8"
-    //             height="8"
-    //             x={this.rect.x}
-    //             y={this.rect.y}
-    //             onMouseOver={(e) => this.dotMouseOver(e)}
-    //             onMouseOut={(e) => this.dotMouseOut(e)}
-    //         />}
-    //     />);
-    // })
+    generatePriceWinners = (parent, i, j) => parent.map((pricewinner, k) => {
+        // console.log(pricewinner)
+        // update the cdot y position by one dot incrementation
+        this.dot.y += this.state.dot.inc;
+        // push a <TlPriceWinner/> for each price winner
+        this.rect.x = this.dot.x - 4;
+        this.rect.y = (this.state.svg.h - this.dot.y) - 4;
+        return this.prizeWinnersArr.push(<TlPriceWinner 
+            // unique key
+            key={`${i}${j}${k}`} 
+            // the content is a SVG circle
+            content={pricewinner.gender ? <circle 
+                className="dot" 
+                // unique id
+                data-id={`${i}${j}${k}`}
+                // category
+                data-age={'duh'}
+                data-coutry={pricewinner.idcountry.name}
+                data-field={'field'}
+                data-gender={pricewinner.gender}
+                // position
+                cx={this.dot.x}
+                cy={this.state.svg.h - this.dot.y}
+                // rayon
+                r={this.state.dot.scaleOut}
+                // mouse events
+                onMouseOver={(e) => this.dotMouseOver(e)}
+                onMouseOut={(e) => this.dotMouseOut(e)}
+            /> : <rect 
+                className="dot" 
+                // unique id
+                data-id={`${i}${j}${k}`}
+                // category
+                data-age={pricewinner.data.age}
+                data-coutry={pricewinner.data.coutry}
+                data-field={pricewinner.data.field}
+                data-gender={pricewinner.data.gender}
+                width="8"
+                height="8"
+                x={this.rect.x}
+                y={this.rect.y}
+                onMouseOver={(e) => this.dotMouseOver(e)}
+                onMouseOut={(e) => this.dotMouseOut(e)}
+            />}
+        />);
+    })
     // // generation of categories (<g><TlPrizeWinner/></g>)
-    // generateCategories = (parent, i) => parent.prizeList.map((category, j) => {
-    //     if (category.length !== 0) {
-    //         // increment the total length with each prize winners in a category length
-    //         this.totalLength += category.length;
-    //         // update the dot y position by one dot incrementation, again
-    //         this.dot.y += this.state.dot.inc;
-    //         // reset the prize winners array
-    //         this.prizeWinnersArr = [];
-    //         // call the above method
-    //         this.generatePriceWinners(category, i, j);
-    //     }
-    //     // push a <TlCategory/> for each category
-    //     return this.CategoriesArr.push(category.length !== 0 ? <TlCategory
-    //         // unique key & id
-    //         key={`${i}${j}`}
-    //         id={`${i}${j}`}
-    //         // the content is all the <TlPriceWinner/>
-    //         content={this.prizeWinnersArr}
-    //     /> : null)
-    // })
-    // // generation of all the prizes (<g><TlCategory/></g>)
+    generateCategories = (parent, i) => parent.map((category, j) => {
+        if (category.length !== 0) {
+            console.log(category)
+            // increment the total length with each prize winners in a category length
+            this.totalLength += category.length;
+            // update the dot y position by one dot incrementation, again
+            this.dot.y += this.state.dot.inc;
+            // reset the prize winners array
+            this.prizeWinnersArr = [];
+            // call the above method
+            this.generatePriceWinners(category, i, j);
+        }
+        // push a <TlCategory/> for each category
+        return this.CategoriesArr.push(category.length !== 0 ? <TlCategory
+            // unique key & id
+            key={`${i}${j}`}
+            id={`${i}${j}`}
+            // the content is all the <TlPriceWinner/>
+            content={this.prizeWinnersArr}
+        /> : null)
+    })
+    // generation of all the prizes (<g><TlCategory/></g>)
     generatePrizes = (parent, i) => {
         // reset the total length
         this.totalLength = 0;
@@ -183,7 +185,7 @@ class Timeline extends Component {
         // reset the categories array
         this.CategoriesArr = [];
         // call the above method
-        // this.generateCategories(parent, i)
+        this.generateCategories(parent, i)
         // reset the line y position
         this.line.y = this.state.svg.h - this.totalLength * this.state.line.multiplier;
         // push a <TlPrize/> for each prize
@@ -199,7 +201,8 @@ class Timeline extends Component {
     generateTimeline = () => Object.keys(this.state.newData).map((year, i) => {
         // reset the prizes array
         this.prizesArr = [];
-        this.generatePrizes(year, i)
+        this.generatePrizes(this.state.newData[year], i)
+        console.log(this.prizesArr)
         return (
             // group all categories in a year
             <TlYear 
@@ -214,11 +217,11 @@ class Timeline extends Component {
                         data-id={i}
                         // position
                         x1={this.line.x} 
-                        y1={this.line.y}
+                        y1={(15 - this.state.newData[year].total) * 10 + 20}
                         x2={this.line.x} 
-                        y2={(15 - this.state.newData[year].total) * 10 + 20} 
+                        y2={200} 
                     />
-                    {/* {this.prizesArr} */}
+                    {this.prizesArr}
                 </Fragment>}
             />
         )
