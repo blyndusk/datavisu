@@ -27,13 +27,7 @@ class App extends Component {
             params: {
                 ...params
             },
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-            },
-            proxy: {
-                host: ' http://172.19.120.186',
-                port: 3000
-            }
+            
         })
         .then(res => {
             this.setState({ timeline: res.data})

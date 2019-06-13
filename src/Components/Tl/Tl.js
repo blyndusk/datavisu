@@ -73,10 +73,8 @@ class Timeline extends Component {
                 this.setState({
                     data: res.data["hydra:member"]
                 }, () => {
-                    console.log(this.state.data)
                     const newData = {}
-                    this.state.data.map((x, i) => {
-                        
+                    this.state.data.map(x => {
                         // if field exist in fields, increment it by 1
                         if (x.year in newData) {
                             const test = newData[x.year]
@@ -85,6 +83,7 @@ class Timeline extends Component {
                         }
                         // else, set to 1
                         else newData[x.year] = [x.idpeople]
+                        return x
                     })
                     
                     
@@ -92,11 +91,12 @@ class Timeline extends Component {
                         let total = 0;
                         newData[key].map(x => total += x.length)
                         newData[key].total = total
+                        return key
                     });
 
                     this.setState({
                         newData
-                    }, () => console.log(this.state.newData))
+                    })
                 })
             })
             .catch(err => console.error(err))
@@ -106,7 +106,6 @@ class Timeline extends Component {
     
     // generation of price winners (dots)
     generatePriceWinners = (parent, i, j) => parent.map((pricewinner, k) => {
-        // console.log(pricewinner)
         // update the cdot y position by one dot incrementation
         this.dot.y += this.state.dot.inc;
         // push a <TlPriceWinner/> for each price winner
@@ -154,7 +153,6 @@ class Timeline extends Component {
     // // generation of categories (<g><TlPrizeWinner/></g>)
     generateCategories = (parent, i) => parent.map((category, j) => {
         if (category.length !== 0) {
-            console.log(category)
             // increment the total length with each prize winners in a category length
             this.totalLength += category.length;
             // update the dot y position by one dot incrementation, again
@@ -202,7 +200,6 @@ class Timeline extends Component {
         // reset the prizes array
         this.prizesArr = [];
         this.generatePrizes(this.state.newData[year], i)
-        console.log(this.prizesArr)
         return (
             // group all categories in a year
             <TlYear 

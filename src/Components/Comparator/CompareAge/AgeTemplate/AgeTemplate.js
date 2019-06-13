@@ -11,28 +11,7 @@ class AgeTemplate extends Component {
             }
         }
     } 
-    // componentDidMount() {
-    //     console.log(this.props.country)
-    //     // this.getAverageAge(this.props.country.m)
-    //     // this.getAverageAge(this.props.country.f)
-    // }
-    // UNSAFE_componentWillReceiveProps(nextProps) {
-    //     if(nextProps.country !== this.props.country){
-    //         this.getAverageAge(this.props.country.m)
-    //         this.getAverageAge(this.props.country.f)
-    //       }
-    // }
-    // componentDidUpdate = (prevProps) => {
-    //     console.log(this.props.country)
-    //     // console.log(prevProps.country)
-    //     // console.log(this.props.country)
-    //     if (this.props.country.m !== prevProps.country.m ) {
-    //         console.log('vam')
-    //         this.getAverageAge(this.props.country.m)
-    //         this.getAverageAge(this.props.country.f)
-    //     }
-    // }
-   
+    
     render() {
             let inc = -25;
             let maxHeight = 0;

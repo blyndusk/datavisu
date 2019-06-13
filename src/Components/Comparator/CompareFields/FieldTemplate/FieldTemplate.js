@@ -26,7 +26,6 @@ class FieldTemplate extends Component {
               maxHeight = this.props.country.fields[key] 
             }
             [...document.querySelectorAll('.FieldTemplate')].map(svg => svg.querySelector('svg').style.height = `248px`)
-            console.log(this.props.country.fields);
             inc += 50
             return <g key={key}>
             

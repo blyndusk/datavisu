@@ -14,14 +14,12 @@ class Nav extends Component {
         this.setState({ page: window.location.pathname.replace('/', '')}, () => {
             switch (this.state.page) {
                 case 'map':
-                    console.log('map page')
                     this.setState({
                         mapClass: "Nav__button Nav__button--active",
                         tlClass: "Nav__button"
                     })
                     break;
                 case 'timeline':
-                    console.log('tl page')
                     this.setState({
                         mapClass: "Nav__button",
                         tlClass: "Nav__button Nav__button--active"

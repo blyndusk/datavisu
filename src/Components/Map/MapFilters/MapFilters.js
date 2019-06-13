@@ -25,7 +25,7 @@ class MapFilters extends Component {
             .then(res => {
                 const response = res.data["hydra:member"];
                 response.unshift({category: 'all'})
-                this.setState({data: res.data["hydra:member"]}, () => console.log(this.state.data))
+                this.setState({data: res.data["hydra:member"]})
             })
             .catch(err => console.log(err))
     }

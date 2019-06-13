@@ -6,7 +6,6 @@ import CompareFields from './CompareFields/CompareFields';
 import CompareParity from './CompareParity/CompareParity';
 import CompareUniversities from './CompareUniversities/CompareUniversities';
 import ComparatorInput from './ComparatorInput/ComparatorInput'
-import Nav from '../Nav/Nav';
 import axios from 'axios';
 
 class Comparator extends Component {
@@ -87,8 +86,6 @@ class Comparator extends Component {
         this.getCodes()
     }
     componentDidUpdate(prevProps, prevState) {
-        console.log('actual', this.state.countries.first.code)
-        console.log('prev', prevState.countries.first.code)
         if (this.state.firstCountryCode !== prevState.firstCountryCode ||
             this.state.secondCountryCode !== prevState.secondCountryCode) {
                 this.setState(prevState => {
@@ -191,7 +188,7 @@ class Comparator extends Component {
                 })
                 this.setState({
                     codes
-                }, () => console.log(this.state.codes))
+                })
             })
             .catch(err => console.log(err))
     }
@@ -245,7 +242,7 @@ class Comparator extends Component {
                 firstCountryData={this.state.firstCountryData}
                 secondCountryData={this.state.secondCountryData}
             />
-            <button className="Comparator__close"></button>
+            <button className="Comparator__close" onClick={() => window.history.back()}></button>
             <ComparatorInput
                 codes={this.state.codes}
                 code={this.state.countries.second.code}

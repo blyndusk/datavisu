@@ -38,7 +38,6 @@ class CompareParity extends Component {
      }
     componentDidUpdate = (prevProps) => {
         if ( this.props.countries.total !== prevProps.countries.total ) {
-            console.log('updated')
             // get parity of the 1st country
             this.getParity(this.props.countries.first, "firstCountry")
             // same for the 2nd
