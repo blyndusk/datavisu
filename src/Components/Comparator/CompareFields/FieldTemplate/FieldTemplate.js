@@ -20,7 +20,7 @@ class FieldTemplate extends Component {
         let inc = -25;
         let maxHeight = 0;
         return <div className="FieldTemplate">
-          <svg className="fieldTemplateSvg">
+          <svg className="FieldTemplateSVG">
           { Object.keys(this.props.country.fields).map(key =>  {
             if (maxHeight < this.props.country.fields[key] ) {
               maxHeight = this.props.country.fields[key] 

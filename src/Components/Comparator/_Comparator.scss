@@ -1,12 +1,47 @@
 .Comparator {
-    width: 100%;
-    height: 100vh;
     position: fixed;
-    top: 0;
-    left: 0;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
     z-index: 2;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background: #12191f;
+    width: 100vw;
+    height: 100vh;
+    padding: 40px;
+    background: $blue;
+    &:after {
+        position: absolute;
+        top: 50%;
+        right: 0px;
+        left: 0px;
+        transform: translateY(-50%);
+        width: 100%;
+        height: 2px;
+        content: '';
+        background: $brand;
+    }
+    section {
+        position: relative;
+        width: 25%;
+        height: 100%;
+        div {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            height: 50%;
+            &:first-child svg {
+                bottom: 8px;
+            }
+            &:last-child svg {
+                top: 8px;
+            }
+            svg {
+                position: absolute;
+            }
+        }
+    }
 }
