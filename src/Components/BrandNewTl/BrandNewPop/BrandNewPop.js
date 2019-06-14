@@ -21,14 +21,30 @@ class BrandNewPop extends Component {
     render() {
         console.log(this.props.data)
         return this.props.data.idcountry ? <div className="BrandNewPop">
-            <span>{this.props.data.idpeople}</span>
-            <h2>{this.props.data.firstname} {this.props.data.name}</h2>
-            {this.props.data.birthday ? <span>{this.setDate(this.props.data.birthday)}</span> : null}
-            {this.props.data.deathdate ? <span>{this.setDate(this.props.data.deathdate)}</span> : null}
-            <span>{this.props.data.idcountry['name']}</span>
-            <ul>
-                {this.props.data.idprice.map((price, i) => <li key={i}>{price.idcategory.category} - {price.year}</li>)}
+            <div className="BrandNewPop__image"></div>
+            <h2 className="BrandNewPop__name">{this.props.data.firstname} {this.props.data.name}</h2>
+            <ul className="BrandNewPop__prizes">
+                {this.props.data.idprice.map((price, i) => <li className="BrandNewPop__prize" key={i}>{price.idcategory.category} - {price.year}</li>)}
             </ul>
+              
+            {this.props.data.birthday ?
+                <div className="BrandNewPop__section">
+                    <h3 className="BrandNewPop__subtitle">Born :</h3>
+                    <span className="BrandNewPop__text">{this.setDate(this.props.data.birthday)}</span>
+                </div>
+            : null}
+             
+            {this.props.data.deathdate ?
+                <div className="BrandNewPop__section">
+                    <h3 className="BrandNewPop__subtitle">Died :</h3>
+                    <span className="BrandNewPop__text">{this.setDate(this.props.data.deathdate)}</span>
+                </div>
+            : null}
+            
+            <div className="BrandNewPop__section">
+                <h3 className="BrandNewPop__subtitle">Nationality :</h3>
+                <span className="BrandNewPop__text">{this.props.data.idcountry['name']}</span>
+            </div>
         </div> : null
 
     }
