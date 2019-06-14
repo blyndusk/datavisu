@@ -59,6 +59,7 @@ class BrandNewTl extends Component {
         e.target.parentNode.classList.toggle('BrandNewTl__item--active')
         // document.querySelector('.BrandNewPop').style.display = 'none'
         if (document.querySelector('.BrandNewPop')) document.querySelector('.BrandNewPop').style.opacity = 0
+        document.querySelector('.BrandNewTl__tutorial').classList.add('BrandNewTl__tutorial--hidden')
         
     }
     displayWoman = (e, li) => {
@@ -72,7 +73,6 @@ class BrandNewTl extends Component {
                 y: e.clientY > Math.floor(window.innerHeight * 1) ? Math.floor(window.innerHeight * 0.33) : e.clientY + 10
             }
         });
-        document.querySelector('.BrandNewTl__tutorial').style.display = 'none'
         if (document.querySelector('.BrandNewPop')) document.querySelector('.BrandNewPop').style.opacity = 1
     }
     render() {
