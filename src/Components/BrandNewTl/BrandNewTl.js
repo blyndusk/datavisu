@@ -51,7 +51,7 @@ class BrandNewTl extends Component {
             })
     }
     displayWomen = (e) => {
-        [...document.querySelectorAll('.BrandNewTl__item')].map(child => child.classList.remove('.BrandNewTl__item--active'));
+        [...document.querySelectorAll('.BrandNewTl__item')].map(child => child.classList.remove('BrandNewTl__item--active'));
         e.target.parentNode.classList.toggle('BrandNewTl__item--active')
     }
     displayWoman = (li) => {
@@ -69,7 +69,7 @@ class BrandNewTl extends Component {
                     <div className="BrandNewTl__dates" onClick={this.displayWomen}>{this.state.dates[i]}</div>
                     <ul className="BrandNewTl__laureats">
                         {woman.map((li, i) => {
-                            return <li className="BrandNewTl__laureat" key={i} onClick={() => this.displayWoman(li)}>{li.firstname}</li>
+                            return <li className="BrandNewTl__laureat" key={i} onClick={() => this.displayWoman(li)}>{li.firstname} {li.name}</li>
                         })}
                     </ul>
                 </div>)}

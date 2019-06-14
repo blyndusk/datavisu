@@ -122,5 +122,9 @@
     }
     &__laureats {
         display: none;
+        flex-direction: column;
+        color: #fff;
+        font-size: 20px;
+        margin: 10px;
     }
 }
