@@ -176,8 +176,9 @@
         cursor: pointer;
     }
     &__image {
-        width: 32px;
-        height: 32px;
+        position: relative;
+        width: 40px;
+        height: 40px;
         margin-bottom: 10px;
         background: $blueMedium;
         border: 2px solid #4527a0;
@@ -186,6 +187,17 @@
         background-position: center;
         background-repeat: no-repeat;
         transition: .3s ease;
+        &:after {
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            bottom: 0px;
+            left: 0px;
+            content: '';
+            background: #000;
+            border-radius: 50%;
+            opacity: .4;
+        }
         &:hover {
             border-color: $brand !important;
         }
