@@ -20,6 +20,11 @@
         flex-direction: column;
         align-items: center;
         width: 152px;
+        &--active {
+            .BrandNewTl__laureats {
+                display: flex;
+            }
+        }
         &:nth-child(2) {
             width: 160px;
             .BrandNewTl__number {

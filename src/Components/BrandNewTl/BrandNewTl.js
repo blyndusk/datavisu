@@ -26,7 +26,8 @@ class BrandNewTl extends Component {
                 "1981-2000",
                 "2001-2018",
             ],
-            woman: {}
+            woman: {},
+            displayWomen: false
         }
     }
     componentDidMount = () => {
@@ -49,6 +50,10 @@ class BrandNewTl extends Component {
                 this.setState({ data })
             })
     }
+    displayWomen = (e) => {
+        [...document.querySelectorAll('.BrandNewTl__item')].map(child => child.classList.remove('.BrandNewTl__item--active'));
+        e.target.parentNode.classList.toggle('BrandNewTl__item--active')
+    }
     displayWoman = (li) => {
         this.setState({
             woman: li
@@ -60,8 +65,8 @@ class BrandNewTl extends Component {
             <Nav />
             <div className="BrandNewTl__items">
                 {this.state.data.map((woman, i) => <div className="BrandNewTl__item" key={i}>
-                    <div className="BrandNewTl__number">{woman.length}</div>
-                    <div className="BrandNewTl__dates">{this.state.dates[i]}</div>
+                    <div className="BrandNewTl__number" onClick={this.displayWomen}>{woman.length}</div>
+                    <div className="BrandNewTl__dates" onClick={this.displayWomen}>{this.state.dates[i]}</div>
                     <ul className="BrandNewTl__laureats">
                         {woman.map((li, i) => {
                             return <li className="BrandNewTl__laureat" key={i} onClick={() => this.displayWoman(li)}>{li.firstname}</li>
