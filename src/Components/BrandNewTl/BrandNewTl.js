@@ -1,5 +1,8 @@
 
 import React, { Component } from 'react';
+import Nav from './../Nav/Nav'
+import Brand from './../Brand/Brand'
+import Compare from './../Compare/Compare'
 import BrandNewPop from './BrandNewPop/BrandNewPop'
 import axios from 'axios';
 
@@ -7,7 +10,7 @@ class BrandNewTl extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            baseUrl: 'http://localhost:8000/api/',
+            baseUrl: 'http://774d8b0b.ngrok.io/api/',
             // 2 types of API filters
             type: [
                 'people',
@@ -53,18 +56,23 @@ class BrandNewTl extends Component {
     }
     render() {
         return <section className="BrandNewTl">
-            {this.state.data.map((woman, i) => <div key={i}>
-                <span>{woman.length}</span>
-                <span>{this.state.dates[i]}</span>
-                <ul>
-                    {woman.map((li, i) => {
-                        return <li key={i} onClick={() => this.displayWoman(li)}>{li.firstname}</li>
-                    })}
-                </ul>
-            </div>)}
-            <BrandNewPop
-                data={this.state.woman}
-            />
+            <Brand />
+            <Nav />
+            <div className="BrandNewTl__items">
+                {this.state.data.map((woman, i) => <div className="BrandNewTl__item" key={i}>
+                    <div className="BrandNewTl__number">{woman.length}</div>
+                    <div className="BrandNewTl__dates">{this.state.dates[i]}</div>
+                    <ul className="BrandNewTl__laureats">
+                        {woman.map((li, i) => {
+                            return <li className="BrandNewTl__laureat" key={i} onClick={() => this.displayWoman(li)}>{li.firstname}</li>
+                        })}
+                    </ul>
+                </div>)}
+                <BrandNewPop
+                    data={this.state.woman}
+                />
+            </div>
+            <Compare />
         </section>
     }
 }
