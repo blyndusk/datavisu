@@ -21,8 +21,9 @@ class BrandNewPop extends Component {
     render() {
         console.log(this.props.data)
         return this.props.data.idcountry ? <div className="BrandNewPop">
+            <span>{this.props.data.idpeople}</span>
             <h2>{this.props.data.firstname} {this.props.data.name}</h2>
-            <span>{this.setDate(this.props.data.birthday)}</span>
+            {this.props.data.birthday ? <span>{this.setDate(this.props.data.birthday)}</span> : null}
             {this.props.data.deathdate ? <span>{this.setDate(this.props.data.deathdate)}</span> : null}
             <span>{this.props.data.idcountry['name']}</span>
             <ul>
