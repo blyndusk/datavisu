@@ -8,6 +8,8 @@
     border-radius: 8px;
     color: $content;
     width: 220px;
+    z-index: 10000000;
+    pointer-events: none;
     &__id {
         display: none;
         position: fixed;

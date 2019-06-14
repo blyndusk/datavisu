@@ -20,7 +20,10 @@ class BrandNewPop extends Component {
     }
     render() {
         console.log(this.props.data)
-        return this.props.data.idcountry ? <div className="BrandNewPop">
+        return this.props.data.idcountry ? <div className="BrandNewPop" style={{
+            top: `${this.props.coords.y + 10}px`,
+            left: `${this.props.coords.x + 10}px`,
+        }}>
             <div className="BrandNewPop__image" style={{background: `url('./women/${this.props.data.idpeople}.jpg') no-repeat center/cover`}}></div>
             <h2 className="BrandNewPop__name">{this.props.data.firstname} {this.props.data.name}</h2>
             <ul className="BrandNewPop__prizes">

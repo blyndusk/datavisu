@@ -27,7 +27,11 @@ class BrandNewTl extends Component {
                 "2001-2018",
             ],
             woman: {},
-            displayWomen: false
+            displayWomen: false,
+            coords: {
+                x: 0,
+                y: 0
+            }
         }
     }
     componentDidMount = () => {
@@ -53,11 +57,23 @@ class BrandNewTl extends Component {
     displayWomen = (e) => {
         [...document.querySelectorAll('.BrandNewTl__item')].map(child => child.classList.remove('BrandNewTl__item--active'));
         e.target.parentNode.classList.toggle('BrandNewTl__item--active')
+        // document.querySelector('.BrandNewPop').style.display = 'none'
+        if (document.querySelector('.BrandNewPop')) document.querySelector('.BrandNewPop').style.opacity = 0
+        
     }
-    displayWoman = (li) => {
+    displayWoman = (e, li) => {
+        console.log(e.clientX, e.clientY)
+        console.log(li)
+        
         this.setState({
-            woman: li
-        })
+            woman: li,
+            coords: {
+                x: e.clientX > Math.floor(window.innerWidth * 1) ? Math.floor(window.innerWidth * 0.66) : e.clientX + 10,
+                y: e.clientY > Math.floor(window.innerHeight * 1) ? Math.floor(window.innerHeight * 0.33) : e.clientY + 10
+            }
+        });
+        document.querySelector('.BrandNewTl__tutorial').style.display = 'none'
+        if (document.querySelector('.BrandNewPop')) document.querySelector('.BrandNewPop').style.opacity = 1
     }
     render() {
         return <section className="BrandNewTl">
@@ -70,7 +86,7 @@ class BrandNewTl extends Component {
                     <div className="BrandNewTl__dates" onClick={this.displayWomen}>{this.state.dates[i]}</div>
                     <ul className="BrandNewTl__laureats">
                         {woman.map((li, i) => {
-                            return <li className="BrandNewTl__laureat" key={i} onClick={() => this.displayWoman(li)}>
+                            return <li className="BrandNewTl__laureat" key={i} onClick={(e) => this.displayWoman(e, li)}>
                                 <div className="BrandNewTl__image" style={{background: `url('./women/${li.idpeople}.jpg') no-repeat center/cover`}}></div>
                             </li>
                         })}
@@ -78,6 +94,7 @@ class BrandNewTl extends Component {
                 </div>)}
                 <BrandNewPop
                     data={this.state.woman}
+                    coords={this.state.coords}
                 />
             </div>
             <p className="BrandNewTl__tutorial">Select colored period to visualize laureats</p>
