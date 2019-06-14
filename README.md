@@ -60,7 +60,7 @@ cp .env.exemple .env
 ### 2. Start
 
 - `bin/console server:run`
-- open localhost:8000/api to get JSONS
+- open 774d8b0b.ngrok.io/api to get JSONS
 
 ## License
 

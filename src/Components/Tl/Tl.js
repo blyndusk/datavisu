@@ -34,7 +34,7 @@ class Timeline extends Component {
             infos: {
 
             },
-            baseUrl: 'http://localhost:8000/api/',
+            baseUrl: 'http://774d8b0b.ngrok.io/api/',
             // 2 types of routes
             type: [
                 'people',
