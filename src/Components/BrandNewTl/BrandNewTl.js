@@ -10,7 +10,7 @@ class BrandNewTl extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            baseUrl: 'http://774d8b0b.ngrok.io/api/',
+            baseUrl: 'http://localhost:8000/api/',
             // 2 types of API filters
             type: [
                 'people',
@@ -63,6 +63,7 @@ class BrandNewTl extends Component {
         return <section className="BrandNewTl">
             <Brand />
             <Nav />
+            <p className="BrandNewTl__context">We decided to focus on women, which are winning more and more prizes every year</p>
             <div className="BrandNewTl__items">
                 {this.state.data.map((woman, i) => <div className="BrandNewTl__item" key={i}>
                     <div className="BrandNewTl__number" onClick={this.displayWomen}>{woman.length}</div>
@@ -79,6 +80,7 @@ class BrandNewTl extends Component {
                     data={this.state.woman}
                 />
             </div>
+            <p className="BrandNewTl__tutorial">Select colored period to visualize laureats</p>
             <Compare />
         </section>
     }

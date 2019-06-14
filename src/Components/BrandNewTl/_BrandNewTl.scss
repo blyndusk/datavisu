@@ -11,6 +11,18 @@
     width: 100vw;
     height: 100vh;
     background: $blue;
+    &__context {
+        position: fixed;
+        top: 162px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 18px;
+        font-weight: 500;
+        color: $brand;
+        text-align: center;
+        width: 460px;
+        line-height: 24px;
+    }
     &__items {
         display: flex;
         width: calc(100vw - 80px);
@@ -166,7 +178,7 @@
     &__laureats {
         position: absolute;
         top: calc(100% + 16px);
-        display: flex;
+        display: none;
         flex-direction: column;
         padding: 0px 16px;
     }
@@ -196,10 +208,22 @@
             content: '';
             background: #000;
             border-radius: 50%;
-            opacity: .4;
+            opacity: .3;
         }
         &:hover {
             border-color: $brand !important;
+        }
+    }
+    &__tutorial {
+        position: fixed;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 18px;
+        color: $brand;
+        transition: .3s ease;
+        &--hidden {
+            opacity: 0;
         }
     }
 }
