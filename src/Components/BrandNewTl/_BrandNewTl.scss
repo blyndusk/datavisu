@@ -38,6 +38,9 @@
             .BrandNewTl__dates {
                 background: #283593;
             }
+            .BrandNewTl__image {
+                border-color: #283593;
+            }
         }
         &:nth-child(3) {
             .BrandNewTl__number {
@@ -48,6 +51,9 @@
             }
             .BrandNewTl__dates {
                 background: #1565c0;
+            }
+            .BrandNewTl__image {
+                border-color: #1565c0;
             }
         }
         &:nth-child(4) {
@@ -60,6 +66,18 @@
             }
             .BrandNewTl__dates {
                 background: #0277bd;
+            }
+            .BrandNewTl__laureats {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            .BrandNewTl__laureat {
+                display: flex;
+                justify-content: center;
+                width: 50%;
+            }
+            .BrandNewTl__image {
+                border-color: #0277bd;
             }
         }
         &:nth-child(5) {
@@ -78,7 +96,12 @@
                 flex-wrap: wrap;
             }
             .BrandNewTl__laureat {
+                display: flex;
+                justify-content: center;
                 width: 50%;
+            }
+            .BrandNewTl__image {
+                border-color: #00838f;
             }
         }
         &:nth-child(6) {
@@ -97,7 +120,12 @@
                 flex-wrap: wrap;
             }
             .BrandNewTl__laureat {
-                width: 33%;
+                display: flex;
+                justify-content: center;
+                width: 25%;
+            }
+            .BrandNewTl__image {
+                border-color: #00695c;
             }
         }
     }
@@ -140,18 +168,26 @@
         top: calc(100% + 16px);
         display: flex;
         flex-direction: column;
+        padding: 0px 16px;
     }
     &__laureat {
         display: flex;
         align-items: center;
+        cursor: pointer;
     }
     &__image {
         width: 32px;
         height: 32px;
+        margin-bottom: 10px;
         background: $blueMedium;
+        border: 2px solid #4527a0;
         border-radius: 50%;
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
+        transition: .3s ease;
+        &:hover {
+            border-color: $brand !important;
+        }
     }
 }
