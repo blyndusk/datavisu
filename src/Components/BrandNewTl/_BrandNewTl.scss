@@ -13,20 +13,22 @@
     background: $blue;
     &__items {
         display: flex;
+        width: calc(100vw - 80px);
         margin-top: -119px;
     }
     &__item {
+        position: relative;
         display: flex;
         flex-direction: column;
         align-items: center;
-        width: 152px;
+        width: 10%;
         &--active {
             .BrandNewTl__laureats {
                 display: flex;
             }
         }
         &:nth-child(2) {
-            width: 160px;
+            width: 12%;
             .BrandNewTl__number {
                 background: #283593;
                 &:after {
@@ -38,7 +40,6 @@
             }
         }
         &:nth-child(3) {
-            width: 145px;
             .BrandNewTl__number {
                 background: #1565c0;
                 &:after {
@@ -50,7 +51,7 @@
             }
         }
         &:nth-child(4) {
-            width: 181px;
+            width: 16%;
             .BrandNewTl__number {
                 background: #0277bd;
                 &:after {
@@ -62,7 +63,7 @@
             }
         }
         &:nth-child(5) {
-            width: 166px;
+            width: 22%;
             .BrandNewTl__number {
                 background: #00838f;
                 &:after {
@@ -72,9 +73,16 @@
             .BrandNewTl__dates {
                 background: #00838f;
             }
+            .BrandNewTl__laureats {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            .BrandNewTl__laureat {
+                width: 50%;
+            }
         }
         &:nth-child(6) {
-            width: 381px;
+            width: 30%;
             .BrandNewTl__number {
                 background: #00695c;
                 &:after {
@@ -83,6 +91,13 @@
             }
             .BrandNewTl__dates {
                 background: #00695c;
+            }
+            .BrandNewTl__laureats {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            .BrandNewTl__laureat {
+                width: 33%;
             }
         }
     }
@@ -121,10 +136,22 @@
         cursor: pointer;
     }
     &__laureats {
-        display: none;
+        position: absolute;
+        top: calc(100% + 16px);
+        display: flex;
         flex-direction: column;
-        color: #fff;
-        font-size: 20px;
-        margin: 10px;
+    }
+    &__laureat {
+        display: flex;
+        align-items: center;
+    }
+    &__image {
+        width: 32px;
+        height: 32px;
+        background: $blueMedium;
+        border-radius: 50%;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
     }
 }
