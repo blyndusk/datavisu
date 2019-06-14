@@ -71,7 +71,6 @@ class BrandNewTl extends Component {
                         {woman.map((li, i) => {
                             return <li className="BrandNewTl__laureat" key={i} onClick={() => this.displayWoman(li)}>
                                 <div className="BrandNewTl__image" style={{background: `url('./women/${li.idpeople}.jpg') no-repeat center/cover`}}></div>
-                                <p className="BrandNewTl__name"><span>{li.firstname}</span><span>{li.name}</span></p>
                             </li>
                         })}
                     </ul>
