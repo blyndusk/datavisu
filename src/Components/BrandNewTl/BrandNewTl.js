@@ -69,7 +69,10 @@ class BrandNewTl extends Component {
                     <div className="BrandNewTl__dates" onClick={this.displayWomen}>{this.state.dates[i]}</div>
                     <ul className="BrandNewTl__laureats">
                         {woman.map((li, i) => {
-                            return <li className="BrandNewTl__laureat" key={i} onClick={() => this.displayWoman(li)}>{li.firstname} {li.name}</li>
+                            return <li className="BrandNewTl__laureat" key={i} onClick={() => this.displayWoman(li)}>
+                                <div className="BrandNewTl__image"></div>
+                                <p className="BrandNewTl__name"><span>{li.firstname}</span><span>{li.name}</span></p>
+                            </li>
                         })}
                     </ul>
                 </div>)}
