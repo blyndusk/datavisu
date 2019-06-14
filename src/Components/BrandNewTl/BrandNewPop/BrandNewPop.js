@@ -21,7 +21,7 @@ class BrandNewPop extends Component {
     render() {
         console.log(this.props.data)
         return this.props.data.idcountry ? <div className="BrandNewPop">
-            <div className="BrandNewPop__image"></div>
+            <div className="BrandNewPop__image" style={{background: `url('./women/${this.props.data.idpeople}.jpg') no-repeat center/cover`}}></div>
             <h2 className="BrandNewPop__name">{this.props.data.firstname} {this.props.data.name}</h2>
             <ul className="BrandNewPop__prizes">
                 {this.props.data.idprice.map((price, i) => <li className="BrandNewPop__prize" key={i}>{price.idcategory.category} - {price.year}</li>)}
