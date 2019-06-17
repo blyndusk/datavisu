@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import App from './Components/App';
 import './scss/master.scss';
 
-import * as serviceWorker from './serviceWorker';
+import * as serviceWorker from './serviceWorker.js';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
