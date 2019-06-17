@@ -1,16 +1,25 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-class Nav extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            page: "",
+interface NavProps {
+    
+} 
+
+interface NavState {
+    page: string,
+    mapClass: string
+    tlClass: string
+} 
+
+class Nav extends React.Component<NavProps, NavState> {
+    UNSAFE_componentWillMount = () => {
+        this.setState({
             mapClass: "Nav__button",
             tlClass: "Nav__button"
-        }
+        })
     }
     componentDidMount() {
+        
         this.setState({ page: window.location.pathname.replace('/', '')}, () => {
             switch (this.state.page) {
                 case 'map':
