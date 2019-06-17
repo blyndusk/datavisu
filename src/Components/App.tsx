@@ -22,27 +22,6 @@ class App extends Component {
             test: "imatest"
         }
     }
-    fetchData = (params) => {
-        axios.get('./timeline.json', {
-            params: {
-                ...params
-            },
-            
-        })
-        .then(res => {
-            this.setState({ timeline: res.data})
-        })
-        .catch(err => console.log(err))
-
-    }
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        // Typical usage (don't forget to compare props):
-        if (this.state.params !== prevState.params) {
-            this.fetchData(this.state.params);
-        }
-    }
-    // fetch the data when the component mounting
-    UNSAFE_componentWillMount = () => this.fetchData(this.state.params);
     setAge = (e, reset) => {
         let params = {...this.state.params};
         params.age = reset ? null : e.target.value;  
