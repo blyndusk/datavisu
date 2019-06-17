@@ -1,34 +1,51 @@
 
 import React, { Component, Fragment } from 'react';
 
-class MapPop extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            pos: {
-                x: window.innerWidth / 2,
-                y: window.innerHeight / 2
-            },
-            fields: {},
-            universities: {},
-            sortedUniversities: [],
-            parity: {
-                m: {
-                    amount: 0,
-                    percent: 0
-                }, 
-                f: {
-                    amount: 0,
-                    percent: 0
-                }
-            },
-            ageAverage: 0,
-            svgStyle: {},
-            pathStyle: {}
+interface MapPopProps {
+    country: string,
+    data: [{
+        idprice: [{
+            idcategory: {
+                category: string;
+            };
+        }];
+        idcountry: {
+            name: string;
+        };
+        idaffiliation: {
+            address: string;
+        };
+        gender: string;
+    }],
+    fieldCode: string
+}
+
+interface MapPopState {
+    pos: {
+        x: 0,
+        y: 0
+    },
+    fields: any,
+    universities: {},
+    sortedUniversities: any[],
+    parity: {
+        m: {
+            amount: number,
+            percent: number
+        }, 
+        f: {
+            amount: number,
+            percent: number
         }
-    }
+    },
+    ageAverage: number,
+    svgStyle: {},
+    pathStyle: {}
+}
+
+class MapPop extends React.Component<MapPopProps, MapPopState> {
     componentDidMount = () => this.displayPop()
-    componentDidUpdate = (prevProps, prevState) => {
+    componentDidUpdate = (prevProps: any, prevState: any) => {
         if (this.props.data !== prevProps.data) this.getParsedData();
         if (this.state.parity !== prevState.parity) {
             this.setPercentage(25, this.state.parity.f.percent / 100);
@@ -43,25 +60,25 @@ class MapPop extends Component {
     }
     displayPop = () => {
         const map = document.querySelector('.Map');
-        const MapPop = document.querySelector('.MapPop');
-        [...map.childNodes].map(child => {
+        const MapPop = document.querySelector('.MapPop') as HTMLElement;
+        Array.from(map!.childNodes).map((child: any) => {
             if (child.tagName  === "svg") {
-                child.addEventListener('click', (e) => {
+                child.addEventListener('click', (e: any) => {
                     e.stopPropagation();
-                    MapPop.style.opacity = 0;
+                    MapPop.style.opacity = '0';
                 });
                 [...child.childNodes].map(grandchild => {
-                    if (grandchild.tagName === 'g') grandchild.addEventListener('click', (e) => {
+                    if (grandchild.tagName === 'g') grandchild.addEventListener('click', (e: any) => {
                         e.stopPropagation();
                         this.setState({pos: {
                             x: e.clientX > Math.floor(window.innerWidth * 0.66) ? Math.floor(window.innerWidth * 0.66) : e.clientX + 10,
                             y: e.clientY > Math.floor(window.innerHeight * 0.33) ? Math.floor(window.innerHeight * 0.33) : e.clientY + 10
                         }})
-                        setTimeout(() => MapPop.style.opacity = 1, 200);
+                        setTimeout(() => MapPop.style.opacity = '1', 200);
                     })
-                    else grandchild.addEventListener('click', (e) => {
+                    else grandchild.addEventListener('click', (e: any) => {
                         e.stopPropagation();
-                        MapPop.style.opacity = 0;
+                        MapPop.style.opacity = '0';
                     })
                     return grandchild;
                 })
@@ -70,9 +87,9 @@ class MapPop extends Component {
         })
     }
     // method to get field for reach price
-    getFieldsAmount = (data) => {
+    getFieldsAmount = (data: [{idprice: [{idcategory: {category: string}}]}]) => {
         // fields is an object which contain fields with amounts of prize for each field
-        const fields = {
+        const fields: any = {
             physics: 0,
             chemistry: 0,
             peace: 0,
@@ -83,7 +100,7 @@ class MapPop extends Component {
         // map over all given data, and over each prize of each people
         data.map(people => people.idprice.map(price => {
             // get field of price
-            const field = price.idcategory.category
+            const field: string = price.idcategory.category
             // if field exist in fields, increment it by 1
             if (field in fields) fields[field] = fields[field] + 1
             // else, set to 1
@@ -96,7 +113,7 @@ class MapPop extends Component {
         })
     }
     // method to get percentage of M/W for each people
-    getParity = (data) => {
+    getParity = (data: [{gender: string}]) => {
         // parity content amount of men & women, and percentage
         const parity = {
             m: {
@@ -109,9 +126,9 @@ class MapPop extends Component {
             }
         }
         // set percent in terms of amount
-        const setPercent = (gender) => Math.floor((gender.amount / data.length) * 100);
+        const setPercent = (gender: {amount: number}) => Math.floor((gender.amount / data.length) * 100);
         // map over all people in given data, and of people if man, increment m, else f
-        data.map(people => people.gender === 'M' ? parity.m.amount++ : parity.f.amount++);
+        data.map((people: {gender: string}) => people.gender === 'M' ? parity.m.amount++ : parity.f.amount++);
         // set percent for men & women
         parity.m.percent = setPercent(parity.m)
         parity.f.percent = setPercent(parity.f)
@@ -119,20 +136,21 @@ class MapPop extends Component {
         this.setState({ parity })
     }
     // method ot get average age of all people
-    getAverageAge = (data) => {
+    getAverageAge = (data: any) => {
+        const dataLength: number = data.length
         // total age begins to 0
-        let ageTotal = 0;
+        let ageTotal: number = 0;
         // map over all given data
-        data.map(people => {
+        data.map((people: {birthday: string, idprice: any[]}) => {
             // if people birthday && people's first price's year exist, increment total age with people age
             if (people.birthday && people.idprice[0].year) ageTotal = ageTotal + parseInt(people.idprice[0].year) - parseInt(people.birthday.replace(/-\w+|:\w+|\+\w+/g, ''));
             return ageTotal;
         })
         // then, set age average to state, doing the average
-        this.setState({ageAverage: Math.floor(ageTotal / data.length)})
+        this.setState({ageAverage: Math.floor(ageTotal / dataLength)})
     }
-    getuniversities = (data) => {
-        let universities = {};
+    getuniversities = (data: [{idaffiliation: {address: string}}]) => {
+        let universities: any = {};
         // map over all given data, and over each prize of each people
         data.map(people => {
             // get field of price
@@ -146,7 +164,7 @@ class MapPop extends Component {
             }
             return university;
         })
-        let sortedUniversities = [];
+        let sortedUniversities: any[] = [];
         for (var university in universities) sortedUniversities.push([university, universities[university]]);
         sortedUniversities.sort((a, b) => b[1] - a[1]);
         sortedUniversities = sortedUniversities.splice(0, 3);
@@ -155,13 +173,13 @@ class MapPop extends Component {
             sortedUniversities
         })
     }
-    setRotation = (percentage) => {
+    setRotation = (percentage: number) => {
 
         this.setState({svgStyle: {
             transform: `rotate(${- 360 * percentage / 2}deg)`},
         })
     }
-    setPercentage = (rayon, percentage) => {
+    setPercentage = (rayon: number, percentage: number) => {
         const perimeter = Math.PI * 2 * rayon;
 
         this.setState({pathStyle: {

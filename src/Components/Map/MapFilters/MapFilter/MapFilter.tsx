@@ -1,13 +1,20 @@
 
 import React, { Component } from 'react';
 
-class MapFilter extends Component {
-    addFilter = (e) => e.target.dataset.label;
+interface MapFilterProps {
+    classState: string,
+    getField: any,
+    label: string,
+    name: string
+}
+
+class MapFilter extends React.Component<MapFilterProps> {
+    addFilter = (e: any) => e.target.dataset.label;
     render() {
         return <li 
             className={`MapFilter ${this.props.classState}`}
-            onClick={(e) => {
-                [...document.querySelectorAll('.MapFilters li')].map(li => li.className = 'MapFilter');
+            onClick={(e: any) => {
+            Array.from(document.querySelectorAll('.MapFilters li')).map(li => li.className = 'MapFilter');
                 e.target.className = 'MapFilter MapFilter--active';
                 this.props.getField(e)
             }}

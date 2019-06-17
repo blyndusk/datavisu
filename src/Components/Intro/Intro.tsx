@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 class Intro extends Component {
-    hideIntro = (e) => {
+    hideIntro = (e: { target: any}) => {
         e.target.parentNode.parentNode.style.display = 'none'
     }
     render() {

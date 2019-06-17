@@ -9,44 +9,60 @@ import MapSVG from './MapSVG/MapSVG';
 import axios from 'axios';
 import Compare from './../Compare/Compare';
 
-class Map extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            // the filled data
-            data: [],
-            pricesPerCountries: {},
-            // API
-            baseUrl: 'http://localhost:8000/api/',
-            // 2 types of API filters
-            type: [
-                'people',
-                'prices', 
-                'categories'
-            ],
-            // 3 params
-            params: {
-                field: 'idprice.idcategory.category',
-                country: 'idcountry.code',
-                peopleCountry: 'idpeople.idcountry.code'
-            },
-            // Codes
-            countryCode: '',
-            fieldCode: '',
-            lengthCode: 0,
-            lengthCountryCode: 0,
-            // call
-            apiCall: '',
-            calls: 0,
-        }
-    }
+interface MapProps {
+
+}
+
+interface MapState {
+    country: string,
+    // the filled data
+    data: [{
+        idprice: [{
+            idcategory: {
+                category: string;
+            };
+        }];
+        idcountry: {
+            name: string;
+        };
+        idaffiliation: {
+            address: string;
+        };
+        gender: string;
+    }],
+    pricesPerCountries: {},
+    // API
+    baseUrl: 'http://localhost:8000/api/',
+    // 2 types of API filters
+    type: [
+        'people',
+        'prices', 
+        'categories'
+    ],
+    // 3 params
+    params: {
+        field: 'idprice.idcategory.category',
+        country: 'idcountry.code',
+        peopleCountry: 'idpeople.idcountry.code'
+    },
+    // Codes
+    countryCode: string,
+    fieldCode: '',
+    lengthCode: number,
+    lengthCountryCode: 0,
+    // call
+    apiCall: string,
+    calls: number,
+}
+
+class Map extends React.Component<MapProps, MapState> {
     // when the Map is mounted, handle country click & set new data
     componentDidMount = () => {
         this.handleCountryClick()
         this.setNewData()
     }
     // set new field code ( PHYSICS, PEACE, ..)
-    handleFilterFieldClick = (e) => this.setState({fieldCode: e.target.dataset.label}, () => this.setNewData());
+    handleFilterFieldClick = (e: any) => this.setState({fieldCode: e.target.dataset.label}, () => this.setNewData());
     // new api call with field param
     setNewData = () => {
         this.setCountriesColorization();
@@ -55,7 +71,7 @@ class Map extends Component {
     // api only called to update countries colorization
     setCountriesColorization = () => {
         // no param by default
-        let params = {}
+        let params: any = {}
         // if a field param is detected, add field param
         if (this.state.fieldCode.length) params[this.state.params.field] = this.state.fieldCode;
         // api call, with custom param (field or no field)
@@ -77,15 +93,15 @@ class Map extends Component {
         const conf = {
             field: {
                 exist: this.state.fieldCode.length, 
-                setParam(that) { params[that.state.params.field] = that.state.fieldCode }
+                setParam(that: any) { params[that.state.params.field] = that.state.fieldCode }
             },
             country: {
                 exist: this.state.countryCode.length,
-                setParam(that) { params[that.state.params.country] = that.state.countryCode }
+                setParam(that: any) { params[that.state.params.country] = that.state.countryCode }
             }
         }
         // no param by default
-        let params = {}
+        let params: any = {}
         // if there is neither field nor country, don't change anything
         if (!conf.field.exist && !conf.country.exist) params = {};
         // if there is a field but no country, add field param
@@ -110,16 +126,16 @@ class Map extends Component {
         .catch(err => console.log(err))
     }
     // set an object with amount of prices per country
-    parseCountries = (data) => {
-        let codes = {}
+    parseCountries = (data: [{idcountry: {code: string}}]) => {
+        let codes: any = {}
         // map over all data
-        data.map(code => {
+        data.map((code: {idcountry: {code: string}}) => {
             // get the country code
-            code = code.idcountry.code;
+            const _code: string = code.idcountry.code;
             // if the country code exist in codes, increment it by 1
-            if (code in codes) codes[code] = codes[code] + 1
+            if (_code in codes) codes[_code] = codes[_code] + 1
             // else, set to 1
-            else codes[code] = 1
+            else codes[_code] = 1
             return code;
         })
         // update the price per contries object with new object
@@ -128,14 +144,14 @@ class Map extends Component {
     // colorize countries
     setCountryColors = () => {
         // codes is a large array of object with each amount of prices per country
-        const codes = this.state.pricesPerCountries;
+        const codes: any = this.state.pricesPerCountries;
         // map over all DOM countries
-        [...document.querySelectorAll('.Map g')].map(g => {
+        Array.from(document.querySelectorAll('.Map g')).map(g => {
             
             // for every country
             for (const key in codes) { 
                 // if the country code match with the codes code, select all its children paths
-                if (g.id.toUpperCase() === key ) [...g.querySelectorAll('path')].map(path => {
+                if (g.id.toUpperCase() === key ) Array.from(g.querySelectorAll('path')).map((path: any) => {
                     path.parentNode.classList.add('available');
                     // and fill them with a hsl color depending on the amount of prices in %
                     const percent = codes[key] + 33;
@@ -148,7 +164,7 @@ class Map extends Component {
     // update call with country code
     handleCountryClick = () => {
         // for every DOM country, add a click event, 
-        [...document.querySelectorAll('.Map g')].map(g => g.addEventListener('click', () => {
+        Array.from(document.querySelectorAll('.Map g')).map(g => g.addEventListener('click', () => {
             // update country code on click and make a new api call
             this.setState({countryCode: g.id}, () => this.apiCountriesCall())
         }));
@@ -156,7 +172,7 @@ class Map extends Component {
     // new call with country param (FR, US, GB, ...)
     apiCountriesCall = () => {
         // no params by default
-        let params = {}
+        let params: any = {}
         // set country param (because we click on a country)
         params[this.state.params.country] = this.state.countryCode;
         // if there is a field filter, update param with field param
