@@ -1,16 +1,29 @@
 
 import React, { Component } from 'react';
 
-class ParityTemplate extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            svgStyle: {},
-            pathStyle: {},
-            rayon: 75
-        }
-    } 
-    componentDidUpdate = (prevProps) => {
+interface ParityTemplateProps {
+    country: {
+        parity: {
+            f: {
+                percent: number,
+                amount: number
+            },
+            m: {
+                percent: number,
+                amount: number
+            }
+        } 
+    }
+}
+
+interface ParityTemplateState {
+    svgStyle: {},
+    pathStyle: {},
+    rayon: 75
+}
+
+class ParityTemplate extends React.Component<ParityTemplateProps, ParityTemplateState> {
+    componentDidUpdate = (prevProps: { country: object}) => {
         if (this.props.country !== prevProps.country ) {
             // set percentage it terms of props
             const percentage = this.props.country.parity.f.percent / 100
@@ -19,9 +32,9 @@ class ParityTemplate extends Component {
         }
     }
     // set rotation of the svg to be aligned horizontally
-    setRotation = (percentage) => this.setState({svgStyle: {transform: `rotate(${- 360 * percentage / 2}deg)`}})
+    setRotation = (percentage: number) => this.setState({svgStyle: {transform: `rotate(${- 360 * percentage / 2}deg)`}})
     // set percentage of the svg
-    setPercentage = (rayon, percentage) => {
+    setPercentage = (rayon: number, percentage: number) => {
         const perimeter = Math.PI * 2 * rayon;
         this.setState({pathStyle: {strokeDasharray: `${perimeter * percentage}, ${perimeter}`},})
     }

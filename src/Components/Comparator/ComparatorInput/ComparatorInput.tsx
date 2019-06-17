@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 
-class ComparatorInput extends Component {
-    toggleClass = (e) => {
+interface ComparatorInputProps {
+    codes: any,
+    code: string, 
+    onInputChanged: any
+}
+
+class ComparatorInput extends React.Component<ComparatorInputProps> {
+    toggleClass = (e: any) => {
         // empty input
         e.target.value = '';
         // stop propagation
@@ -24,7 +30,7 @@ class ComparatorInput extends Component {
             />
             <span className="ComparatorInput__icon"></span>
             <datalist id="countries">
-                {this.props.codes.length ? this.props.codes.map(code => <option 
+                {this.props.codes.length ? this.props.codes.map((code: {code: string, name: string}) => <option 
                     // for every code, DOM an option
                     key={code.code}
                     // same key & value

@@ -1,17 +1,19 @@
 
 import React, { Component } from 'react';
 
-class AgeTemplate extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            ageAverage: {
-                m: 0,
-                f: 0
-            }
-        }
-    } 
-    
+interface AgeTemplateProps {
+    country: any,
+    order: number
+}
+
+interface AgeTemplateState {
+    ageAverage: {
+        m: 0,
+        f: 0
+    }
+}
+
+class AgeTemplate extends React.Component<AgeTemplateProps, AgeTemplateState> {    
     render() {
         // inc begin at -25
         let inc = -25;
@@ -26,7 +28,7 @@ class AgeTemplate extends Component {
                     // update max height
                     if (maxHeight < age ) maxHeight = age;
                     // for every svg in the template, set height to max height
-                    [...document.querySelectorAll('.AgeTemplateSvg')].map(svg => svg.querySelector('svg').style.height = `${maxHeight * 2 +  50}px`)
+                    Array.from(document.querySelectorAll('.AgeTemplateSvg')).map(svg => svg.querySelector('svg')!.style.height = `${maxHeight * 2 +  50}px`)
                     // increment each age
                     inc += 50
                     // generate svg with line & text

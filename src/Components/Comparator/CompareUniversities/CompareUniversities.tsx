@@ -2,21 +2,18 @@
 import React, { Component } from 'react';
 import UniversityTemplate from './UniveristyTemplate/UniveristyTemplate'
 
-class CompareUniversities extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            firstCountry: {
-                universities: {},
-                sortedUniversities: []
-            },
-            secondCountry: {
-                universities: {},
-                sortedUniversities: []
-            }
-        }
-    }
-    componentDidUpdate = (prevProps) => {
+interface CompareUniversitiesProps {
+    firstCountryData: [{idaffiliation: { address: string}}],
+    secondCountryData: [{idaffiliation: { address: string}}]
+}
+
+interface CompareUniversitiesState {
+    firstCountry: any,
+    secondCountry: any
+}
+
+class CompareUniversities extends React.Component<CompareUniversitiesProps, CompareUniversitiesState> {
+    componentDidUpdate = (prevProps: {firstCountryData: {}, secondCountryData: {}}) => {
         if (this.props.firstCountryData !== prevProps.firstCountryData ) {
 
             
@@ -28,15 +25,15 @@ class CompareUniversities extends Component {
             this.setCountry(this.props.secondCountryData, 1)
         }
     }
-    setCountry = (data, countrybin) => {
+    setCountry = (data: [{idaffiliation: { address: string}}], countrybin: number) => {
         this.getuniversities(data, countrybin);
     }
-    getuniversities = (data, countrybin) => {
-        let universities = {};
+    getuniversities = (data: [{idaffiliation: { address: string}}], countrybin: number) => {
+        let universities: any = {};
         // map over all given data, and over each prize of each people
         data.map(people => {
             // get field of price
-            let university;
+            let university: string = '';
             if (people.idaffiliation) university = people.idaffiliation.address;
             if (university !== undefined) {
                 // if university exist in universities, increment it by 1

@@ -1,22 +1,33 @@
 
 import React, { Component } from 'react';
 import AgeTemplate from './AgeTemplate/AgeTemplate';
+import { string } from 'prop-types';
 
-class CompareAge extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            firstCountry: {
-                m: 0,
-                f: 0
-            },
-            secondCountry: {
-                m: 0,
-                f: 0
-            }
+interface CompareAgeProps {
+    countries: {
+        first: {
+            parity: any
+        }  
+        second: {
+            parity: any
         }
+        total: number
     }
-    componentDidUpdate = (prevProps) => {
+}
+
+interface CompareAgeState {
+    firstCountry: {
+        m: 0,
+        f: 0
+    },
+    secondCountry: {
+        m: 0,
+        f: 0
+    }
+}
+
+class CompareAge extends React.Component<CompareAgeProps, CompareAgeState> {
+    componentDidUpdate = (prevProps: { countries: {total: number}}) => {
         if ( this.props.countries.total !== prevProps.countries.total ) {
             // get average age for the 2 countries
             this.getAverageAge(this.props.countries.first.parity, "firstCountry")
@@ -24,25 +35,25 @@ class CompareAge extends Component {
         }
     }
     // get avergae age for a country
-    getAverageAge = (data, index) => {
+    getAverageAge = (data: any, index: string) => {
         const averageAge = { m: 0, f: 0 }
         // set men average age
         this.getAvegrageAgeGender(data, averageAge, 'm')
         // set women average age
         this.getAvegrageAgeGender(data, averageAge, 'f')
         // new state template
-        const newState = {};
+        const newState: any = {};
         // add average age for a country
         newState[index] = averageAge;
         // spread new state
         this.setState({ ...newState })
     }
-    getAvegrageAgeGender = (data, avagerageAge,  genderCode) => {
+    getAvegrageAgeGender = (data: any, avagerageAge: any,  genderCode: string) => {
         data = data[genderCode];
         // total age begins to 0
         let ageTotal = 0;
         // map over all given data
-        data.map(people => {
+        data.map((people: any) => {
             // if people birthday && people's first price's year exist, increment total age with people age
             if (people.birthday && people.idprice[0].year) ageTotal = ageTotal + parseInt(people.idprice[0].year) - parseInt(people.birthday.replace(/-\w+|:\w+|\+\w+/g, ''));
             return ageTotal;

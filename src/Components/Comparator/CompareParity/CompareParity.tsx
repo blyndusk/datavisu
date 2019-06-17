@@ -2,41 +2,51 @@
 import React, { Component } from 'react';
 import ParityTemplate from './ParityTemplate/ParityTemplate'
 
-class CompareParity extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            // first country
-            firstCountry: {
-                // parity
-                parity: {
-                    m: {
-                        // amount of men & percent of men
-                        amount: 0,
-                        percent: 0
-                    }, 
-                    f: {
-                        amount: 0,
-                        percent: 0
-                    }
-                },
-            },
-            // same pattern
-            secondCountry: {
-                parity: {
-                    m: {
-                        amount: 0,
-                        percent: 0
-                    }, 
-                    f: {
-                        amount: 0,
-                        percent: 0
-                    }
-                },
-            }
+interface CompareParityProps {
+    countries: {
+        total: number,
+        first: {
+            parity: { m: any[], f: any[], total: number }
+        },
+        second: {
+            parity: { m: any[], f: any[], total: number }
         }
-     }
-    componentDidUpdate = (prevProps) => {
+    }
+}
+
+interface CompareParityState {
+    // first country
+    firstCountry: {
+        // parity
+        parity: {
+            m: {
+                // amount of men & percent of men
+                amount: 0,
+                percent: 0
+            }, 
+            f: {
+                amount: 0,
+                percent: 0
+            }
+        },
+    },
+    // same pattern
+    secondCountry: {
+        parity: {
+            m: {
+                amount: 0,
+                percent: 0
+            }, 
+            f: {
+                amount: 0,
+                percent: 0
+            }
+        },
+    }
+}
+
+class CompareParity extends React.Component<CompareParityProps, CompareParityState> {
+    componentDidUpdate = (prevProps: {countries: {total: number}}) => {
         if ( this.props.countries.total !== prevProps.countries.total ) {
             // get parity of the 1st country
             this.getParity(this.props.countries.first, "firstCountry")
@@ -44,7 +54,7 @@ class CompareParity extends Component {
             this.getParity(this.props.countries.second, "secondCountry")
         }
     }
-    getParity = (data, index) => {
+    getParity = (data: { parity: { m: any[], f: any[], total: number }}, index: string) => {
         // parity state pattern
         const parity = {
             m: {
@@ -57,11 +67,11 @@ class CompareParity extends Component {
             }
         }
         // update state with custom key
-        const newState = {}
+        const newState: any = {}
         newState[index] = { parity }
         this.setState({ ...newState })
     }
-    setPercent = (amount, totalAmount) => Math.floor((amount / totalAmount) * 100);
+    setPercent = (amount: number, totalAmount: number) => Math.floor((amount / totalAmount) * 100);
     render() {
         return <section className="CompareParity Comparator__section">
             <h3 className="Comparator__subtitle">Parity</h3>

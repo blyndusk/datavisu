@@ -1,7 +1,14 @@
 
 import React, { Component } from 'react';
 
-class FieldTemplate extends Component {
+interface FieldTemplateProps {
+  country: {
+    fields: any,
+  },
+  order: number
+}
+
+class FieldTemplate extends React.Component<FieldTemplateProps> {
     render() {
         // inc begin at -25
         let inc = -25;
@@ -9,11 +16,11 @@ class FieldTemplate extends Component {
         let maxHeight = 0;
         return <div className="FieldTemplate Comparator__template">
           <svg className="FieldTemplateSVG">
-          {Object.keys(this.props.country.fields).map(key => {
+          {Object.keys(this.props.country.fields).map((key: string) => {
             // update max height
             if (maxHeight < this.props.country.fields[key]) maxHeight = this.props.country.fields[key];
             // set fixed height for all svg
-            [...document.querySelectorAll('.FieldTemplate')].map(svg => svg.querySelector('svg').style.height = `248px`)
+            Array.from(document.querySelectorAll('.FieldTemplate')).map(svg => svg.querySelector('svg')!.style.height = `248px`)
             inc += 50
             return <g key={key}>
               <text 

@@ -1,7 +1,14 @@
 
 import React, { Component } from 'react';
 
-class UniversitiesTemplate extends Component {
+interface UniversityTemplateProps {
+    country: {
+        sortedUniversities: any[]
+    }
+    order: number
+}
+
+class UniversityTemplate extends React.Component<UniversityTemplateProps> {
     render() {
           // inc begin at -50
           let inc = -50;
@@ -13,7 +20,7 @@ class UniversitiesTemplate extends Component {
                     // udpate max height
                     if (maxHeight < university[1] ) maxHeight = university[1];
                     // set fixed height to all svgs
-                    [...document.querySelectorAll('.UniversitiesTemplate')].map(svg => svg.querySelector('svg').style.height = '191px')
+                    Array.from(document.querySelectorAll('.UniversitiesTemplate')).map(svg => svg.querySelector('svg')!.style.height = '191px')
                     inc += 100
                     return <g key={university[0]}>
                         <text 
@@ -36,4 +43,4 @@ class UniversitiesTemplate extends Component {
     }
 }
 
-export default UniversitiesTemplate;
+export default UniversityTemplate;
