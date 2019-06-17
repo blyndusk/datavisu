@@ -1,21 +1,40 @@
 
 import React, { Component } from 'react';
+import { object } from 'prop-types';
+interface BrandNewPopProps {
+    data: {
+        idcountry: {
+            name: string
+        },
+        idpeople: number,
+        firstname: string,
+        name: string,
+        idprice: [
+            {
+                year: number,
+                idcategory: {
+                    category: string
+                }
+            }
+        ],
+        birthday: string,
+        deathdate: string
+    },
+    coords: { x: number, y: number }
+}
+interface BrandNewPopState {
+    months: [
+        ['01', 'January'], ['02', 'February'], ['03', 'March'],
+        ['04', 'April'], ['05', 'May'], ['06', 'June'],
+        ['07', 'July'], ['08', 'August'], ['09', 'September'], 
+        ['10', 'October'], ['11', 'November'], ['12', 'December']
+    ]
+}
 
-class BrandNewPop extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            months: [
-                ['01', 'January'], ['02', 'February'], ['03', 'March'],
-                ['04', 'April'], ['05', 'May'], ['06', 'June'],
-                ['07', 'July'], ['08', 'August'], ['09', 'September'], 
-                ['10', 'October'], ['11', 'November'], ['12', 'December']
-            ]
-        }
-    }
-    setDate = (date) => {
+class BrandNewPop extends React.Component<BrandNewPopProps, BrandNewPopState>  {
+    setDate = (date: string) => {
         const newDate = date.replace(/T\w+|:\w+|\+\w+/g, '').replace(/-/g, ',').split(',').reverse();
-        this.state.months.map(month => newDate[1] === month[0] ? newDate.splice(1, 1, month[1]) : null)
+        this.state.months.map((month) => newDate[1] === month[0] ? newDate.splice(1, 1, month[1]) : null)
         return newDate.join(' ')
     }
     render() {
@@ -27,7 +46,7 @@ class BrandNewPop extends Component {
             <div className="BrandNewPop__image" style={{background: `url('./women/${this.props.data.idpeople}.jpg') no-repeat center/cover`}}></div>
             <h2 className="BrandNewPop__name">{this.props.data.firstname} {this.props.data.name}</h2>
             <ul className="BrandNewPop__prizes">
-                {this.props.data.idprice.map((price, i) => <li className="BrandNewPop__prize" key={i}>{price.idcategory.category} - {price.year}</li>)}
+                {this.props.data.idprice.map((price: any, i: number) => <li className="BrandNewPop__prize" key={i}>{price.idcategory.category} - {price.year}</li>)}
             </ul>
               
             {this.props.data.birthday ?
