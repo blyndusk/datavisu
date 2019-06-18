@@ -1,6 +1,6 @@
 {
   "short_name": "Unknown genius",
-  "name": "Unknown genius, a Nobel Prize datavisualisation",
+  "name": "A data visualization, highlighting the winners of the Nobel Prizes, using @reactjs",
   "icons": [
     {
       "src": "favicon.ico",
