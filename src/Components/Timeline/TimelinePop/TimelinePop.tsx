@@ -1,7 +1,6 @@
 
-import React, { Component } from 'react';
-import { object } from 'prop-types';
-interface BrandNewPopProps {
+import React from 'react';
+interface P {
     data: {
         idcountry: {
             name: string
@@ -22,16 +21,22 @@ interface BrandNewPopProps {
     },
     coords: { x: number, y: number }
 }
-interface BrandNewPopState {
-    months: [
-        ['01', 'January'], ['02', 'February'], ['03', 'March'],
-        ['04', 'April'], ['05', 'May'], ['06', 'June'],
-        ['07', 'July'], ['08', 'August'], ['09', 'September'], 
-        ['10', 'October'], ['11', 'November'], ['12', 'December']
-    ]
+interface S {
+    months: string[][]
 }
 
-class BrandNewPop extends React.Component<BrandNewPopProps, BrandNewPopState>  {
+export default class TimelinePop extends React.Component<P, S>  {
+    constructor(props: P) {
+        super(props);
+        this.state = {
+            months: [
+                ['01', 'January'], ['02', 'February'], ['03', 'March'],
+                ['04', 'April'], ['05', 'May'], ['06', 'June'],
+                ['07', 'July'], ['08', 'August'], ['09', 'September'], 
+                ['10', 'October'], ['11', 'November'], ['12', 'December']
+            ]
+        }
+    }
     setDate = (date: string) => {
         const newDate = date.replace(/T\w+|:\w+|\+\w+/g, '').replace(/-/g, ',').split(',').reverse();
         this.state.months.map((month) => newDate[1] === month[0] ? newDate.splice(1, 1, month[1]) : null)
@@ -39,7 +44,7 @@ class BrandNewPop extends React.Component<BrandNewPopProps, BrandNewPopState>  {
     }
     render() {
         console.log(this.props.data)
-        return this.props.data.idcountry ? <div className="BrandNewPop" style={{
+        return this.props.data.idcountry.name.length ? <div className="BrandNewPop" style={{
             top: `${this.props.coords.y + 10}px`,
             left: `${this.props.coords.x + 10}px`,
         }}>
@@ -71,5 +76,3 @@ class BrandNewPop extends React.Component<BrandNewPopProps, BrandNewPopState>  {
 
     }
 }
-
-export default BrandNewPop;

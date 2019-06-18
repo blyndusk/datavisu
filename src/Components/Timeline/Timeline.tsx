@@ -1,31 +1,18 @@
 
-import React, { Component } from 'react';
-import Nav from './../Nav/Nav'
-import Brand from './../Brand/Brand'
-import Compare from './../Compare/Compare'
-import BrandNewPop from './BrandNewPop/BrandNewPop'
+import React from 'react';
+import Nav from '../Nav/Nav'
+import Brand from '../Brand/Brand'
+import Compare from '../Compare/Compare'
+import TimelinePop from './TimelinePop/TimelinePop'
 import axios from 'axios';
 
-interface BrandNewTlProps {
-
-}
-interface BrandNewTlState {
-    baseUrl: 'http://localhost:8000/api/',
+interface P {}
+interface S {
+    baseUrl: string;
     // 2 types of API filters
-    type: [
-        'people',
-        'prices', 
-        'categories'
-    ],
+    type: string[];
     data: {}[][],
-    dates: [
-        "1901-1920",
-        "1921-1940",
-        "1941-1960",
-        "1961-1980",
-        "1981-2000",
-        "2001-2018",
-    ],
+    dates: string[];
     woman: {
         idcountry: {
             name: string
@@ -43,15 +30,56 @@ interface BrandNewTlState {
         ],
         birthday: string,
         deathdate: string
-    },
-    displayWomen: false,
+    };
+    displayWomen: boolean;
     coords: {
-        x: 0,
-        y: 0
+        x: number,
+        y: number
     }
 }
 
-class BrandNewTl extends React.Component<BrandNewTlProps, BrandNewTlState> {
+export default class Timeline extends React.Component<P, S> {
+    constructor(props: P) {
+        super(props);
+        this.state = {
+            baseUrl: 'http://localhost:8000/api/',
+            // 2 types of API filters
+            type: [
+                'people',
+                'prices', 
+                'categories'
+            ],
+            data: [],
+            dates: [
+                "1901-1920",
+                "1921-1940",
+                "1941-1960",
+                "1961-1980",
+                "1981-2000",
+                "2001-2018",
+            ],
+            woman: {
+                idcountry: {
+                    name: ''
+                },
+                idpeople: 0,
+                firstname: '',
+                name: '',
+                idprice: [
+                    {
+                        year: 0,
+                        idcategory: {
+                            category: ''
+                        }
+                    }
+                ],
+                birthday: '',
+                deathdate: ''
+            },
+            displayWomen: false,
+            coords: { x: 0, y: 0 }
+        }
+    }
     componentDidMount = () => {
         axios.get(this.state.baseUrl + this.state.type[0])
             .then(res => {
@@ -79,7 +107,6 @@ class BrandNewTl extends React.Component<BrandNewTlProps, BrandNewTlState> {
         parent.classList.toggle('BrandNewTl__item--active') 
         if (pop) pop!.style.opacity = '0'
         document.querySelector('.BrandNewTl__tutorial')!.classList.add('BrandNewTl__tutorial--hidden')
-        
     }
     displayWoman = (e: any, li: any) => {
         console.log(e.clientX, e.clientY)
@@ -111,7 +138,7 @@ class BrandNewTl extends React.Component<BrandNewTlProps, BrandNewTlState> {
                         )}
                     </ul>
                 </div>)}
-                <BrandNewPop
+                <TimelinePop
                     data={this.state.woman}
                     coords={this.state.coords}
                 />
@@ -121,5 +148,3 @@ class BrandNewTl extends React.Component<BrandNewTlProps, BrandNewTlState> {
         </section>
     }
 }
-
-export default BrandNewTl;
