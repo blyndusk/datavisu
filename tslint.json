@@ -12,7 +12,8 @@
     "curly": false,
     "quotemark": [true, "single", "jsx-simple"],
     "interface-name": [true, "never-prefix"],
-    "no-console": [true, "log"]
+    "no-console": [true, "log"],
+    "variable-name": false
   },
   "linterOptions": {
     "include": [
@@ -20,7 +21,8 @@
     ],
     "exclude": [
       "config/**/*.js",
-      "node_modules/**/*.ts"
+      "node_modules/**/*.ts",
+      "src/Components/Map/MapSVG/MapSVG.tsx"
     ]
   }
 }
