@@ -1,0 +1,16 @@
+{
+  "extends": ["tslint:latest", "tslint-react"],
+  "rules": {
+    "jsx-wrap-multiline": false,
+    "quotemark": [true, "single", "jsx-simple"]
+  },
+  "linterOptions": {
+    "include": [
+      "src/**/*.tsx"
+    ],
+    "exclude": [
+      "config/**/*.js",
+      "node_modules/**/*.ts"
+    ]
+  }
+}
