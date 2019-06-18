@@ -273,6 +273,7 @@ export default class Comparator extends React.Component<P, S> {
                 if (index === 'first') this.setState({firstCountryCode: newCode});
                 else if (index === 'second') this.setState({secondCountryCode: newCode});
             }
+            return code;
         });
     }
     disableActiveInput = (e: any) => {
