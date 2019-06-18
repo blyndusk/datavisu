@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
-interface ComparatorInputProps {
+interface P {
     codes: any,
     code: string, 
     onInputChanged: any
 }
 
-class ComparatorInput extends React.Component<ComparatorInputProps> {
+class ComparatorInput extends React.Component<P> {
     toggleClass = (e: any) => {
         // empty input
         e.target.value = '';

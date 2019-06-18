@@ -259,12 +259,11 @@ export default class Comparator extends React.Component<P, S> {
             .catch(err => console.log(err))
     }
     onInputChanged = (e: any, index: string) => {
-        const value = e.target.value;
         this.state.codes.map((code: any) => {
-            if (value.length === 2 && value === code.code) {
-                const newCode = e.target
+            if (e.target.value.length === 2 && e.target.value === code.code) {
+                const newCode = e.target.value
                 this.state.codes.map((code: any) => newCode === code.code ? this.setState(prevState => {
-                    let countries:any = Object.assign({}, prevState.countries);
+                    let countries: any = Object.assign({}, prevState.countries);
                     // set response to code,  
                     countries[index].name = code.name
                     countries[index].code = code.code
