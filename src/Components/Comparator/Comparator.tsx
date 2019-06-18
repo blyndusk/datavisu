@@ -310,7 +310,7 @@ export default class Comparator extends React.Component<P, S> {
                 firstCountryData={this.state.firstCountryData}
                 secondCountryData={this.state.secondCountryData}
             />
-            <button className='Comparator__close' onClick={window.history.back}/>
+            <button className='Comparator__close' onClick={() => window.history.back()}/>
             <ComparatorInput
                 codes={this.state.codes}
                 code={this.state.countries.second.code}

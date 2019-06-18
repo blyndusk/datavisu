@@ -41,6 +41,7 @@ export default class Nav extends React.Component<P, S> {
         return <nav className='Nav'>
             <Link className={this.state.mapClass} to='/map'>
                 <span className='Nav__icon Nav__icon--map'/>
+                <span className='Nav__text'>Map</span>
             </Link>
             <Link className={this.state.tlClass} to='/timeline'>
                 <span className='Nav__icon Nav__icon--timeline'/>
