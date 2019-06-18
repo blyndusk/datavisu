@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class MapLegend extends Component {
+export default class MapLegend extends Component {
     render() {
         return <div className="MapLegend">
             <div className="MapLegend__container">
@@ -11,5 +11,3 @@ class MapLegend extends Component {
         </div>
     }
 }
-
-export default MapLegend;

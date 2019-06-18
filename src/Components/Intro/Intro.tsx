@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 
-class Intro extends Component {
-    hideIntro = (e: { target: any}) => {
-        e.target.parentNode.parentNode.style.display = 'none'
-    }
+export default class Intro extends Component {
+    hideIntro = (e: { target: any}) => e.target.parentNode.parentNode.style.display = 'none';
     render() {
         return <section className="Intro">
             <div className="Intro__container">
@@ -14,5 +12,3 @@ class Intro extends Component {
         </section>
     }
 }
-
-export default Intro;

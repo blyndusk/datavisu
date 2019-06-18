@@ -1,5 +1,5 @@
 
-import React, { Component } from 'react';
+import React from 'react';
 
 interface P {
     country: {
@@ -22,7 +22,7 @@ interface S {
     rayon: number
 }
 
-class ParityTemplate extends React.Component<P, S> {
+export default class ParityTemplate extends React.Component<P, S> {
     constructor(props: P) {
         super(props);
         this.state = {
@@ -68,5 +68,3 @@ class ParityTemplate extends React.Component<P, S> {
         </div>
     }
 }
-
-export default ParityTemplate;

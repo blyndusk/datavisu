@@ -1,17 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
-interface NavProps {
-    
-} 
+interface P {}
 
-interface NavState {
+interface S {
     page: string,
     mapClass: string
     tlClass: string
 } 
 
-class Nav extends React.Component<NavProps, NavState> {
+export default class Nav extends React.Component<P, S> {
     UNSAFE_componentWillMount = () => {
         this.setState({
             mapClass: "Nav__button",
@@ -52,5 +50,3 @@ class Nav extends React.Component<NavProps, NavState> {
         </nav>
     }
 }
-
-export default Nav;

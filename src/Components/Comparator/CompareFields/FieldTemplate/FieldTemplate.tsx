@@ -1,14 +1,14 @@
 
 import React, { Component } from 'react';
 
-interface FieldTemplateProps {
+interface P {
   country: {
     fields: any,
   },
   order: number
 }
 
-class FieldTemplate extends React.Component<FieldTemplateProps> {
+export default class FieldTemplate extends React.Component<P> {
     render() {
         // inc begin at -25
         let inc = -25;
@@ -41,5 +41,3 @@ class FieldTemplate extends React.Component<FieldTemplateProps> {
         </div>
     }
 }
-
-export default FieldTemplate;

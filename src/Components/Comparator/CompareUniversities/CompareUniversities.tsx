@@ -1,5 +1,5 @@
 
-import React, { Component } from 'react';
+import React from 'react';
 import UniversityTemplate from './UniveristyTemplate/UniveristyTemplate'
 
 interface P {

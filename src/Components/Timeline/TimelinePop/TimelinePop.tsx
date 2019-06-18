@@ -73,6 +73,5 @@ export default class TimelinePop extends React.Component<P, S>  {
                 <span className="BrandNewPop__text">{this.props.data.idcountry['name']}</span>
             </div>
         </div> : null
-
     }
 }

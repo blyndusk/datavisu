@@ -1,14 +1,14 @@
 
-import React, { Component } from 'react';
+import React from 'react';
 
-interface UniversityTemplateProps {
+interface P {
     country: {
         sortedUniversities: any[]
     }
     order: number
 }
 
-class UniversityTemplate extends React.Component<UniversityTemplateProps> {
+export default class UniversityTemplate extends React.Component<P> {
     render() {
           // inc begin at -50
           let inc = -50;
@@ -42,5 +42,3 @@ class UniversityTemplate extends React.Component<UniversityTemplateProps> {
         </div>
     }
 }
-
-export default UniversityTemplate;

@@ -1,5 +1,5 @@
 
-import React, { Component } from 'react';
+import React from 'react';
 import ParityTemplate from './ParityTemplate/ParityTemplate'
 
 interface P {

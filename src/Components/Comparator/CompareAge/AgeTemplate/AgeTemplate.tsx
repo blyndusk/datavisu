@@ -1,19 +1,28 @@
 
 import React, { Component } from 'react';
 
-interface AgeTemplateProps {
+interface P {
     country: any,
     order: number
 }
 
-interface AgeTemplateState {
+interface S {
     ageAverage: {
-        m: 0,
-        f: 0
+        m: number,
+        f: number
     }
 }
 
-class AgeTemplate extends React.Component<AgeTemplateProps, AgeTemplateState> {    
+export default class AgeTemplate extends React.Component<P, S> {   
+    constructor(props: P) {
+        super(props);
+        this.state = {
+            ageAverage: {
+                m: 0,
+                f: 0
+            }
+        }
+    } 
     render() {
         // inc begin at -25
         let inc = -25;
@@ -50,5 +59,3 @@ class AgeTemplate extends React.Component<AgeTemplateProps, AgeTemplateState> {
         </div> 
     }
 }
-
-export default AgeTemplate;

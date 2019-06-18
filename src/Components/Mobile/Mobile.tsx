@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 
-class Mobile extends Component {
+export default class Mobile extends Component {
     render() {
         return <section className="Mobile" style={window.innerHeight < 768 ? {display: "flex"} : {display: "none"}}>
             <h2>Oops</h2>
@@ -10,5 +10,3 @@ class Mobile extends Component {
         </section>
     }
 }
-
-export default Mobile;

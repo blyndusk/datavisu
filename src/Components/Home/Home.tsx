@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
 
-import Brand from './../Brand/Brand';
-import Nav from './../Nav/Nav';
-import Compare from './../Compare/Compare';
+import Brand from '../Brand/Brand';
+import Nav from '../Nav/Nav';
+import Compare from '../Compare/Compare';
 
-class Home extends Component {
+export default class Home extends Component {
     render() {
         return <section className="Home">
-            <Brand />
+            <Brand/>
             <div className="Home__container">
                 <h3 className="Home__title">Explore by</h3>
-                <Nav />
+                <Nav/>
             </div>
-            <Compare />
+            <Compare/>
         </section>
     }
 }
-
-export default Home;

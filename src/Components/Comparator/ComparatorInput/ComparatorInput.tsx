@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 interface P {
     codes: any,
@@ -6,7 +6,7 @@ interface P {
     onInputChanged: any
 }
 
-class ComparatorInput extends React.Component<P> {
+export default class ComparatorInput extends React.Component<P> {
     toggleClass = (e: any) => {
         // empty input
         e.target.value = '';
@@ -42,5 +42,3 @@ class ComparatorInput extends React.Component<P> {
         </form>
     }
 }
-
-export default ComparatorInput;

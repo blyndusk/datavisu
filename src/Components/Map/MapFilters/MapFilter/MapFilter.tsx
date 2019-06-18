@@ -1,5 +1,5 @@
 
-import React, { Component } from 'react';
+import React from 'react';
 
 interface P {
     classState: string,
@@ -8,7 +8,7 @@ interface P {
     name: string
 }
 
-class MapFilter extends React.Component<P> {
+export default class MapFilter extends React.Component<P> {
     addFilter = (e: any) => e.target.dataset.label;
     render() {
         return <li 
@@ -22,5 +22,3 @@ class MapFilter extends React.Component<P> {
         >{this.props.name}</li>
     }
 }
-
-export default MapFilter;

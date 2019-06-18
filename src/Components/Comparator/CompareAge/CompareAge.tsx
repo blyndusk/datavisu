@@ -25,7 +25,7 @@ interface S {
     }
 }
 
-class CompareAge extends React.Component<P, S> {
+export default class CompareAge extends React.Component<P, S> {
     constructor(props: P) {
         super(props);
         this.state = {
@@ -87,5 +87,3 @@ class CompareAge extends React.Component<P, S> {
         </section>
     }
 }
-
-export default CompareAge;

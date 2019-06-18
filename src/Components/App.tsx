@@ -8,7 +8,7 @@ import Map from './Map/Map'
 import Intro from './Intro/Intro';
 import Mobile from './Mobile/Mobile'
 
-class App extends Component {    
+export default class App extends Component {    
     render() {
         return <div className="App">
             <Mobile/>
@@ -22,5 +22,3 @@ class App extends Component {
         </div>;
     }
 }
-
-export default App;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-class Compare extends Component {
+export default class Compare extends Component {
     render() {
         return <Link className="Compare" to="/comparator">
             <span className="Compare__icon"></span>
@@ -9,5 +9,3 @@ class Compare extends Component {
         </Link>
     }
 }
-
-export default Compare;

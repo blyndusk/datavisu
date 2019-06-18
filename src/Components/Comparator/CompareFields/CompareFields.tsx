@@ -21,7 +21,7 @@ interface S {
     fields: {}
 }
 
-class CompareFields extends React.Component<P, S> {
+export default class CompareFields extends React.Component<P, S> {
     constructor(props: P) {
         super(props);
         this.state = {
@@ -70,5 +70,3 @@ class CompareFields extends React.Component<P, S> {
         </section>
     }
 }
-
-export default CompareFields;
