@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import Comparator from './Comparator/Comparator'
 import Home from './Home/Home'
-import BrandNewTl from './BrandNewTl/BrandNewTl'
+import BrandNewTl from './Timeline/Timeline'
 import Map from './Map/Map'
 import Intro from './Intro/Intro';
 import Mobile from './Mobile/Mobile'
