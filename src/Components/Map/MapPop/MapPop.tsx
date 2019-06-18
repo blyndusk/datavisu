@@ -1,7 +1,7 @@
 
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 
-interface MapPopProps {
+interface P {
     country: string,
     data: [{
         idprice: [{
@@ -20,10 +20,10 @@ interface MapPopProps {
     fieldCode: string
 }
 
-interface MapPopState {
+interface S {
     pos: {
-        x: 0,
-        y: 0
+        x: number,
+        y: number
     },
     fields: any,
     universities: {},
@@ -43,7 +43,40 @@ interface MapPopState {
     pathStyle: {}
 }
 
-class MapPop extends React.Component<MapPopProps, MapPopState> {
+export default class MapPop extends React.Component<P, S> {
+    constructor(props: P) {
+        super(props);
+        this.state = {
+            pos: {
+                x: window.innerWidth / 2,
+                y: window.innerHeight / 2
+            },
+            fields: {},
+            universities: {},
+            sortedUniversities: [],
+            parity: {
+                m: {
+                    amount: 0,
+                    percent: 0
+                }, 
+                f: {
+                    amount: 0,
+                    percent: 0
+                }
+            },
+            ageAverage: 0,
+            svgStyle: {},
+            pathStyle: {}
+        }
+    }
+    UNSAFE_componentWillMount = () => {
+        this.setState({
+            pos: {
+                x: 0,
+                y: 0
+            },
+        })
+    }
     componentDidMount = () => this.displayPop()
     componentDidUpdate = (prevProps: any, prevState: any) => {
         if (this.props.data !== prevProps.data) this.getParsedData();
@@ -236,11 +269,9 @@ class MapPop extends React.Component<MapPopProps, MapPopState> {
             <div className="MapPop__age">
                 <span>{this.state.ageAverage}</span>
                 <span>Average age</span>
-            </div>
+            </div> 
             </Fragment> : null
             }
         </section>
     }
 }
-
-export default MapPop;

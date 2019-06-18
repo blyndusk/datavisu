@@ -1,5 +1,5 @@
 
-import React, { Component } from 'react';
+import React from 'react';
 import Nav from './../Nav/Nav';
 import Brand from './../Brand/Brand';
 import MapFilters from './MapFilters/MapFilters';
@@ -9,12 +9,10 @@ import MapSVG from './MapSVG/MapSVG';
 import axios from 'axios';
 import Compare from './../Compare/Compare';
 
-interface MapProps {
+interface P {}
 
-}
-
-interface MapState {
-    country: string,
+interface S {
+    country: string;
     // the filled data
     data: [{
         idprice: [{
@@ -29,33 +27,74 @@ interface MapState {
             address: string;
         };
         gender: string;
-    }],
-    pricesPerCountries: {},
+    }];
+    pricesPerCountries: {};
     // API
-    baseUrl: 'http://localhost:8000/api/',
+    baseUrl: string;
     // 2 types of API filters
-    type: [
-        'people',
-        'prices', 
-        'categories'
-    ],
+    type: string[];
     // 3 params
-    params: {
-        field: 'idprice.idcategory.category',
-        country: 'idcountry.code',
-        peopleCountry: 'idpeople.idcountry.code'
-    },
+    params: any,
     // Codes
     countryCode: string,
-    fieldCode: '',
+    fieldCode: string,
     lengthCode: number,
-    lengthCountryCode: 0,
+    lengthCountryCode: number,
     // call
     apiCall: string,
     calls: number,
 }
 
-class Map extends React.Component<MapProps, MapState> {
+export default class Map extends React.Component<P, S> {
+    constructor(props: P) {
+        super(props);
+        this.state = {
+            country: '',
+            // the filled data
+            data: [{
+                idprice: [{
+                    idcategory: {
+                        category: '',
+                    },
+                }],
+                idcountry: {
+                    name: '',
+                },
+                idaffiliation: {
+                    address: '',
+                },
+                gender: '',
+            }],
+            pricesPerCountries: {},
+            // API
+            baseUrl: 'http://localhost:8000/api/',
+            // 2 types of API filters
+            type: [
+                'people',
+                'prices', 
+                'categories'
+            ],
+            // 3 params
+            params: {
+                field: 'idprice.idcategory.category',
+                country: 'idcountry.code',
+                peopleCountry: 'idpeople.idcountry.code'
+            },
+            // Codes
+            countryCode: '',
+            fieldCode: '',
+            lengthCode: 0,
+            lengthCountryCode: 0,
+            // call
+            apiCall: '',
+            calls: 0,
+        }
+    }
+    UNSAFE_componentWillMount = () => {
+        this.setState({
+            fieldCode: ''
+        })
+    }
     // when the Map is mounted, handle country click & set new data
     componentDidMount = () => {
         this.handleCountryClick()
@@ -215,5 +254,3 @@ class Map extends React.Component<MapProps, MapState> {
         </section>
     }
 }
-
-export default Map;

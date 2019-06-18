@@ -1,14 +1,14 @@
 
 import React, { Component } from 'react';
 
-interface MapFilterProps {
+interface P {
     classState: string,
     getField: any,
     label: string,
     name: string
 }
 
-class MapFilter extends React.Component<MapFilterProps> {
+class MapFilter extends React.Component<P> {
     addFilter = (e: any) => e.target.dataset.label;
     render() {
         return <li 
