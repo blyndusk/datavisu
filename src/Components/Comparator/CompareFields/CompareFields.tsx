@@ -1,9 +1,9 @@
 
-import React, { Component } from 'react';
+import React from 'react';
 import FieldTemplate from './FieldTemplate/FieldTemplate'
 import FieldsLegend from './FieldsLegend/FieldsLegend'
 
-interface CompareFieldsProps {
+interface P {
     countries: { 
         first: {
             data: any[]
@@ -15,13 +15,21 @@ interface CompareFieldsProps {
     }
 }
 
-interface CompareFieldsState {
+interface S {
     firstCountry: { fields: {} },
     secondCountry: { fields: {} },
     fields: {}
 }
 
-class CompareFields extends React.Component<CompareFieldsProps, CompareFieldsState> {
+class CompareFields extends React.Component<P, S> {
+    constructor(props: P) {
+        super(props);
+        this.state = {
+            firstCountry: { fields: {} },
+            secondCountry: { fields: {} },
+            fields: {}
+        }
+    }
     componentDidUpdate = (prevProps: { countries: { total: number}}) => {
         if (this.props.countries.total !== prevProps.countries.total ) {
             this.getFieldsAmount(this.props.countries.first.data, 0)

@@ -2,17 +2,30 @@
 import React, { Component } from 'react';
 import UniversityTemplate from './UniveristyTemplate/UniveristyTemplate'
 
-interface CompareUniversitiesProps {
+interface P {
     firstCountryData: [{idaffiliation: { address: string}}],
     secondCountryData: [{idaffiliation: { address: string}}]
 }
 
-interface CompareUniversitiesState {
+interface S {
     firstCountry: any,
     secondCountry: any
 }
 
-class CompareUniversities extends React.Component<CompareUniversitiesProps, CompareUniversitiesState> {
+class CompareUniversities extends React.Component<P, S> {
+    constructor(props: P) {
+        super(props);
+        this.state = {
+            firstCountry: {
+                universities: {},
+                sortedUniversities: []
+            },
+            secondCountry: {
+                universities: {},
+                sortedUniversities: []
+            }
+        }
+    }
     componentDidUpdate = (prevProps: {firstCountryData: {}, secondCountryData: {}}) => {
         if (this.props.firstCountryData !== prevProps.firstCountryData ) {
 

@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 
-interface ParityTemplateProps {
+interface P {
     country: {
         parity: {
             f: {
@@ -16,13 +16,21 @@ interface ParityTemplateProps {
     }
 }
 
-interface ParityTemplateState {
+interface S {
     svgStyle: {},
     pathStyle: {},
-    rayon: 75
+    rayon: number
 }
 
-class ParityTemplate extends React.Component<ParityTemplateProps, ParityTemplateState> {
+class ParityTemplate extends React.Component<P, S> {
+    constructor(props: P) {
+        super(props);
+        this.state = {
+            svgStyle: {},
+            pathStyle: {},
+            rayon: 75
+        }
+    }
     componentDidUpdate = (prevProps: { country: object}) => {
         if (this.props.country !== prevProps.country ) {
             // set percentage it terms of props

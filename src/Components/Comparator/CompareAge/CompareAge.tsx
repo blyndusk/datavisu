@@ -1,9 +1,8 @@
 
-import React, { Component } from 'react';
+import React from 'react';
 import AgeTemplate from './AgeTemplate/AgeTemplate';
-import { string } from 'prop-types';
 
-interface CompareAgeProps {
+interface P {
     countries: {
         first: {
             parity: any
@@ -15,18 +14,31 @@ interface CompareAgeProps {
     }
 }
 
-interface CompareAgeState {
+interface S {
     firstCountry: {
-        m: 0,
-        f: 0
+        m: number,
+        f: number
     },
     secondCountry: {
-        m: 0,
-        f: 0
+        m: number,
+        f: number
     }
 }
 
-class CompareAge extends React.Component<CompareAgeProps, CompareAgeState> {
+class CompareAge extends React.Component<P, S> {
+    constructor(props: P) {
+        super(props);
+        this.state = {
+            firstCountry: {
+                m: 0,
+                f: 0
+            },
+            secondCountry: {
+                m: 0,
+                f: 0
+            }
+        }
+    }
     componentDidUpdate = (prevProps: { countries: {total: number}}) => {
         if ( this.props.countries.total !== prevProps.countries.total ) {
             // get average age for the 2 countries

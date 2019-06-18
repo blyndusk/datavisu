@@ -1,5 +1,5 @@
 
-import React, { Component } from 'react';
+import React from 'react';
 
 import CompareAge from './CompareAge/CompareAge';
 import CompareFields from './CompareFields/CompareFields';
@@ -8,64 +8,113 @@ import CompareUniversities from './CompareUniversities/CompareUniversities';
 import ComparatorInput from './ComparatorInput/ComparatorInput'
 import axios from 'axios';
 
-interface ComparatorProps {
-    
-}
+interface P {}
 
-interface ComparatorState {
-    firstCountryCode: "FR",
-    secondCountryCode: "US",
+interface S {
+    firstCountryCode: string,
+    secondCountryCode: string,
     firstCountryData: [{ idaffiliation: { address: string; }; }],
     secondCountryData: [{ idaffiliation: { address: string; }; }],
     // countries
     countries: {
         // total of people
-        total: 0,
-        codes: [],
+        total: number,
+        codes: any[],
         first: {
             // code for the country
-            code: "FR",
-            name: "France",
-            data: [],
+            code: string,
+            name: string,
+            data: any[],
             // parity
             parity: {
-                f: [],
-                m: [],
+                f: any[],
+                m: any[],
                 // total of people of the country
-                total: 0
+                total: number
             }
         },
         // same pattern
         second: {
-            code: "US",
-            name: "USA",
-            data: [],
+            code: string,
+            name: string,
+            data: any[],
             parity: {
-                f: [],
-                m: [],
-                total: 0
+                f: any[],
+                m: any[],
+                total: number
             }
         }
     },
     codes: string[],
     // base url for API call
-    baseUrl: 'http://localhost:8000/api/',
+    baseUrl: string,
     // 2 types of routes
-    type: [
-        'people',
-        'prices',
-        'countries'
-    ],
+    type: string[],
     // diffrent params
     params: {
-        field: 'idprice.idcategory.category',
-        country: 'idcountry.code',
-        peopleCountry: 'idpeople.idcountry.code',
-        gender: 'gender'
+        field: string;
+        country: string;
+        peopleCountry: string;
+        gender: string;
     },
 }
 
-class Comparator extends React.Component<ComparatorProps, ComparatorState> {
+export default class Comparator extends React.Component<P, S> {
+    constructor(props: P) {
+        super(props);
+        this.state = {
+            firstCountryCode: "FR",
+            secondCountryCode: "US",
+            firstCountryData: [{ idaffiliation: { address: '' } }],
+            secondCountryData: [{ idaffiliation: { address: '' } }],
+            // countries
+            countries: {
+                // total of people
+                total: 0,
+                codes: [],
+                first: {
+                    // code for the country
+                    code: "FR",
+                    name: "France",
+                    data: [],
+                    // parity
+                    parity: {
+                        f: [],
+                        m: [],
+                        // total of people of the country
+                        total: 0
+                    }
+                },
+                // same pattern
+                second: {
+                    code: "US",
+                    name: "USA",
+                    data: [],
+                    parity: {
+                        f: [],
+                        m: [],
+                        total: 0
+                    }
+                }
+            },
+            codes: [],
+            // base url for API call
+            baseUrl: 'http://localhost:8000/api/',
+            // 2 types of routes
+            type: [
+                'people',
+                'prices',
+                'countries'
+            ],
+            // diffrent params
+            params: {
+                field: 'idprice.idcategory.category',
+                country: 'idcountry.code',
+                peopleCountry: 'idpeople.idcountry.code',
+                gender: 'gender'
+            },
+        }
+    }
     componentDidMount = () => {
         const codes = [
             [
@@ -266,5 +315,3 @@ class Comparator extends React.Component<ComparatorProps, ComparatorState> {
         </section>
     }
 }
-
-export default Comparator;
